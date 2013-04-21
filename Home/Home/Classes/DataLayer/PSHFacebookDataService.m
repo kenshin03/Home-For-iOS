@@ -133,7 +133,7 @@ typedef void (^InitAccountSuccessBlock)();
     NSURL * feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/home"];
     
     
-    NSDictionary * params = @{@"limit":@"25"};
+    NSDictionary * params = @{@"limit":@"50"};
     SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:params];
     NSLog(@"request.URL: %@", request.URL);
     request.account = self.facebookAccount;
