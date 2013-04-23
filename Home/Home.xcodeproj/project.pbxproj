@@ -23,7 +23,6 @@
 		8E403AF51723C96400B46570 /* PSHCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AE51723C96400B46570 /* PSHCommentsViewController.m */; };
 		8E403AF61723C96400B46570 /* PSHCoverFeedPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AE81723C96400B46570 /* PSHCoverFeedPageViewController.m */; };
 		8E403AF71723C96400B46570 /* PSHCoverFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AEA1723C96400B46570 /* PSHCoverFeedViewController.m */; };
-		8E403AF81723C96400B46570 /* PSHHomeButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AEC1723C96400B46570 /* PSHHomeButtonView.m */; };
 		8E403AF91723C96400B46570 /* PSHHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AEE1723C96400B46570 /* PSHHomeViewController.m */; };
 		8E403B011723C97800B46570 /* LEColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AFC1723C97800B46570 /* LEColorPicker.m */; };
 		8E403B021723C97800B46570 /* UIColor+YUVSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403AFE1723C97800B46570 /* UIColor+YUVSpace.m */; };
@@ -46,7 +45,6 @@
 		8E403B321723C98100B46570 /* PSHCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E403B1C1723C98100B46570 /* PSHCommentsViewController.xib */; };
 		8E403B331723C98100B46570 /* PSHCoverFeedPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E403B1E1723C98100B46570 /* PSHCoverFeedPageViewController.xib */; };
 		8E403B341723C98100B46570 /* PSHCoverFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E403B1F1723C98100B46570 /* PSHCoverFeedViewController.xib */; };
-		8E403B351723C98100B46570 /* PSHHomeButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E403B211723C98100B46570 /* PSHHomeButtonView.xib */; };
 		8E403B361723C98100B46570 /* PSHHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E403B221723C98100B46570 /* PSHHomeViewController.xib */; };
 		8E403B381723CA2C00B46570 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B371723CA2C00B46570 /* CoreData.framework */; };
 		8E403B3A1723CA3F00B46570 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B391723CA3F00B46570 /* Accounts.framework */; };
@@ -57,6 +55,20 @@
 		8E403B461723CAD700B46570 /* ItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B451723CAD700B46570 /* ItemSource.m */; };
 		8E403B4A1723CD5700B46570 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B491723CD5700B46570 /* QuartzCore.framework */; };
 		8E403B4B1723CD9400B46570 /* PSHFeedComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B481723CB1100B46570 /* PSHFeedComment.m */; };
+		8E7C60CC1725B5B8004EAD40 /* PSHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C60CB1725B5B8004EAD40 /* PSHMenuViewController.m */; };
+		8E7C60CF1725B5EC004EAD40 /* PSHMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60CE1725B5EC004EAD40 /* PSHMenuViewController.xib */; };
+		8E7C60D41725CA06004EAD40 /* menu_messenger_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60D21725CA06004EAD40 /* menu_messenger_icon.png */; };
+		8E7C60D51725CA06004EAD40 /* menu_messenger_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60D31725CA06004EAD40 /* menu_messenger_icon@2x.png */; };
+		8E7C60D81725CB18004EAD40 /* menu_launcher_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60D61725CB18004EAD40 /* menu_launcher_icon.png */; };
+		8E7C60D91725CB18004EAD40 /* menu_launcher_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60D71725CB18004EAD40 /* menu_launcher_icon@2x.png */; };
+		8E7C60DC1725CE71004EAD40 /* menu_notifications.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60DA1725CE71004EAD40 /* menu_notifications.png */; };
+		8E7C60DD1725CE71004EAD40 /* menu_notifications@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60DB1725CE71004EAD40 /* menu_notifications@2x.png */; };
+		8E7C60E01725DA38004EAD40 /* PSHMenuGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */; };
+		8E7C60E6172607CD004EAD40 /* menu_camera_app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60E2172607CD004EAD40 /* menu_camera_app_icon@2x.png */; };
+		8E7C60E7172607CD004EAD40 /* menu_mail_app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60E3172607CD004EAD40 /* menu_mail_app_icon@2x.png */; };
+		8E7C60E8172607CD004EAD40 /* menu_map_app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60E4172607CD004EAD40 /* menu_map_app_icon@2x.png */; };
+		8E7C60E9172607CD004EAD40 /* menu_photos_app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60E5172607CD004EAD40 /* menu_photos_app_icon@2x.png */; };
+		8E7C60EB17262327004EAD40 /* menu_safari_app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60EA17262327004EAD40 /* menu_safari_app@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,8 +98,6 @@
 		8E403AE81723C96400B46570 /* PSHCoverFeedPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHCoverFeedPageViewController.m; sourceTree = "<group>"; };
 		8E403AE91723C96400B46570 /* PSHCoverFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHCoverFeedViewController.h; sourceTree = "<group>"; };
 		8E403AEA1723C96400B46570 /* PSHCoverFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHCoverFeedViewController.m; sourceTree = "<group>"; };
-		8E403AEB1723C96400B46570 /* PSHHomeButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHHomeButtonView.h; sourceTree = "<group>"; };
-		8E403AEC1723C96400B46570 /* PSHHomeButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHHomeButtonView.m; sourceTree = "<group>"; };
 		8E403AED1723C96400B46570 /* PSHHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHHomeViewController.h; sourceTree = "<group>"; };
 		8E403AEE1723C96400B46570 /* PSHHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHHomeViewController.m; sourceTree = "<group>"; };
 		8E403AFB1723C97800B46570 /* LEColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEColorPicker.h; sourceTree = "<group>"; };
@@ -115,7 +125,6 @@
 		8E403B1C1723C98100B46570 /* PSHCommentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSHCommentsViewController.xib; sourceTree = "<group>"; };
 		8E403B1E1723C98100B46570 /* PSHCoverFeedPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSHCoverFeedPageViewController.xib; sourceTree = "<group>"; };
 		8E403B1F1723C98100B46570 /* PSHCoverFeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSHCoverFeedViewController.xib; sourceTree = "<group>"; };
-		8E403B211723C98100B46570 /* PSHHomeButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSHHomeButtonView.xib; sourceTree = "<group>"; };
 		8E403B221723C98100B46570 /* PSHHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSHHomeViewController.xib; sourceTree = "<group>"; };
 		8E403B371723CA2C00B46570 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8E403B391723CA3F00B46570 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -129,6 +138,23 @@
 		8E403B471723CB1100B46570 /* PSHFeedComment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PSHFeedComment.h; path = ../../../../../../workspace5/ProjectSH/SocialHome/SocialHome/Classes/DataModels/PSHFeedComment.h; sourceTree = "<group>"; };
 		8E403B481723CB1100B46570 /* PSHFeedComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PSHFeedComment.m; path = ../../../../../../workspace5/ProjectSH/SocialHome/SocialHome/Classes/DataModels/PSHFeedComment.m; sourceTree = "<group>"; };
 		8E403B491723CD5700B46570 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8E7C60CA1725B5B8004EAD40 /* PSHMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMenuViewController.h; path = Menu/PSHMenuViewController.h; sourceTree = "<group>"; };
+		8E7C60CB1725B5B8004EAD40 /* PSHMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMenuViewController.m; path = Menu/PSHMenuViewController.m; sourceTree = "<group>"; };
+		8E7C60CE1725B5EC004EAD40 /* PSHMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHMenuViewController.xib; path = Menu/PSHMenuViewController.xib; sourceTree = "<group>"; };
+		8E7C60D21725CA06004EAD40 /* menu_messenger_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_messenger_icon.png; sourceTree = "<group>"; };
+		8E7C60D31725CA06004EAD40 /* menu_messenger_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_messenger_icon@2x.png"; sourceTree = "<group>"; };
+		8E7C60D61725CB18004EAD40 /* menu_launcher_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_launcher_icon.png; sourceTree = "<group>"; };
+		8E7C60D71725CB18004EAD40 /* menu_launcher_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_launcher_icon@2x.png"; sourceTree = "<group>"; };
+		8E7C60DA1725CE71004EAD40 /* menu_notifications.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_notifications.png; sourceTree = "<group>"; };
+		8E7C60DB1725CE71004EAD40 /* menu_notifications@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_notifications@2x.png"; sourceTree = "<group>"; };
+		8E7C60DE1725DA38004EAD40 /* PSHMenuGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMenuGestureRecognizer.h; path = Menu/PSHMenuGestureRecognizer.h; sourceTree = "<group>"; };
+		8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMenuGestureRecognizer.m; path = Menu/PSHMenuGestureRecognizer.m; sourceTree = "<group>"; };
+		8E7C60E2172607CD004EAD40 /* menu_camera_app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_camera_app_icon@2x.png"; sourceTree = "<group>"; };
+		8E7C60E3172607CD004EAD40 /* menu_mail_app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_mail_app_icon@2x.png"; sourceTree = "<group>"; };
+		8E7C60E4172607CD004EAD40 /* menu_map_app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_map_app_icon@2x.png"; sourceTree = "<group>"; };
+		8E7C60E5172607CD004EAD40 /* menu_photos_app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_photos_app_icon@2x.png"; sourceTree = "<group>"; };
+		8E7C60EA17262327004EAD40 /* menu_safari_app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_safari_app@2x.png"; sourceTree = "<group>"; };
+		8E7C60EF17270702004EAD40 /* Home.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.entitlements; sourceTree = "<group>"; };
 		DA567A19A021492194B15157 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,6 +217,7 @@
 		8E403ABC1723C89700B46570 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8E7C60EF17270702004EAD40 /* Home.entitlements */,
 				8E403AD31723C96400B46570 /* Classes */,
 				8E403AFA1723C97800B46570 /* Externals */,
 				8E403AC51723C89700B46570 /* PSHAppDelegate.h */,
@@ -254,6 +281,7 @@
 			children = (
 				8E403AE11723C96400B46570 /* Comments */,
 				8E403AE61723C96400B46570 /* CoverFeed */,
+				8E7C60CD1725B5BD004EAD40 /* Menu */,
 				8E403AED1723C96400B46570 /* PSHHomeViewController.h */,
 				8E403AEE1723C96400B46570 /* PSHHomeViewController.m */,
 			);
@@ -278,8 +306,6 @@
 				8E403AE81723C96400B46570 /* PSHCoverFeedPageViewController.m */,
 				8E403AE91723C96400B46570 /* PSHCoverFeedViewController.h */,
 				8E403AEA1723C96400B46570 /* PSHCoverFeedViewController.m */,
-				8E403AEB1723C96400B46570 /* PSHHomeButtonView.h */,
-				8E403AEC1723C96400B46570 /* PSHHomeButtonView.m */,
 			);
 			path = CoverFeed;
 			sourceTree = "<group>";
@@ -319,6 +345,7 @@
 		8E403B091723C98100B46570 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E7C60D11725CA06004EAD40 /* Menu */,
 				8E403B0A1723C98100B46570 /* CoverFeed */,
 				8E403B151723C98100B46570 /* fbhome_icon.png */,
 				8E403B161723C98100B46570 /* fbhome_icon@2x.png */,
@@ -357,6 +384,7 @@
 				8E403B1A1723C98100B46570 /* Comments */,
 				8E403B1D1723C98100B46570 /* CoverFeed */,
 				8E403B201723C98100B46570 /* Home */,
+				8E7C60D01725B5F2004EAD40 /* Menu */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -382,10 +410,54 @@
 		8E403B201723C98100B46570 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				8E403B211723C98100B46570 /* PSHHomeButtonView.xib */,
 				8E403B221723C98100B46570 /* PSHHomeViewController.xib */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8E7C60CD1725B5BD004EAD40 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				8E7C60CA1725B5B8004EAD40 /* PSHMenuViewController.h */,
+				8E7C60CB1725B5B8004EAD40 /* PSHMenuViewController.m */,
+				8E7C60DE1725DA38004EAD40 /* PSHMenuGestureRecognizer.h */,
+				8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		8E7C60D01725B5F2004EAD40 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				8E7C60CE1725B5EC004EAD40 /* PSHMenuViewController.xib */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		8E7C60D11725CA06004EAD40 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				8E7C60E1172607CC004EAD40 /* AppIcons */,
+				8E7C60DA1725CE71004EAD40 /* menu_notifications.png */,
+				8E7C60DB1725CE71004EAD40 /* menu_notifications@2x.png */,
+				8E7C60D61725CB18004EAD40 /* menu_launcher_icon.png */,
+				8E7C60D71725CB18004EAD40 /* menu_launcher_icon@2x.png */,
+				8E7C60D21725CA06004EAD40 /* menu_messenger_icon.png */,
+				8E7C60D31725CA06004EAD40 /* menu_messenger_icon@2x.png */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		8E7C60E1172607CC004EAD40 /* AppIcons */ = {
+			isa = PBXGroup;
+			children = (
+				8E7C60EA17262327004EAD40 /* menu_safari_app@2x.png */,
+				8E7C60E2172607CD004EAD40 /* menu_camera_app_icon@2x.png */,
+				8E7C60E3172607CD004EAD40 /* menu_mail_app_icon@2x.png */,
+				8E7C60E4172607CD004EAD40 /* menu_map_app_icon@2x.png */,
+				8E7C60E5172607CD004EAD40 /* menu_photos_app_icon@2x.png */,
+			);
+			path = AppIcons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,8 +535,19 @@
 				8E403B321723C98100B46570 /* PSHCommentsViewController.xib in Resources */,
 				8E403B331723C98100B46570 /* PSHCoverFeedPageViewController.xib in Resources */,
 				8E403B341723C98100B46570 /* PSHCoverFeedViewController.xib in Resources */,
-				8E403B351723C98100B46570 /* PSHHomeButtonView.xib in Resources */,
 				8E403B361723C98100B46570 /* PSHHomeViewController.xib in Resources */,
+				8E7C60CF1725B5EC004EAD40 /* PSHMenuViewController.xib in Resources */,
+				8E7C60D41725CA06004EAD40 /* menu_messenger_icon.png in Resources */,
+				8E7C60D51725CA06004EAD40 /* menu_messenger_icon@2x.png in Resources */,
+				8E7C60D81725CB18004EAD40 /* menu_launcher_icon.png in Resources */,
+				8E7C60D91725CB18004EAD40 /* menu_launcher_icon@2x.png in Resources */,
+				8E7C60DC1725CE71004EAD40 /* menu_notifications.png in Resources */,
+				8E7C60DD1725CE71004EAD40 /* menu_notifications@2x.png in Resources */,
+				8E7C60E6172607CD004EAD40 /* menu_camera_app_icon@2x.png in Resources */,
+				8E7C60E7172607CD004EAD40 /* menu_mail_app_icon@2x.png in Resources */,
+				8E7C60E8172607CD004EAD40 /* menu_map_app_icon@2x.png in Resources */,
+				8E7C60E9172607CD004EAD40 /* menu_photos_app_icon@2x.png in Resources */,
+				8E7C60EB17262327004EAD40 /* menu_safari_app@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,7 +598,6 @@
 				8E403AF51723C96400B46570 /* PSHCommentsViewController.m in Sources */,
 				8E403AF61723C96400B46570 /* PSHCoverFeedPageViewController.m in Sources */,
 				8E403AF71723C96400B46570 /* PSHCoverFeedViewController.m in Sources */,
-				8E403AF81723C96400B46570 /* PSHHomeButtonView.m in Sources */,
 				8E403AF91723C96400B46570 /* PSHHomeViewController.m in Sources */,
 				8E403B011723C97800B46570 /* LEColorPicker.m in Sources */,
 				8E403B021723C97800B46570 /* UIColor+YUVSpace.m in Sources */,
@@ -523,6 +605,8 @@
 				8E403B231723C98100B46570 /* SocialHome.xcdatamodeld in Sources */,
 				8E403B431723CAD700B46570 /* FeedItem.m in Sources */,
 				8E403B461723CAD700B46570 /* ItemSource.m in Sources */,
+				8E7C60CC1725B5B8004EAD40 /* PSHMenuViewController.m in Sources */,
+				8E7C60E01725DA38004EAD40 /* PSHMenuGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,11 +684,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60376E42E2174B98869A4EEB /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Steven Fransen (7S2SY4ZDJA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Home/Home-Prefix.pch";
 				INFOPLIST_FILE = "Home/Home-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5E061D0D-B2EC-472A-8F8C-3F6BE8835F87";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -613,11 +699,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60376E42E2174B98869A4EEB /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Steven Fransen (7S2SY4ZDJA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Home/Home-Prefix.pch";
 				INFOPLIST_FILE = "Home/Home-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5E061D0D-B2EC-472A-8F8C-3F6BE8835F87";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

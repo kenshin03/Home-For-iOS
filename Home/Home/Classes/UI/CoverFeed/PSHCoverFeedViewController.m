@@ -9,7 +9,7 @@
 #import "PSHCoverFeedViewController.h"
 #import "PSHFacebookDataService.h"
 #import "PSHCoverFeedPageViewController.h"
-#import "PSHHomeButtonView.h"
+#import "PSHMenuViewController.h"
 #import "FeedItem.h"
 #import "ItemSource.h"
 
@@ -22,8 +22,6 @@
 @property (nonatomic, strong) PSHCoverFeedPageViewController * currentPagePageViewController;
 
 @property (nonatomic, strong) PSHFacebookDataService * facebookDataService;
-
-@property (nonatomic, weak) IBOutlet PSHHomeButtonView * homeButtonView;
 
 
 @end
@@ -48,28 +46,8 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"MMMM d"];
     self.feedItemsArray = [@[] mutableCopy];
-//    [self initHomeButton];
     
-    NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
-    if ([feedItemsArray count] > 0){
-        [self.feedItemsArray removeAllObjects];
-        [self.feedItemsArray addObjectsFromArray:feedItemsArray];
-        [self initFeedsPageViewController];
-        
-        // reload
-    }else{
-        self.facebookDataService = [PSHFacebookDataService sharedService];
-        [self.facebookDataService fetchFeed:^(NSArray *resultsArray, NSError *error) {
-            NSLog(@"done...");
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.feedItemsArray removeAllObjects];
-                [self.feedItemsArray addObjectsFromArray:resultsArray];
-                // reload page view controller
-                [self initFeedsPageViewController];
-            });
-        }];
-    }
+    [self initMenuViewController];
     
 }
 
@@ -184,69 +162,14 @@
     }else{
         return nil;
     }
-    
-    
-    
-    
-    
-    
-    
-//    PSHCoverFeedPageViewController *currentViewController = (PSHCoverFeedPageViewController*) viewController;
-//    NSInteger currentIndex = currentViewController.currentIndex;
-//    NSInteger updateCurrentIndex = currentIndex +1;
-//    
-//    // prev page
-//    self.prevPagePageViewController = currentViewController;
-//    
-//    // current page
-//    self.currentPagePageViewController = self.nextPagePageViewController;
-//    
-//    // next page
-//    if (updateCurrentIndex == [self.feedItemsArray count]-1){
-//        return nil;
-//    }else{
-//
-//        FeedItem * nextFeedItem = self.feedItemsArray[updateCurrentIndex+1];
-//        self.nextPagePageViewController.feedType = nextFeedItem.type;
-//        self.nextPagePageViewController.messageLabelString = nextFeedItem.message;
-//        self.nextPagePageViewController.infoLabelString = [NSString stringWithFormat:@"%@ - %@", [self.dateFormatter stringFromDate:nextFeedItem.updatedTime], nextFeedItem.source.name];
-//        self.nextPagePageViewController.likesCount = [nextFeedItem.likesCount integerValue];
-//        self.nextPagePageViewController.commentsCount = [nextFeedItem.commentsCount integerValue];
-//        self.nextPagePageViewController.feedItemGraphID = nextFeedItem.graphID;
-//        self.nextPagePageViewController.feedType = nextFeedItem.type;
-//        self.nextPagePageViewController.currentIndex = updateCurrentIndex+1;
-//        if (nextFeedItem.imageURL != nil){
-//            self.nextPagePageViewController.imageURLString = nextFeedItem.imageURL;
-//        }
-//        self.nextPagePageViewController.sourceName = nextFeedItem.source.name;
-//        self.nextPagePageViewController.sourceAvartarImageURL = nextFeedItem.source.imageURL;
-//    }
-//    return  self.nextPagePageViewController;
-    
-    
 }
 
-#pragma mark - home button
-
-- (void)initHomeButton {
-    
-    FetchProfileSuccess fetchProfileSuccess =^(NSString * graphID, NSString * avartarImageURL, NSError * error){
-        NSLog(@"graphID: %@", graphID);
-        NSLog(@"avartarImageURL: %@", avartarImageURL);
-        NSLog(@"error: %@", error);
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage * profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.homeButtonView.homeButtonImageView.image = profileImage;
-                [self.view bringSubviewToFront:self.self.homeButtonView];
-            });
-        });
-    };
-    PSHFacebookDataService * facebookDataService = [PSHFacebookDataService sharedService];
-    [facebookDataService fetchOwnProfile:fetchProfileSuccess];
+- (void) initMenuViewController {
+    PSHMenuViewController * menuViewController = [[PSHMenuViewController alloc] init];
+    [self addChildViewController:menuViewController];
+    [self.view addSubview:menuViewController.view];
+    [menuViewController didMoveToParentViewController:self];
     
 }
-
 
 @end
