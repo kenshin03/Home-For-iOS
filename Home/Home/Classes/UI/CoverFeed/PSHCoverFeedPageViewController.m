@@ -363,6 +363,8 @@
 -(void) singleTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer {
     if ([self.delegate respondsToSelector:@selector(coverfeedPageViewController:mainViewTapped:)]){
         [self animateHideActionsPanelView];
+        [self hideCommentsPostingView];
+        
         [self.delegate coverfeedPageViewController:self mainViewTapped:YES];
     }
     
@@ -555,9 +557,9 @@
 
 - (void) animateShowActionsPanelView {
     CGRect destFrame = self.actionsPanelView.frame;
-    destFrame.origin.y -= self.actionsPanelView.frame.size.height;
+    destFrame.origin.y = 507.0f;
     
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         self.actionsPanelView.frame = destFrame;
         
@@ -569,9 +571,9 @@
 
 - (void) animateHideActionsPanelView {
     CGRect destFrame = self.actionsPanelView.frame;
-    destFrame.origin.y += self.actionsPanelView.frame.size.height;
+    destFrame.origin.y = self.view.frame.size.height;
     
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         self.actionsPanelView.frame = destFrame;
         

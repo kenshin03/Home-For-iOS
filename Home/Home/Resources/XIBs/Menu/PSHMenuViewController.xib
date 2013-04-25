@@ -83,6 +83,7 @@
 								<string key="NSFrame">{{11, 11}, {25, 25}}</string>
 								<reference key="NSSuperview" ref="58438530"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="125799131"/>
 								<int key="IBUIContentMode">1</int>
@@ -179,7 +180,7 @@
 									<bytes key="NSWhite">MQA</bytes>
 									<reference key="NSCustomColorSpace" ref="85532797"/>
 								</object>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.69999998807907104</float>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIView" id="839190030">

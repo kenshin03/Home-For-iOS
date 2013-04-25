@@ -120,7 +120,11 @@
     
     self.view.gestureRecognizers = self.feedsPageViewController.gestureRecognizers;
     
-    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self animateHideMenu];
+    });
 }
 
 #pragma mark - UIPageViewController dataSource
@@ -197,20 +201,29 @@
     self.menuViewController = menuViewController;
     
     
+    // move it down
+    CGRect destFrame = self.menuViewController.view.frame;
+    self.menuViewController.view.frame = destFrame;
+    
+    [self addChildViewController:self.menuViewController];
+    [self.view addSubview:self.menuViewController.view];
+    [self.menuViewController didMoveToParentViewController:self];
+    
+    
 }
 
 - (void) animateHideMenu {
     
     CGRect destFrame = self.menuViewController.view.frame;
-    destFrame.origin.y += destFrame.size.height;
+    destFrame.origin.y = destFrame.size.height;
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         
         self.menuViewController.view.frame = destFrame;
         
     } completion:^(BOOL finished) {
-        [self.menuViewController.view removeFromSuperview];
-        [self.menuViewController removeFromParentViewController];
+//        [self.menuViewController.view removeFromSuperview];
+//        [self.menuViewController removeFromParentViewController];
     }];
     
 }
@@ -218,20 +231,19 @@
 - (void) animateShowMenu {
     
     CGRect originFrame = self.menuViewController.view.frame;
+    originFrame.origin.y = 0.0f;
     CGRect destFrame = self.menuViewController.view.frame;
-    destFrame.origin.y += destFrame.size.height;
+    destFrame.origin.y = destFrame.size.height;
     self.menuViewController.view.frame = destFrame;
     
-    [self addChildViewController:self.menuViewController];
-    [self.view addSubview:self.menuViewController.view];
-    [self.menuViewController didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         
         self.menuViewController.view.frame = originFrame;
         
     } completion:^(BOOL finished) {
-        //
+        NSLog(@"done: %@", NSStringFromCGRect(self.menuViewController.view.frame));
+        
     }];
     
 }
