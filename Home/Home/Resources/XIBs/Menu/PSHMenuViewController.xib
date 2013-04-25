@@ -83,7 +83,6 @@
 								<string key="NSFrame">{{11, 11}, {25, 25}}</string>
 								<reference key="NSSuperview" ref="58438530"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="125799131"/>
 								<int key="IBUIContentMode">1</int>
@@ -747,6 +746,14 @@
 					<int key="connectionID">20</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">launcherMenuView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="31855915"/>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">launchAppButtonTapped:</string>
 						<reference key="source" ref="523702005"/>
@@ -1135,7 +1142,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">55</int>
+			<int key="maxID">56</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1155,6 +1162,7 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="launcherButtonView">UIView</string>
+						<string key="launcherMenuView">UIView</string>
 						<string key="menuButtonImageView">UIImageView</string>
 						<string key="menuButtonView">UIView</string>
 						<string key="messengerButtonImageView">UIImageView</string>
@@ -1164,6 +1172,10 @@
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="launcherButtonView">
 							<string key="name">launcherButtonView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="launcherMenuView">
+							<string key="name">launcherMenuView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="menuButtonImageView">

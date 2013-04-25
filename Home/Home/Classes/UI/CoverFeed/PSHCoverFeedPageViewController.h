@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FeedItem.h"
 
+@protocol PSHCoverFeedPageViewControllerDelegate;
+
+
 @interface PSHCoverFeedPageViewController : UIViewController
 
 
@@ -27,5 +30,16 @@
 
 @property (nonatomic) NSInteger currentIndex;
 
+@property (nonatomic) id<PSHCoverFeedPageViewControllerDelegate> delegate;
+
+- (void) animateShowActionsPanelView;
 
 @end
+
+
+@protocol PSHCoverFeedPageViewControllerDelegate <NSObject>
+
+- (void)coverfeedPageViewController:(PSHCoverFeedPageViewController*)vc mainViewTapped:(BOOL)tapped;
+
+@end
+

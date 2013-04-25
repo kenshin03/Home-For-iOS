@@ -13,15 +13,18 @@
 #import "FeedItem.h"
 #import "ItemSource.h"
 
-@interface PSHCoverFeedViewController ()<UIPageViewControllerDataSource>
+@interface PSHCoverFeedViewController ()<UIPageViewControllerDataSource, PSHMenuViewControllerDelegate, PSHCoverFeedPageViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * feedItemsArray;
 @property (nonatomic, strong) UIPageViewController * feedsPageViewController;
 @property (nonatomic, strong) NSDateFormatter * dateFormatter;
 
 @property (nonatomic, strong) PSHCoverFeedPageViewController * currentPagePageViewController;
+@property (nonatomic, strong) PSHMenuViewController * menuViewController;
+@property (nonatomic) BOOL isMenuHidden;
 
 @property (nonatomic, strong) PSHFacebookDataService * facebookDataService;
+
 
 
 @end
@@ -47,8 +50,28 @@
     [self.dateFormatter setDateFormat:@"MMMM d"];
     self.feedItemsArray = [@[] mutableCopy];
     
-    [self initMenuViewController];
+    NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+    if ([feedItemsArray count] > 0){
+        [self.feedItemsArray removeAllObjects];
+        [self.feedItemsArray addObjectsFromArray:feedItemsArray];
+        [self initFeedsPageViewController];
+        
+        // reload
+    }else{
+        self.facebookDataService = [PSHFacebookDataService sharedService];
+        [self.facebookDataService fetchFeed:^(NSArray *resultsArray, NSError *error) {
+            NSLog(@"done...");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.feedItemsArray removeAllObjects];
+                [self.feedItemsArray addObjectsFromArray:resultsArray];
+                // reload page view controller
+                [self initFeedsPageViewController];
+            });
+        }];
+    }
     
+    [self initMenuViewController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +107,7 @@
     }
     currentPagePageViewController.sourceName = firstFeedItem.source.name;
     currentPagePageViewController.sourceAvartarImageURL = firstFeedItem.source.imageURL;
+    currentPagePageViewController.delegate = self;
     
     [self.feedsPageViewController setViewControllers:@[currentPagePageViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
     }];
@@ -126,6 +150,7 @@
         }
         prevPageViewController.sourceName = previousFeedItem.source.name;
         prevPageViewController.sourceAvartarImageURL = previousFeedItem.source.imageURL;
+        prevPageViewController.delegate = self;
         return prevPageViewController;
     }
 }
@@ -155,7 +180,7 @@
         }
         nextPageViewController.sourceName = nextFeedItem.source.name;
         nextPageViewController.sourceAvartarImageURL = nextFeedItem.source.imageURL;
-        
+        nextPageViewController.delegate = self;
         return nextPageViewController;
         
         
@@ -164,12 +189,70 @@
     }
 }
 
+#pragma mark - Menu related
+
 - (void) initMenuViewController {
     PSHMenuViewController * menuViewController = [[PSHMenuViewController alloc] init];
-    [self addChildViewController:menuViewController];
-    [self.view addSubview:menuViewController.view];
-    [menuViewController didMoveToParentViewController:self];
+    menuViewController.delegate = self;
+    self.menuViewController = menuViewController;
+    
     
 }
+
+- (void) animateHideMenu {
+    
+    CGRect destFrame = self.menuViewController.view.frame;
+    destFrame.origin.y += destFrame.size.height;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        self.menuViewController.view.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        [self.menuViewController.view removeFromSuperview];
+        [self.menuViewController removeFromParentViewController];
+    }];
+    
+}
+
+- (void) animateShowMenu {
+    
+    CGRect originFrame = self.menuViewController.view.frame;
+    CGRect destFrame = self.menuViewController.view.frame;
+    destFrame.origin.y += destFrame.size.height;
+    self.menuViewController.view.frame = destFrame;
+    
+    [self addChildViewController:self.menuViewController];
+    [self.view addSubview:self.menuViewController.view];
+    [self.menuViewController didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        self.menuViewController.view.frame = originFrame;
+        
+    } completion:^(BOOL finished) {
+        //
+    }];
+    
+}
+
+
+#pragma mark - PSHMenuViewControllerDelegate methods
+
+- (void)menuViewController:(PSHMenuViewController*)vc menuViewTapped:(BOOL)tapped {
+    [self animateHideMenu];
+    
+    [[self.feedsPageViewController viewControllers] enumerateObjectsUsingBlock:^(PSHCoverFeedPageViewController * feedPageViewController, NSUInteger idx, BOOL *stop) {
+        if ([feedPageViewController respondsToSelector:@selector(animateShowActionsPanelView)]){
+            [feedPageViewController animateShowActionsPanelView];
+        }
+    }];
+}
+
+
+- (void)coverfeedPageViewController:(PSHCoverFeedPageViewController*)vc mainViewTapped:(BOOL)tapped {
+    [self animateShowMenu];
+}
+
 
 @end

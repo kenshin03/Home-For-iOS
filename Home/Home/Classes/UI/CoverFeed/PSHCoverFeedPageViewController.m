@@ -98,6 +98,14 @@
     [doubleTapGestureRecognizer addTarget:self action:@selector(doubleTapGestureRecognized:)];
     [self.view addGestureRecognizer:doubleTapGestureRecognizer];
     
+    UITapGestureRecognizer * singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    singleTapGestureRecognizer.numberOfTapsRequired = 1;
+    [singleTapGestureRecognizer addTarget:self action:@selector(singleTapGestureRecognized:)];
+    [self.view addGestureRecognizer:singleTapGestureRecognizer];
+    
+    [singleTapGestureRecognizer requireGestureRecognizerToFail:doubleTapGestureRecognizer];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -352,6 +360,15 @@
     }
 }
 
+-(void) singleTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer {
+    if ([self.delegate respondsToSelector:@selector(coverfeedPageViewController:mainViewTapped:)]){
+        [self animateHideActionsPanelView];
+        [self.delegate coverfeedPageViewController:self mainViewTapped:YES];
+    }
+    
+}
+
+
 #pragma mark - Like and Comments
 
 -(IBAction)likeButtonTapped:(id)sender {
@@ -535,6 +552,34 @@
     self.photosCommentsView.hidden = NO;
 }
 
+
+- (void) animateShowActionsPanelView {
+    CGRect destFrame = self.actionsPanelView.frame;
+    destFrame.origin.y -= self.actionsPanelView.frame.size.height;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        self.actionsPanelView.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        //
+        self.actionsPanelView.hidden = NO;
+    }];
+}
+
+- (void) animateHideActionsPanelView {
+    CGRect destFrame = self.actionsPanelView.frame;
+    destFrame.origin.y += self.actionsPanelView.frame.size.height;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        self.actionsPanelView.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        //
+        self.actionsPanelView.hidden = YES;
+    }];
+}
 
 
 @end

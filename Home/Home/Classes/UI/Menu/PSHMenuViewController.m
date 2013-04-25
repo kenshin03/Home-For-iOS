@@ -35,6 +35,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
 @property (nonatomic, weak) IBOutlet UIView * notificationsButtonView;
 
 @property (nonatomic, weak) IBOutlet UIView * launcherButtonView;
+@property (nonatomic, weak) IBOutlet UIView * launcherMenuView;
 
 @property (nonatomic) BOOL menuExpanded;
 
@@ -44,6 +45,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
 @property (nonatomic, strong) UILongPressGestureRecognizer * menuLongGestureRecognizer;
 
 
+@property (nonatomic) CGRect defaultMenuButtonFrame;
 @property (nonatomic) CGRect defaultMessengerButtonFrame;
 @property (nonatomic) CGRect defaultNotificationsButtonFrame;
 @property (nonatomic) CGRect defaultLauncherButtonFrame;
@@ -77,6 +79,11 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     
     self.menuGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:self.menuGestureRecognizer];
+    
+    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    [tapGestureRecognizer addTarget:self action:@selector(viewTapped:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +94,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
 
 
 - (void) initMenuButton {
-    
+    self.defaultMenuButtonFrame = self.menuButtonView.frame;
     self.menuButtonView.tag = kPSHMenuViewControllerMenuButtonViewTag;
     [self.menuButtonView.layer setCornerRadius:30.0f];
     [self.menuButtonView.layer setMasksToBounds:YES];
@@ -118,6 +125,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     [self.menuButtonView addGestureRecognizer:self.menuLongGestureRecognizer];
     
     
+    
 }
 
 - (void) initMessengerButton {
@@ -135,7 +143,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     [self.launcherButtonView.layer setBorderWidth:.5f];
     [self.launcherButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
     self.launcherButtonView.backgroundColor = [UIColor lightGrayColor];
-    
+    self.launcherMenuView.hidden = YES;
 }
 
 - (void) initNotificationsButton {
@@ -166,14 +174,14 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     CGRect messengerFrame = self.messengerButtonView.frame;
     CGRect notificationFrame = self.notificationsButtonView.frame;
     
-    CGRect initialButtonsFrame = CGRectMake(130.0f, 474.0f, 60.0f, 60.0f);
-    if ((CGRectContainsRect(initialButtonsFrame, launcherFrame)) ||
-        (CGRectContainsRect(initialButtonsFrame, messengerFrame)) ||
-        (CGRectContainsRect(initialButtonsFrame, notificationFrame))
-    ){
-        // ignore event if all buttons are at initial position
-        return;
-    }
+//    CGRect initialButtonsFrame = CGRectMake(130.0f, 474.0f, 60.0f, 60.0f);
+//    if ((CGRectContainsRect(initialButtonsFrame, launcherFrame)) ||
+//        (CGRectContainsRect(initialButtonsFrame, messengerFrame)) ||
+//        (CGRectContainsRect(initialButtonsFrame, notificationFrame))
+//    ){
+//        // ignore event if all buttons are at initial position
+//        return;
+//    }
     if (recognizer.state == UIGestureRecognizerStateBegan){
         
         launcherFrame = self.launcherButtonView.frame;
@@ -183,28 +191,34 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     } else if (recognizer.state == UIGestureRecognizerStateChanged){
         CGPoint currentTouchPoint = [recognizer locationInView:self.view];
         if (CGRectContainsPoint(self.defaultLauncherButtonFrame, currentTouchPoint)){
-            [self animateShowLauncher];
-            [self animateHideMenuButtons];
-            [self resetMenuButton];
-            recognizer.enabled = NO;
-            recognizer.enabled = YES;
+            if (CGRectEqualToRect(self.launcherButtonView.frame, self.defaultLauncherButtonFrame)){
+                [self animateShowLauncher];
+                [self resetMenuButton];
+//                [self animateHideMenuButtons];
+                recognizer.enabled = NO;
+                recognizer.enabled = YES;
+            }
             
         }else if (CGRectContainsPoint(self.defaultMessengerButtonFrame, currentTouchPoint)){
-            [self animateShowMessenger];
-            [self animateHideMenuButtons];
-            [self resetMenuButton];
-            recognizer.enabled = NO;
-            recognizer.enabled = YES;
+            if (CGRectEqualToRect(self.messengerButtonView.frame, self.defaultMessengerButtonFrame)){
+                [self animateShowMessenger];
+                [self animateHideMenuButtons];
+                [self resetMenuButton];
+                recognizer.enabled = NO;
+                recognizer.enabled = YES;
+            }
             
         }else if (CGRectContainsPoint(self.defaultNotificationsButtonFrame, currentTouchPoint)){
-            [self animateShowNotifications];
-            [self animateHideMenuButtons];
-            [self resetMenuButton];
-            recognizer.enabled = NO;
-            recognizer.enabled = YES;
+            if (CGRectEqualToRect(self.notificationsButtonView.frame, self.defaultNotificationsButtonFrame)){
+                [self animateShowNotifications];
+                [self animateHideMenuButtons];
+                [self resetMenuButton];
+                recognizer.enabled = NO;
+                recognizer.enabled = YES;
+            }
         }else{
             CGRect upperFrameRect = self.view.frame;
-            upperFrameRect.size.height = upperFrameRect.size.height/2;
+            upperFrameRect.size.height = upperFrameRect.size.height/1.5;
             if (CGRectContainsPoint(upperFrameRect, currentTouchPoint)){
                 [self animateHideMenuButtonsFollowTouchPoint:currentTouchPoint];
                 
@@ -215,14 +229,15 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
         
         CGPoint currentTouchPoint = [recognizer locationInView:self.view];
         CGRect upperFrameRect = self.view.frame;
-        upperFrameRect.size.height = upperFrameRect.size.height/2;
+        upperFrameRect.size.height = upperFrameRect.size.height/1.5;
         if (CGRectContainsPoint(upperFrameRect, currentTouchPoint)){
-                [self animateHideMenuButtonsFollowTouchPoint:currentTouchPoint];
+            [self animateHideMenuButtonsFollowTouchPoint:currentTouchPoint];
         }
         if (!CGRectEqualToRect(self.launcherButtonView.frame, self.defaultLauncherButtonFrame)){
             [self resetMenuButton];
             [self animateHideMenuButtons];
         }
+        
     } else if (recognizer.state == UIGestureRecognizerStateFailed){
         [self resetMenuButton];
         [self animateHideMenuButtons];
@@ -242,6 +257,11 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
 
 - (void) animateShowLauncher {
     NSLog(@"animateShowLauncher");
+    if (self.launcherMenuView.hidden){
+        self.launcherButtonView.hidden = NO;
+    }else{
+        self.launcherButtonView.hidden = YES;
+    }
 }
 
 - (void) animateShowMessenger {
@@ -292,6 +312,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
         
         self.launcherButtonView.alpha = 1.0f;
         self.notificationsButtonView.alpha = 1.0f;
+        self.messengerButtonView.alpha = 1.0f;
         
     } completion:^(BOOL finished) {
         // nothing
@@ -381,6 +402,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
         
         self.launcherButtonView.alpha = 0.0f;
         self.notificationsButtonView.alpha = 0.0f;
+        self.messengerButtonView.alpha = 0.0f;
         
     } completion:^(BOOL finished) {
         // nothing
@@ -426,6 +448,13 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     
 //    openApp(CFSTR("com.apple.Preferences"), FALSE);
 //    openApp(CFSTR("com.apple.mobileslideshow"), FALSE);
+}
+
+
+- (void) viewTapped:(UITapGestureRecognizer*) tapGestureRecognizer {
+    if ([self.delegate respondsToSelector:@selector(menuViewController:menuViewTapped:)]){
+        [self.delegate menuViewController:self menuViewTapped:YES];
+    }
 }
 
 @end

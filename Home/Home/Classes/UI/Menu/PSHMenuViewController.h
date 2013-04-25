@@ -10,7 +10,17 @@
 
 static NSInteger const kPSHMenuViewControllerMenuButtonViewTag = 1111;
 
+@protocol PSHMenuViewControllerDelegate;
+
 @interface PSHMenuViewController : UIViewController
 
+@property (nonatomic, weak) id<PSHMenuViewControllerDelegate> delegate;
+
+@end
+
+
+@protocol PSHMenuViewControllerDelegate <NSObject>
+
+- (void)menuViewController:(PSHMenuViewController*)vc menuViewTapped:(BOOL)tapped;
 
 @end
