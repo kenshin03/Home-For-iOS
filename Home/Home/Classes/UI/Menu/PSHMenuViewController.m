@@ -101,6 +101,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     [self.menuButtonView.layer setBorderWidth:2.0f];
     [self.menuButtonView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     self.menuButtonView.backgroundColor = [UIColor clearColor];
+    self.menuButtonImageView.backgroundColor = [UIColor blackColor];
     
     FetchProfileSuccess fetchProfileSuccess =^(NSString * graphID, NSString * avartarImageURL, NSError * error){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
