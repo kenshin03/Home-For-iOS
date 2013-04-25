@@ -16,12 +16,14 @@
 static NSInteger const kPSHMenuViewControllerLaunchPhoneButton = 1112;
 static NSInteger const kPSHMenuViewControllerLaunchMailButton = 1113;
 static NSInteger const kPSHMenuViewControllerLaunchMapsButton = 1114;
+
 static NSInteger const kPSHMenuViewControllerLaunchBrowserButton = 1115;
-static NSInteger const kPSHMenuViewControllerLaunchFBButton = 1116;
-static NSInteger const kPSHMenuViewControllerLaunchMessengerButton = 1117;
-static NSInteger const kPSHMenuViewControllerLaunchInstagramButton = 1118;
-static NSInteger const kPSHMenuViewControllerLaunchCameraButton = 1119;
-static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
+static NSInteger const kPSHMenuViewControllerLaunchMessengerButton = 1116;
+static NSInteger const kPSHMenuViewControllerLaunchYoutubeButton = 1117;
+
+static NSInteger const kPSHMenuViewControllerLaunchMusicButton = 1118;
+static NSInteger const kPSHMenuViewControllerLaunchInstagramButton = 1119;
+static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 
 @interface PSHMenuViewController ()<UIGestureRecognizerDelegate>
@@ -71,6 +73,7 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     [self initMenuButton];
     [self initMessengerButton];
     [self initAppLauncherButton];
+    [self initAppLauncher];
     [self initNotificationsButton];
     self.menuExpanded = NO;
     
@@ -144,7 +147,15 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     [self.launcherButtonView.layer setBorderWidth:.5f];
     [self.launcherButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
     self.launcherButtonView.backgroundColor = [UIColor lightGrayColor];
+}
+
+- (void) initAppLauncher {
     self.launcherMenuView.hidden = YES;
+    UISwipeGestureRecognizer * swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] init];
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [swipeGestureRecognizer addTarget:self action:@selector(appLauncherSwipedDown:)];
+    [self.launcherMenuView addGestureRecognizer:swipeGestureRecognizer];
+    
 }
 
 - (void) initNotificationsButton {
@@ -258,12 +269,44 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
 
 - (void) animateShowLauncher {
     NSLog(@"animateShowLauncher");
-    if (self.launcherMenuView.hidden){
-        self.launcherButtonView.hidden = NO;
-    }else{
-        self.launcherButtonView.hidden = YES;
+    [self.view bringSubviewToFront:self.launcherMenuView];
+    
+    CGRect origLauncherMenuRect = self.launcherMenuView.frame;
+    origLauncherMenuRect.origin.y = 0.0f;
+    
+    if (self.launcherMenuView.frame.origin.y == 0.0f){
+        // set it down to bring it up
+        CGRect destLauncherMenuRect = self.launcherMenuView.frame;
+        destLauncherMenuRect.origin.y = self.launcherMenuView.frame.size.height;
+        self.launcherMenuView.frame = destLauncherMenuRect;
     }
+    self.launcherMenuView.hidden = NO;
+    self.launcherMenuView.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.launcherMenuView.frame = origLauncherMenuRect;
+        self.launcherMenuView.alpha = 1.0f;
+    } completion:^(BOOL finished) {
+        //
+    }];
+    
 }
+
+
+- (void) animateHideLauncher {
+    NSLog(@"animateHideLauncher");
+    
+    CGRect destLauncherMenuRect = self.launcherMenuView.frame;
+    destLauncherMenuRect.origin.y = self.launcherMenuView.frame.size.height;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.launcherMenuView.frame = destLauncherMenuRect;
+        self.launcherMenuView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        self.launcherMenuView.hidden = YES;
+    }];
+}
+
 
 - (void) animateShowMessenger {
     NSLog(@"animateShowMessenger");
@@ -421,30 +464,72 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
     }
 }
 
-- (IBAction)launchAppButtonTapped:(UIView*)sender {
-    /*
-    NSURL *url = [NSURL URLWithString:@"http://maps.apple.com/maps?daddr="];
-    [[UIApplication sharedApplication] openURL:url];
-     */
+- (void)appLauncherSwipedDown:(UISwipeGestureRecognizer*)swipeGestureRecognizer {
+    if(!self.launcherMenuView.hidden){
+        [self animateHideLauncher];
+    }
+}
+
+
+- (IBAction)launchAppButtonTapped:(UIButton*)sender {
     
-    void (*openApp)(CFStringRef, Boolean);
-    void *hndl = dlopen("/System/Library/PrivateFrameworks/SpringBoardServices.framework/SpringBoardServices");
-    openApp = dlsym(hndl, "SBSLaunchApplicationWithIdentifier");
-    
+    NSURL * url = nil;
     switch (sender.tag) {
-        case kPSHMenuViewControllerLaunchBrowserButton:
-            openApp(CFSTR("com.apple.mobilesafari"), FALSE);
-            break;
-        case kPSHMenuViewControllerLaunchCameraButton:
-            openApp(CFSTR("com.apple.camera"), FALSE);
-            break;
-        case kPSHMenuViewControllerLaunchPhotosButton:
-            openApp(CFSTR("com.apple.mobileslideshow"), FALSE);
-            break;
             
+        case kPSHMenuViewControllerLaunchPhoneButton:
+            url = [NSURL URLWithString:@"tel:1-408-111-1111"];
+            break;
+        case kPSHMenuViewControllerLaunchMailButton:
+            url = [NSURL URLWithString:@"mailto:"];
+            break;
+        case kPSHMenuViewControllerLaunchMapsButton:
+            url = [NSURL URLWithString:@"maps:"];
+            break;
+        case kPSHMenuViewControllerLaunchBrowserButton:
+            url = [NSURL URLWithString:@"http://facebook.com"];
+            break;
+        case kPSHMenuViewControllerLaunchMessengerButton:
+            url = [NSURL URLWithString:@"sms:"];
+            break;
+        case kPSHMenuViewControllerLaunchYoutubeButton:
+            url = [NSURL URLWithString:@"http://youtube.com"];
+            break;
+        case kPSHMenuViewControllerLaunchMusicButton:
+            url = [NSURL URLWithString:@"music:"];
+            break;
+        case kPSHMenuViewControllerLaunchInstagramButton:
+            url = [NSURL URLWithString:@"instagram://app"];
+            break;
+        case kPSHMenuViewControllerLaunchTwitterButton:
+            url = [NSURL URLWithString:@"twitter://"];
+            break;
         default:
             break;
     }
+    if ([[UIApplication sharedApplication] canOpenURL:url]){
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
+    
+    
+//    void (*openApp)(CFStringRef, Boolean);
+//    void *hndl = dlopen("/System/Library/PrivateFrameworks/SpringBoardServices.framework/SpringBoardServices");
+//    openApp = dlsym(hndl, "SBSLaunchApplicationWithIdentifier");
+//    
+//    switch (sender.tag) {
+//        case kPSHMenuViewControllerLaunchBrowserButton:
+//            openApp(CFSTR("com.apple.mobilesafari"), FALSE);
+//            break;
+//        case kPSHMenuViewControllerLaunchCameraButton:
+//            openApp(CFSTR("com.apple.camera"), FALSE);
+//            break;
+//        case kPSHMenuViewControllerLaunchPhotosButton:
+//            openApp(CFSTR("com.apple.mobileslideshow"), FALSE);
+//            break;
+//            
+//        default:
+//            break;
+//    }
     
     
 //    openApp(CFSTR("com.apple.Preferences"), FALSE);
@@ -453,9 +538,13 @@ static NSInteger const kPSHMenuViewControllerLaunchPhotosButton = 1120;
 
 
 - (void) viewTapped:(UITapGestureRecognizer*) tapGestureRecognizer {
-    if ([self.delegate respondsToSelector:@selector(menuViewController:menuViewTapped:)]){
-        [self.delegate menuViewController:self menuViewTapped:YES];
+    if (self.launcherMenuView.hidden){
+        if ([self.delegate respondsToSelector:@selector(menuViewController:menuViewTapped:)]){
+            [self.delegate menuViewController:self menuViewTapped:YES];
+        }
     }
 }
+
+
 
 @end

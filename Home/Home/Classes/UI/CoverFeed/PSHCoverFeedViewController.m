@@ -120,7 +120,7 @@
     
     self.view.gestureRecognizers = self.feedsPageViewController.gestureRecognizers;
     
-    double delayInSeconds = 2.0;
+    double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self animateHideMenu];
@@ -208,7 +208,7 @@
     [self addChildViewController:self.menuViewController];
     [self.view addSubview:self.menuViewController.view];
     [self.menuViewController didMoveToParentViewController:self];
-    
+    [self.view bringSubviewToFront:self.menuViewController.view];
     
 }
 
@@ -217,7 +217,7 @@
     CGRect destFrame = self.menuViewController.view.frame;
     destFrame.origin.y = destFrame.size.height;
     
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         
         self.menuViewController.view.frame = destFrame;
         
