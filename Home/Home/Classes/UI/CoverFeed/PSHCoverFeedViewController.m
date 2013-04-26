@@ -235,7 +235,7 @@
     CGRect destFrame = self.menuViewController.view.frame;
     destFrame.origin.y = destFrame.size.height;
     self.menuViewController.view.frame = destFrame;
-    
+    [self.view bringSubviewToFront:self.menuViewController.view];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         

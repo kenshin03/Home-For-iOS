@@ -142,14 +142,12 @@ typedef void (^InitAccountSuccessBlock)();
         NSLog(@"responseString: %@", responseString);
         NSError* responseError;
         NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
-        [self parseHomeDataJSON:jsonDict];
+        [self parseHomeDataJSON:jsonDict fetchFeedSuccess:fetchFeedSuccess];
 
-        NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
-        fetchFeedSuccess(feedItemsArray, nil);
     }];
 }
 
-- (void) parseHomeDataJSON:(NSDictionary*)jsonDict {
+- (void) parseHomeDataJSON:(NSDictionary*)jsonDict fetchFeedSuccess:(FetchFeedSuccess)fetchFeedSuccess{
     [jsonDict[@"data"] enumerateObjectsUsingBlock:^(NSDictionary * dataDict, NSUInteger idx, BOOL *stop) {
         
         
@@ -239,7 +237,12 @@ typedef void (^InitAccountSuccessBlock)();
                     FetchSourceCoverImageSuccessBlock sucessBlock = ^(NSString * coverImageURL, NSString * avartarImageURL){
                         feedItem.imageURL = coverImageURL;
                         feedItem.source.imageURL = avartarImageURL;
-                        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                        
+                        [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+                            //
+                            NSLog(@"saving cover images");
+                        }];
+                        
                     };
                     
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -255,7 +258,15 @@ typedef void (^InitAccountSuccessBlock)();
             feedItem.source = feedSource;
         }
     }];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    
+    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        //
+        NSLog(@"saving all feed items");
+        NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+        fetchFeedSuccess(feedItemsArray, nil);
+        
+    }];
+    
 }
 
 - (BOOL) isHandledFeedType:(NSString*)feedType subType:(NSString*)subType{
