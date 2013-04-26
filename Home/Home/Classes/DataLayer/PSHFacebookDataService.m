@@ -63,7 +63,7 @@ typedef void (^InitAccountSuccessBlock)();
     
     ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:facebookOptions
-                                            completion: ^(BOOL granted, NSError *e) {
+                                            completion: ^(BOOL granted, NSError *error) {
                                                 NSLog(@"granted: %i", granted);
                                                 if (granted) {
                                                     NSArray *accounts = [self.accountStore accountsWithAccountType:facebookAccountType];
@@ -73,8 +73,26 @@ typedef void (^InitAccountSuccessBlock)();
                                                     self.facebookAccount = [accounts lastObject];
                                                     success();
                                                 } else {
-                                                    //Fail gracefully...
-                                                    NSLog(@"error getting permission %@",e);
+                                                    
+                                                    dispatch_sync(dispatch_get_main_queue(), ^{
+                                                        
+                                                        if ((error.code == 7) || (error.code == 6)){
+                                                            // User tapped 'Don't Allow'
+                                                            // Error Domain=com.apple.accounts Code=7 "The operation couldn’t be completed. (com.apple.accounts error 7.)"
+                                                            // FB account not set up on device
+                                                            // The operation couldn’t be completed. (com.apple.accounts error 6.)
+                                                            
+                                                            UIAlertView *alert = [[UIAlertView alloc]
+                                                                                  initWithTitle:@"Facebook account not set up"
+                                                                                  message:@"Please set up facebook account in Settings first"
+                                                                                  delegate:self
+                                                                                  cancelButtonTitle:@"Okay"
+                                                                                  otherButtonTitles:nil,nil];
+                                                            
+                                                            [alert show];
+                                                            
+                                                        }
+                                                    });
                                                 } }];
 }
 
