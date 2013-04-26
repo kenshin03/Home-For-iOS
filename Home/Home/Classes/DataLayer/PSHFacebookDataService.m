@@ -112,7 +112,23 @@ typedef void (^InitAccountSuccessBlock)();
     }];
 }
 
-
+- (void) removeAllCachedFeeds:(Success)successBlock {
+    
+//    NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+//    [feedItemsArray enumerateObjectsUsingBlock:^(FeedItem * feed, NSUInteger idx, BOOL *stop) {
+//        [feed deleteInContext:[NSManagedObjectContext defaultContext]];
+//        NSLog(@"deleteing feed...");
+//    }];
+    
+    [FeedItem MR_truncateAllInContext:[NSManagedObjectContext defaultContext]];
+    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        //
+        NSLog(@"removeAllCachedFeeds");
+        successBlock();
+    }];
+    
+    
+}
 
 - (void) fetchFeed:(FetchFeedSuccess)fetchFeedSuccess {
     
@@ -125,7 +141,6 @@ typedef void (^InitAccountSuccessBlock)();
     }else{
         successBlock();
     }
-    
 }
 
 - (void) _fetchFeed:(FetchFeedSuccess)fetchFeedSuccess{

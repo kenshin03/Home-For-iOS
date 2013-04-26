@@ -21,7 +21,8 @@
 
 @property (nonatomic, strong) PSHCoverFeedPageViewController * currentPagePageViewController;
 @property (nonatomic, strong) PSHMenuViewController * menuViewController;
-@property (nonatomic) BOOL isMenuHidden;
+@property (nonatomic, strong) UIView * menuView;
+
 
 @property (nonatomic, strong) PSHFacebookDataService * facebookDataService;
 
@@ -209,6 +210,7 @@
     [self.view addSubview:self.menuViewController.view];
     [self.menuViewController didMoveToParentViewController:self];
     [self.view bringSubviewToFront:self.menuViewController.view];
+    self.menuView = self.menuViewController.view;
     
 }
 
@@ -261,6 +263,44 @@
     }];
 }
 
+- (void)menuViewController:(PSHMenuViewController*)vc reloadButtonTapped:(BOOL)tapped {
+    [self animateHideMenu];
+    
+    
+    [self.feedItemsArray removeAllObjects];
+    [self.feedsPageViewController.view removeFromSuperview];
+    [self.feedsPageViewController removeFromParentViewController];
+    self.feedsPageViewController = nil;
+    
+    self.facebookDataService = [PSHFacebookDataService sharedService];
+    [self.facebookDataService removeAllCachedFeeds:^{
+        
+        
+        NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+        if ([feedItemsArray count] > 0){
+            [self.feedItemsArray removeAllObjects];
+            [self.feedItemsArray addObjectsFromArray:feedItemsArray];
+            [self initFeedsPageViewController];
+            
+        }else{
+            self.facebookDataService = [PSHFacebookDataService sharedService];
+            [self.facebookDataService fetchFeed:^(NSArray *resultsArray, NSError *error) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.feedItemsArray removeAllObjects];
+                    [self.feedItemsArray addObjectsFromArray:resultsArray];
+                    // reload page view controller
+                    [self initFeedsPageViewController];
+                });
+            }];
+        }
+        
+        [self.view bringSubviewToFront:self.menuView];
+    }];
+    
+}
+
+#pragma mark - PSHCoverFeedPageViewController methods
 
 - (void)coverfeedPageViewController:(PSHCoverFeedPageViewController*)vc mainViewTapped:(BOOL)tapped {
     [self animateShowMenu];

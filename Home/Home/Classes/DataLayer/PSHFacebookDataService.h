@@ -31,4 +31,6 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 
 - (void) fetchSourceCoverImageURLFor:(NSString*)fromGraphID success:(FetchSourceCoverImageSuccessBlock) successBlock;
 
+- (void) removeAllCachedFeeds:(Success)successBlock;
+
 @end

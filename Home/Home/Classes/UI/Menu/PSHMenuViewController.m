@@ -58,6 +58,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 - (IBAction)statusUpdateButtonTapped:(id)sender;
 - (IBAction)photosButtonTapped:(id)sender;
 - (IBAction)checkinButtonTapped:(id)sender;
+- (IBAction)reloadButtonTapped:(id)sender;
 
 
 
@@ -587,6 +588,11 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     
 }
 
+- (IBAction)reloadButtonTapped:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(menuViewController:reloadButtonTapped:)]){
+        [self.delegate menuViewController:self reloadButtonTapped:YES];
+    }
+}
 
 
 @end
