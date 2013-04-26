@@ -81,7 +81,7 @@
     
     if (self.currentIndex == 0){
         self.dateFormatter = [[NSDateFormatter alloc] init];
-        self.dateFormatter.dateFormat = @"HH:MM";
+        self.dateFormatter.dateFormat = @"HH:mm";
         [self showFirstLaunchView];
     }else{
         self.currentTimeView.hidden = YES;
@@ -506,7 +506,8 @@
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
                                          nil]];
-    bounceAnimation.removedOnCompletion = YES;
+    bounceAnimation.removedOnCompletion = NO;
+    bounceAnimation.fillMode = kCAFillModeForwards;
     
     [self.commentsPostingView.layer addAnimation:bounceAnimation forKey:@"bounce"];
     double delayInSeconds = 0.2;

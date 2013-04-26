@@ -11,7 +11,7 @@
 #import "PSHMenuGestureRecognizer.h"
 
 #import <QuartzCore/QuartzCore.h>
-
+#import <Social/Social.h>
 
 static NSInteger const kPSHMenuViewControllerLaunchPhoneButton = 1112;
 static NSInteger const kPSHMenuViewControllerLaunchMailButton = 1113;
@@ -41,6 +41,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 @property (nonatomic) BOOL menuExpanded;
 
+@property (nonatomic, strong) NSString * ownGraphID;
 
 @property (nonatomic, strong) PSHMenuGestureRecognizer * menuGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer * menuTapGestureRecognizer;
@@ -53,6 +54,12 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 @property (nonatomic) CGRect defaultLauncherButtonFrame;
 
 - (IBAction)launchAppButtonTapped:(id)sender;
+
+- (IBAction)statusUpdateButtonTapped:(id)sender;
+- (IBAction)photosButtonTapped:(id)sender;
+- (IBAction)checkinButtonTapped:(id)sender;
+
+
 
 @end
 
@@ -107,6 +114,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     self.menuButtonImageView.backgroundColor = [UIColor blackColor];
     
     FetchProfileSuccess fetchProfileSuccess =^(NSString * graphID, NSString * avartarImageURL, NSError * error){
+        self.ownGraphID = graphID;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage * profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -310,7 +318,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 - (void) animateShowMessenger {
     NSLog(@"animateShowMessenger");
-    NSURL *url = [NSURL URLWithString:@"fb://messaging"];
+    NSURL *url = [NSURL URLWithString:@"fb-messenger://compose"];
     [[UIApplication sharedApplication] openURL:url];
 }
 
@@ -543,6 +551,40 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
             [self.delegate menuViewController:self menuViewTapped:YES];
         }
     }
+}
+
+- (IBAction)statusUpdateButtonTapped:(id)sender {
+    
+//    NSString * urlString = [NSString stringWithFormat:@"fb://publish/profile/%@?text=awesome!", self.ownGraphID];
+//    
+//    NSURL * url = [NSURL URLWithString:urlString];
+//    if ([[UIApplication sharedApplication] canOpenURL:url]){
+//        [[UIApplication sharedApplication] openURL:url];
+//    }
+
+    SLComposeViewController *composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    NSString * initalTextString = @"Home is awesome.";
+    [composeViewController setInitialText:initalTextString];
+    [self presentViewController:composeViewController animated:YES completion:^{
+        // 
+    }];
+    
+}
+
+- (IBAction)photosButtonTapped:(id)sender {
+    NSURL * url = [NSURL URLWithString:@"fb6628568379snap://"];
+    if ([[UIApplication sharedApplication] canOpenURL:url]){
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
+}
+
+- (IBAction)checkinButtonTapped:(id)sender {
+    NSURL * url = [NSURL URLWithString:@"fb://place/create"];
+    if ([[UIApplication sharedApplication] canOpenURL:url]){
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
 }
 
 
