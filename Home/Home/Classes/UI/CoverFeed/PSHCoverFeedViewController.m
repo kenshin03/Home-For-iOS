@@ -102,6 +102,7 @@
     currentPagePageViewController.commentsCount = [firstFeedItem.commentsCount integerValue];
     currentPagePageViewController.feedItemGraphID = firstFeedItem.graphID;
     currentPagePageViewController.feedType = firstFeedItem.type;
+    currentPagePageViewController.likedByMe = firstFeedItem.likedByMe.boolValue;
     currentPagePageViewController.currentIndex = 0;
     if (firstFeedItem.imageURL != nil){
         currentPagePageViewController.imageURLString = firstFeedItem.imageURL;
@@ -150,6 +151,7 @@
         prevPageViewController.feedItemGraphID = previousFeedItem.graphID;
         prevPageViewController.feedType = previousFeedItem.type;
         prevPageViewController.currentIndex = previousIndex;
+        prevPageViewController.likedByMe = previousFeedItem.likedByMe.boolValue;
         if (previousFeedItem.imageURL != nil){
             prevPageViewController.imageURLString = previousFeedItem.imageURL;
         }
@@ -180,6 +182,7 @@
         nextPageViewController.feedItemGraphID = nextFeedItem.graphID;
         nextPageViewController.feedType = nextFeedItem.type;
         nextPageViewController.currentIndex = nextIndex;
+        nextPageViewController.likedByMe = nextFeedItem.likedByMe.boolValue;
         if (nextFeedItem.imageURL != nil){
             nextPageViewController.imageURLString = nextFeedItem.imageURL;
         }
@@ -226,6 +229,7 @@
     } completion:^(BOOL finished) {
 //        [self.menuViewController.view removeFromSuperview];
 //        [self.menuViewController removeFromParentViewController];
+        [self.menuViewController animateHideMenuButtons];
     }];
     
 }
@@ -306,5 +310,18 @@
     [self animateShowMenu];
 }
 
+- (void)coverfeedPageViewController:(PSHCoverFeedPageViewController*)vc feedID:(NSString*)feedID unliked:(BOOL)unliked {
+    // unlike the feed
+    [self.feedItemsArray enumerateObjectsUsingBlock:^(FeedItem * feedItem, NSUInteger idx, BOOL *stop) {
+        if ([feedItem.graphID isEqualToString:feedID]){
+            if (unliked){
+                feedItem.likedByMe = [NSNumber numberWithBool:NO];
+            }else{
+                feedItem.likedByMe = [NSNumber numberWithBool:YES];
+            }
+        }
+    }];
+    
+}
 
 @end

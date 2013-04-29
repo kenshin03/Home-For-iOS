@@ -23,6 +23,7 @@
 
 @property (nonatomic) NSInteger likesCount;
 @property (nonatomic) NSInteger commentsCount;
+@property (nonatomic) BOOL likedByMe;
 
 
 @property (nonatomic, strong) NSString * sourceName;
@@ -40,6 +41,8 @@
 @protocol PSHCoverFeedPageViewControllerDelegate <NSObject>
 
 - (void)coverfeedPageViewController:(PSHCoverFeedPageViewController*)vc mainViewTapped:(BOOL)tapped;
+- (void)coverfeedPageViewController:(PSHCoverFeedPageViewController*)vc feedID:(NSString*)feedID unliked:(BOOL)uniked;
+
 
 @end
 

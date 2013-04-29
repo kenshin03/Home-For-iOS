@@ -166,7 +166,7 @@ typedef void (^InitAccountSuccessBlock)();
     NSURL * feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/home"];
     
     
-    NSDictionary * params = @{@"limit":@"50"};
+    NSDictionary * params = @{@"limit":@"100"};
     SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:params];
     NSLog(@"request.URL: %@", request.URL);
     request.account = self.facebookAccount;
@@ -214,8 +214,10 @@ typedef void (^InitAccountSuccessBlock)();
             // likes and comments
             NSNumber * likesCount;
             NSNumber * commentsCount;
+            BOOL likedByMe = NO;
             if (dataDict[@"likes"]){
                 likesCount = [NSNumber numberWithInt:[dataDict[@"likes"][@"count"] integerValue]];
+                likedByMe = [self checkIfPostIsLikedByMe:dataDict[@"likes"]];
             }
             if (dataDict[@"comments"]){
                 commentsCount = [NSNumber numberWithInt:[dataDict[@"comments"][@"count"] integerValue]];
@@ -254,6 +256,7 @@ typedef void (^InitAccountSuccessBlock)();
             }
             feedItem.likesCount = likesCount;
             feedItem.commentsCount = commentsCount;
+            feedItem.likedByMe = [NSNumber numberWithBool:likedByMe];
             
             // handling for photos
             if ([type isEqualToString:@"photo"]){
@@ -337,7 +340,35 @@ typedef void (^InitAccountSuccessBlock)();
 
 #pragma mark - Likes and Comments
 
+- (void) unlikeFeed:(NSString*)graphID {
+    
+    NSLog(@"unlikeFeed");
+    
+    InitAccountSuccessBlock successBlock = ^{
+        NSString * graphIDSuffix = [graphID componentsSeparatedByString:@"_"][1];
+        NSString * likeURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", graphIDSuffix];
+        NSURL * feedURL = [NSURL URLWithString:likeURLString];
+        
+        SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodDELETE URL:feedURL parameters:nil];
+        NSLog(@"request.URL: %@", request.URL);
+        request.account = self.facebookAccount;
+        [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"responseString: %@", responseString);
+        }];
+    };
+    
+    if (self.facebookAccount == nil){
+        [self initAccount:successBlock];
+    }else{
+        successBlock();
+    }
+    
+}
+
 - (void) likeFeed:(NSString*)graphID {
+    
+    NSLog(@"likeFeed");
     
     InitAccountSuccessBlock successBlock = ^{
         NSString * likeURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", graphID];
@@ -435,6 +466,20 @@ typedef void (^InitAccountSuccessBlock)();
         successBlock();
     }
     
+}
+
+- (BOOL) checkIfPostIsLikedByMe:(NSDictionary*)likesDict {
+    __block BOOL isLikedByMe = NO;
+    NSString * ownGraphID = [NSString stringWithFormat:@"%ld", [(NSNumber*)[self.facebookAccount valueForKeyPath:@"properties.uid"] longValue]];
+    NSArray * likedData = likesDict[@"data"];
+    
+    [likedData enumerateObjectsUsingBlock:^(NSDictionary * likeDict, NSUInteger idx, BOOL *stop) {
+        NSString * idString = likeDict[@"id"];
+        if ([idString isEqualToString:ownGraphID]){
+            isLikedByMe = YES;
+        }
+    }];
+    return isLikedByMe;
 }
 
 @end

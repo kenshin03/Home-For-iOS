@@ -148,6 +148,9 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [self.messengerButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
     self.messengerButtonView.backgroundColor = [UIColor lightGrayColor];
     
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateShowMessenger)];
+    [self.messengerButtonView addGestureRecognizer:tapRecognizer];
+    
 }
 
 - (void) initAppLauncherButton {
@@ -156,6 +159,10 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [self.launcherButtonView.layer setBorderWidth:.5f];
     [self.launcherButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
     self.launcherButtonView.backgroundColor = [UIColor lightGrayColor];
+    
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateShowLauncher)];
+    [self.launcherButtonView addGestureRecognizer:tapRecognizer];
+    
 }
 
 - (void) initAppLauncher {
@@ -174,6 +181,9 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [self.notificationsButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
     self.notificationsButtonView.backgroundColor = [UIColor lightGrayColor];
     
+    
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateShowNotifications)];
+    [self.notificationsButtonView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)menuButtonLongPressed:(UILongPressGestureRecognizer*)longRecognizer {
@@ -195,14 +205,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     CGRect messengerFrame = self.messengerButtonView.frame;
     CGRect notificationFrame = self.notificationsButtonView.frame;
     
-//    CGRect initialButtonsFrame = CGRectMake(130.0f, 474.0f, 60.0f, 60.0f);
-//    if ((CGRectContainsRect(initialButtonsFrame, launcherFrame)) ||
-//        (CGRectContainsRect(initialButtonsFrame, messengerFrame)) ||
-//        (CGRectContainsRect(initialButtonsFrame, notificationFrame))
-//    ){
-//        // ignore event if all buttons are at initial position
-//        return;
-//    }
+
     if (recognizer.state == UIGestureRecognizerStateBegan){
         
         launcherFrame = self.launcherButtonView.frame;
@@ -210,6 +213,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
         notificationFrame = self.notificationsButtonView.frame;
     
     } else if (recognizer.state == UIGestureRecognizerStateChanged){
+//        NSLog(@"UIGestureRecognizerStateChanged");
         CGPoint currentTouchPoint = [recognizer locationInView:self.view];
         if (CGRectContainsPoint(self.defaultLauncherButtonFrame, currentTouchPoint)){
             if (CGRectEqualToRect(self.launcherButtonView.frame, self.defaultLauncherButtonFrame)){
@@ -247,6 +251,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
         }
         
     }else if (recognizer.state == UIGestureRecognizerStateEnded){
+        NSLog(@"UIGestureRecognizerStateEnded");
         
         CGPoint currentTouchPoint = [recognizer locationInView:self.view];
         CGRect upperFrameRect = self.view.frame;
@@ -259,7 +264,12 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
             [self animateHideMenuButtons];
         }
         
+//            [self resetMenuButton];
+//            [self animateHideMenuButtons];
+        
+        
     } else if (recognizer.state == UIGestureRecognizerStateFailed){
+        NSLog(@"UIGestureRecognizerStateFailed");
         [self resetMenuButton];
         [self animateHideMenuButtons];
         
@@ -404,34 +414,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     } completion:^(BOOL finished) {
     }];
     
-    
-//    CGRect messengerButtonViewFrame = self.messengerButtonView.frame;
-//    messengerButtonViewFrame.origin.x = currentTouchPoint.x-20.0f;
-//    messengerButtonViewFrame.origin.y = currentTouchPoint.y+20.0f;
-//
-//    CGRect launcherButtonViewFrame = self.launcherButtonView.frame;
-//    launcherButtonViewFrame.origin.x = currentTouchPoint.x-20.0f;;
-//    launcherButtonViewFrame.origin.y = currentTouchPoint.y-20.0f;
-//    
-//    CGRect notificationsButtonViewFrame = self.notificationsButtonView.frame;
-//    notificationsButtonViewFrame.origin.x = currentTouchPoint.x-20.0f;
-//    notificationsButtonViewFrame.origin.y = currentTouchPoint.y-20.0f;
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            self.notificationsButtonView.frame = notificationsButtonViewFrame;
-//        } completion:^(BOOL finished) {
-//        }];
-//        [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            self.launcherButtonView.frame = launcherButtonViewFrame;
-//        } completion:^(BOOL finished) {
-//        }];
-//        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            self.messengerButtonView.frame = messengerButtonViewFrame;
-//        } completion:^(BOOL finished) {
-//            followMenuButtonAnimationLock = 0;
-//        }];
-//    });
+
 }
 
 - (void) animateHideMenuButtons {

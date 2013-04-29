@@ -49,7 +49,6 @@
 		8E403B3C1723CA4600B46570 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B3B1723CA4600B46570 /* Social.framework */; };
 		8E403B3E1723CA6100B46570 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B3D1723CA6100B46570 /* MobileCoreServices.framework */; };
 		8E403B401723CA6700B46570 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B3F1723CA6700B46570 /* SystemConfiguration.framework */; };
-		8E403B431723CAD700B46570 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B421723CAD700B46570 /* FeedItem.m */; };
 		8E403B461723CAD700B46570 /* ItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B451723CAD700B46570 /* ItemSource.m */; };
 		8E403B4A1723CD5700B46570 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B491723CD5700B46570 /* QuartzCore.framework */; };
 		8E403B4B1723CD9400B46570 /* PSHFeedComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B481723CB1100B46570 /* PSHFeedComment.m */; };
@@ -64,6 +63,9 @@
 		8E7C60DC1725CE71004EAD40 /* menu_notifications.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60DA1725CE71004EAD40 /* menu_notifications.png */; };
 		8E7C60DD1725CE71004EAD40 /* menu_notifications@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60DB1725CE71004EAD40 /* menu_notifications@2x.png */; };
 		8E7C60E01725DA38004EAD40 /* PSHMenuGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */; };
+		8EB47D4B172E33FA00BF3476 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB47D4A172E33FA00BF3476 /* FeedItem.m */; };
+		8EB47D4E172E3A3300BF3476 /* coverfeed-liked_by_me_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */; };
+		8EB47D4F172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */; };
 		8ECDBC7C1729C39E007778E7 /* menu_facebook_app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBC6F1729C39E007778E7 /* menu_facebook_app@2x.png */; };
 		8ECDBC7D1729C39E007778E7 /* menu_fb_messenger_app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBC701729C39E007778E7 /* menu_fb_messenger_app@2x.png */; };
 		8ECDBC7E1729C39E007778E7 /* menu_instagram_app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBC711729C39E007778E7 /* menu_instagram_app@2x.png */; };
@@ -147,8 +149,6 @@
 		8E403B3B1723CA4600B46570 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8E403B3D1723CA6100B46570 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8E403B3F1723CA6700B46570 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8E403B411723CAD700B46570 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
-		8E403B421723CAD700B46570 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		8E403B441723CAD700B46570 /* ItemSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemSource.h; sourceTree = "<group>"; };
 		8E403B451723CAD700B46570 /* ItemSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSource.m; sourceTree = "<group>"; };
 		8E403B471723CB1100B46570 /* PSHFeedComment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PSHFeedComment.h; path = ../../../../../../workspace5/ProjectSH/SocialHome/SocialHome/Classes/DataModels/PSHFeedComment.h; sourceTree = "<group>"; };
@@ -168,6 +168,10 @@
 		8E7C60DE1725DA38004EAD40 /* PSHMenuGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMenuGestureRecognizer.h; path = Menu/PSHMenuGestureRecognizer.h; sourceTree = "<group>"; };
 		8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMenuGestureRecognizer.m; path = Menu/PSHMenuGestureRecognizer.m; sourceTree = "<group>"; };
 		8E7C60EF17270702004EAD40 /* Home.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.entitlements; sourceTree = "<group>"; };
+		8EB47D49172E33FA00BF3476 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
+		8EB47D4A172E33FA00BF3476 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
+		8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-liked_by_me_button.png"; sourceTree = "<group>"; };
+		8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-liked_by_me_button@2x.png"; sourceTree = "<group>"; };
 		8ECDBC6F1729C39E007778E7 /* menu_facebook_app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_facebook_app@2x.png"; sourceTree = "<group>"; };
 		8ECDBC701729C39E007778E7 /* menu_fb_messenger_app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_fb_messenger_app@2x.png"; sourceTree = "<group>"; };
 		8ECDBC711729C39E007778E7 /* menu_instagram_app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_instagram_app@2x.png"; sourceTree = "<group>"; };
@@ -303,10 +307,10 @@
 		8E403AD71723C96400B46570 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				8EB47D49172E33FA00BF3476 /* FeedItem.h */,
+				8EB47D4A172E33FA00BF3476 /* FeedItem.m */,
 				8E403B441723CAD700B46570 /* ItemSource.h */,
 				8E403B451723CAD700B46570 /* ItemSource.m */,
-				8E403B411723CAD700B46570 /* FeedItem.h */,
-				8E403B421723CAD700B46570 /* FeedItem.m */,
 				8E403B471723CB1100B46570 /* PSHFeedComment.h */,
 				8E403B481723CB1100B46570 /* PSHFeedComment.m */,
 			);
@@ -395,6 +399,8 @@
 		8E403B0A1723C98100B46570 /* CoverFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */,
+				8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */,
 				8E403B0B1723C98100B46570 /* coverfeed-bottom_gradient.png */,
 				8E403B0C1723C98100B46570 /* coverfeed-bottom_gradient@2x.png */,
 				8E403B0D1723C98100B46570 /* coverfeed-comments_background.png */,
@@ -621,6 +627,8 @@
 				8ECDBCA6172A4DC0007778E7 /* Icon@2x.png in Resources */,
 				8E422B5F172B24570028DCDD /* menu_refresh_icon.png in Resources */,
 				8E422B60172B24570028DCDD /* menu_refresh_icon@2x.png in Resources */,
+				8EB47D4E172E3A3300BF3476 /* coverfeed-liked_by_me_button.png in Resources */,
+				8EB47D4F172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,11 +684,11 @@
 				8E403B021723C97800B46570 /* UIColor+YUVSpace.m in Sources */,
 				8E403B031723C97800B46570 /* UIImage+LEColorPicker.m in Sources */,
 				8E403B231723C98100B46570 /* SocialHome.xcdatamodeld in Sources */,
-				8E403B431723CAD700B46570 /* FeedItem.m in Sources */,
 				8E403B461723CAD700B46570 /* ItemSource.m in Sources */,
 				8E7C60CC1725B5B8004EAD40 /* PSHMenuViewController.m in Sources */,
 				8E7C60E01725DA38004EAD40 /* PSHMenuGestureRecognizer.m in Sources */,
 				8ECDBCAD172A6AD6007778E7 /* QTouchposeApplication.m in Sources */,
+				8EB47D4B172E33FA00BF3476 /* FeedItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

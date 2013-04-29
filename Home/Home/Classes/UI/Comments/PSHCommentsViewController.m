@@ -44,6 +44,13 @@
     [self fetchCommentsForItem:self.feedItemGraphID];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"MM:dd";
+    
+    UISwipeGestureRecognizer * swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] init];
+    [swipeGestureRecognizer addTarget:self action:@selector(viewDidSwipeDown:)];
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    swipeGestureRecognizer.delaysTouchesBegan = YES;
+    [self.commentsTableView addGestureRecognizer:swipeGestureRecognizer];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,6 +63,7 @@
 
 - (void)initCommentsTableView {
     [self.commentsTableView registerNib:[UINib nibWithNibName:@"PSHCommentsTableViewCell" bundle:nil] forCellReuseIdentifier:@"kPSHCommentsTableViewCell"];
+    self.commentsTableView.multipleTouchEnabled = YES;
 }
 
 #pragma mark - fetch comments
@@ -169,6 +177,18 @@
             [self fetchCommentsForItem:self.feedItemGraphID];
         });
     }];
+    
+}
+
+#pragma mark - UISwipeGestureRecognizer
+
+- (void)viewDidSwipeDown: (id)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(commentsViewController:viewDidSwipeDown:)]){
+        [self.delegate commentsViewController:self viewDidSwipeDown:YES];
+    }
+    
+    
     
 }
 

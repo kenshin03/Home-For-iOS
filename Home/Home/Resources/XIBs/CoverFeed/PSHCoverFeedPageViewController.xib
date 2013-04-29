@@ -655,6 +655,14 @@
 					<int key="connectionID">51</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">likeImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="731958162"/>
+					</object>
+					<int key="connectionID">52</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">likeButtonTapped:</string>
 						<reference key="source" ref="668628678"/>
@@ -898,7 +906,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">51</int>
+			<int key="maxID">52</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -927,6 +935,7 @@
 						<string key="commentsPostingView">UIView</string>
 						<string key="currentTimeLabel">UILabel</string>
 						<string key="currentTimeView">UIView</string>
+						<string key="likeImageView">UIImageView</string>
 						<string key="likesCountLabel">UILabel</string>
 						<string key="photosCommentsMessageLabel">UILabel</string>
 						<string key="photosCommentsUpdateInfoLabel">UILabel</string>
@@ -965,6 +974,10 @@
 						<object class="IBToOneOutletInfo" key="currentTimeView">
 							<string key="name">currentTimeView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="likeImageView">
+							<string key="name">likeImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="likesCountLabel">
 							<string key="name">likesCountLabel</string>

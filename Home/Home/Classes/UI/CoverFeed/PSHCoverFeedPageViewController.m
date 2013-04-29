@@ -12,7 +12,7 @@
 #import "LEColorPicker.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface PSHCoverFeedPageViewController ()
+@interface PSHCoverFeedPageViewController ()<PSHCommentsViewControllerDelegate>
 
 // time
 @property (nonatomic, weak) IBOutlet UIView * currentTimeView;
@@ -46,6 +46,9 @@
 // background
 @property (nonatomic, weak) IBOutlet UIImageView * backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIView * backgroundOverlayImageView;
+
+// like
+@property (nonatomic, weak) IBOutlet UIImageView * likeImageView;
 
 
 
@@ -119,6 +122,12 @@
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [UIView setAnimationsEnabled:YES];
+    self.backgroundImageView.transform = CGAffineTransformIdentity;
+}
+
+
 - (void)viewDidAppear:(BOOL)animated {
 }
 
@@ -166,6 +175,14 @@
     }
     self.commentsPostingView.hidden = YES;
     
+    if (self.likedByMe){
+        self.likeImageView.image = [UIImage imageNamed:@"coverfeed-liked_by_me_button"];
+    }else{
+        self.likeImageView.image = [UIImage imageNamed:@"coverfeed-like_button"];
+        
+    }
+    
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         if (!self.imageURLString){
@@ -192,6 +209,16 @@
             }];
         });
     });
+}
+
+- (void) setLikedByMe:(BOOL)likedByMe {
+    _likedByMe = likedByMe;
+    if (likedByMe){
+        self.likeImageView.image = [UIImage imageNamed:@"coverfeed-liked_by_me_button"];
+    }else{
+        self.likeImageView.image = [UIImage imageNamed:@"coverfeed-like_button"];
+        
+    }
 }
 
 - (void) showCurrentTimeView {
@@ -314,7 +341,7 @@
     }
         
     // re-animate image background
-    [UIView animateWithDuration:40.0f
+    [UIView animateWithDuration:50.0f
                           delay:0.0f
                         options:
      UIViewAnimationOptionCurveLinear |
@@ -356,7 +383,12 @@
 
 -(void)doubleTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        [self likeFeed];
+        if (self.likedByMe){
+            [self unlikeFeed];
+            
+        }else{
+            [self likeFeed];
+        }
     }
 }
 
@@ -374,7 +406,12 @@
 #pragma mark - Like and Comments
 
 -(IBAction)likeButtonTapped:(id)sender {
-    [self likeFeed];
+    if (self.likedByMe){
+        [self unlikeFeed];
+        
+    }else{
+        [self likeFeed];
+    }
 }
 
 -(IBAction)commentButtonTapped:(id)sender {
@@ -386,6 +423,7 @@
             [self.commentsViewController removeFromParentViewController];
         }
         self.commentsViewController = [[PSHCommentsViewController alloc] init];
+        self.commentsViewController.delegate = self;
         self.commentsViewController.feedItemGraphID = self.feedItemGraphID;
         [self addChildViewController:self.commentsViewController];
         [self.commentsPostingView addSubview:self.commentsViewController.view];
@@ -396,6 +434,18 @@
         
     }
 }
+
+- (void) unlikeFeed {
+    self.likeImageView.image = [UIImage imageNamed:@"coverfeed-like_button"];
+    if ([self.delegate respondsToSelector:@selector(coverfeedPageViewController:feedID:unliked:)]){
+        
+        PSHFacebookDataService * facebookDataService = [PSHFacebookDataService sharedService];
+        [facebookDataService unlikeFeed:self.feedItemGraphID];
+        [self.delegate coverfeedPageViewController:self feedID:self.feedItemGraphID unliked:YES];
+        self.likedByMe = NO;
+    }
+}
+
 
 
 - (void) likeFeed {
@@ -457,12 +507,18 @@
         bounceAnimation.removedOnCompletion = NO;
         [self.likesCountLabel.layer addAnimation:bounceAnimation forKey:@"bounce"];
     });
+    self.likeImageView.image = [UIImage imageNamed:@"coverfeed-liked_by_me_button"];
+    self.likedByMe = YES;
     
     // clean up
     double delayInSeconds2 = 2.0;
     dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
     dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         [self.animatedLikeImageView removeFromSuperview];
+        
+        if ([self.delegate respondsToSelector:@selector(coverfeedPageViewController:feedID:unliked:)]){
+            [self.delegate coverfeedPageViewController:self feedID:self.feedItemGraphID unliked:NO];
+        }
     });
 }
 
@@ -582,6 +638,12 @@
         //
         self.actionsPanelView.hidden = YES;
     }];
+}
+
+#pragma mark - PSHCommentsViewControllerDelegate methods
+
+- (void) commentsViewController:(PSHCommentsViewController*)viewController viewDidSwipeDown:(BOOL)swiped {
+    [self animateHideCommentsPostingView];
 }
 
 

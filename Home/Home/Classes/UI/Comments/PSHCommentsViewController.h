@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PSHCommentsViewControllerDelegate;
+
 @interface PSHCommentsViewController : UIViewController
 
 @property (nonatomic, strong) NSString * feedItemGraphID;
+@property (nonatomic, weak) id<PSHCommentsViewControllerDelegate> delegate;
+
+@end
+
+
+@protocol PSHCommentsViewControllerDelegate <NSObject>
+
+- (void) commentsViewController:(PSHCommentsViewController*)viewController viewDidSwipeDown:(BOOL)swiped;
 
 @end

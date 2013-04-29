@@ -25,6 +25,9 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 
 - (void) likeFeed:(NSString*)graphID;
 
+- (void) unlikeFeed:(NSString*)graphID;
+
+
 - (void) fetchComments:(NSString*)graphID success:(FetchCommentsSuccess)fetchCommentsSuccess;
 
 - (void) postComment:(NSString*) message forItem:(NSString*)itemGraphID success:(Success)successBlock;
