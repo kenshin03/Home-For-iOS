@@ -257,6 +257,17 @@
 
 #pragma mark - PSHMenuViewControllerDelegate methods
 
+- (void)menuViewController:(PSHMenuViewController*)vc viewSwipedToLeft:(BOOL)tapped {
+     [self animateHideMenu];
+    
+}
+
+- (void)menuViewController:(PSHMenuViewController*)vc viewSwipedToRight:(BOOL)tapped {
+    [self animateHideMenu];
+    
+}
+
+
 - (void)menuViewController:(PSHMenuViewController*)vc menuViewTapped:(BOOL)tapped {
     [self animateHideMenu];
     

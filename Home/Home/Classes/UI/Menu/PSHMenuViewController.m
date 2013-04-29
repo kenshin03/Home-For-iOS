@@ -95,6 +95,11 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [tapGestureRecognizer addTarget:self action:@selector(viewTapped:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
+    UISwipeGestureRecognizer * swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] init];
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
+    [swipeGestureRecognizer addTarget:self action:@selector(viewSwiped:)];
+    [self.view addGestureRecognizer:swipeGestureRecognizer];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -528,6 +533,17 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 //    openApp(CFSTR("com.apple.mobileslideshow"), FALSE);
 }
 
+- (void) viewSwiped:(UISwipeGestureRecognizer*) swipeGestureRecognizer {
+    if (swipeGestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft){
+        if ([self.delegate respondsToSelector:@selector(menuViewController:viewSwipedToLeft:)]){
+            [self.delegate menuViewController:self viewSwipedToLeft:YES];
+        }
+    }else{
+        if ([self.delegate respondsToSelector:@selector(menuViewController:viewSwipedToRight:)]){
+            [self.delegate menuViewController:self viewSwipedToRight:YES];
+        }
+    }
+}
 
 - (void) viewTapped:(UITapGestureRecognizer*) tapGestureRecognizer {
     if (self.launcherMenuView.hidden){

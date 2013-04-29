@@ -96,6 +96,8 @@ typedef void (^InitAccountSuccessBlock)();
                                                 } }];
 }
 
+
+
 - (void) fetchOwnProfile:(FetchProfileSuccess)fetchProfileSuccess{
     
     InitAccountSuccessBlock successBlock = ^{

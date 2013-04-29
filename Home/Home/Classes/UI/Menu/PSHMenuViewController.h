@@ -26,4 +26,9 @@ static NSInteger const kPSHMenuViewControllerMenuButtonViewTag = 1111;
 
 - (void)menuViewController:(PSHMenuViewController*)vc menuViewTapped:(BOOL)tapped;
 - (void)menuViewController:(PSHMenuViewController*)vc reloadButtonTapped:(BOOL)tapped;
+
+- (void)menuViewController:(PSHMenuViewController*)vc viewSwipedToLeft:(BOOL)tapped;
+- (void)menuViewController:(PSHMenuViewController*)vc viewSwipedToRight:(BOOL)tapped;
+
+
 @end
