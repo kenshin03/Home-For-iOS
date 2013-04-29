@@ -2,7 +2,7 @@
 //  FeedItem.h
 //  Home
 //
-//  Created by Kenny Tang on 4/21/13.
+//  Created by Kenny Tang on 4/28/13.
 //  Copyright (c) 2013 com.corgitoergosum.net. All rights reserved.
 //
 
@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString * message;
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSDate * updatedTime;
+@property (nonatomic, retain) NSNumber * likedByMe;
 @property (nonatomic, retain) ItemSource *source;
 
 @end

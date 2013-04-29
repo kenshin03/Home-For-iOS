@@ -2,7 +2,7 @@
 //  FeedItem.m
 //  Home
 //
-//  Created by Kenny Tang on 4/21/13.
+//  Created by Kenny Tang on 4/28/13.
 //  Copyright (c) 2013 com.corgitoergosum.net. All rights reserved.
 //
 
@@ -20,6 +20,7 @@
 @dynamic message;
 @dynamic type;
 @dynamic updatedTime;
+@dynamic likedByMe;
 @dynamic source;
 
 @end
