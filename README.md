@@ -4,7 +4,7 @@ Home for iOS
 ![Screenshot](cover_image.png)
 
 
-This is an attempt to replicate essential elements of the Facebook Home experience to iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
+This is an attempt to replicate essential elements of the Facebook Home experience in iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
 controls and the Facebook Graph API.
 
 I will be updating this documentation and writing development notes at:
