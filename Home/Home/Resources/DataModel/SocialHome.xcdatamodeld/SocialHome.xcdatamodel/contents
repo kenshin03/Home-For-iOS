@@ -20,7 +20,7 @@
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FeedItem" inverseName="source" inverseEntity="FeedItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FeedItem" positionX="160" positionY="192" width="128" height="195"/>
-        <element name="ItemSource" positionX="-101" positionY="168" width="128" height="120"/>
+        <element name="FeedItem" positionX="124" positionY="189" width="128" height="195"/>
+        <element name="ItemSource" positionX="-47" positionY="231" width="128" height="120"/>
     </elements>
 </model>

@@ -51,7 +51,6 @@
 		8E403B401723CA6700B46570 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B3F1723CA6700B46570 /* SystemConfiguration.framework */; };
 		8E403B461723CAD700B46570 /* ItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B451723CAD700B46570 /* ItemSource.m */; };
 		8E403B4A1723CD5700B46570 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E403B491723CD5700B46570 /* QuartzCore.framework */; };
-		8E403B4B1723CD9400B46570 /* PSHFeedComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E403B481723CB1100B46570 /* PSHFeedComment.m */; };
 		8E422B5F172B24570028DCDD /* menu_refresh_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E422B5D172B24570028DCDD /* menu_refresh_icon.png */; };
 		8E422B60172B24570028DCDD /* menu_refresh_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E422B5E172B24570028DCDD /* menu_refresh_icon@2x.png */; };
 		8E7C60CC1725B5B8004EAD40 /* PSHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C60CB1725B5B8004EAD40 /* PSHMenuViewController.m */; };
@@ -89,6 +88,7 @@
 		8ECDBCA5172A4DC0007778E7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA3172A4DBF007778E7 /* Icon.png */; };
 		8ECDBCA6172A4DC0007778E7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */; };
 		8ECDBCAD172A6AD6007778E7 /* QTouchposeApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */; };
+		8EF8F9A61730446400531D07 /* PSHFeedComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F9A51730446400531D07 /* PSHFeedComment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,8 +151,6 @@
 		8E403B3F1723CA6700B46570 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8E403B441723CAD700B46570 /* ItemSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemSource.h; sourceTree = "<group>"; };
 		8E403B451723CAD700B46570 /* ItemSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSource.m; sourceTree = "<group>"; };
-		8E403B471723CB1100B46570 /* PSHFeedComment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PSHFeedComment.h; path = ../../../../../../workspace5/ProjectSH/SocialHome/SocialHome/Classes/DataModels/PSHFeedComment.h; sourceTree = "<group>"; };
-		8E403B481723CB1100B46570 /* PSHFeedComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PSHFeedComment.m; path = ../../../../../../workspace5/ProjectSH/SocialHome/SocialHome/Classes/DataModels/PSHFeedComment.m; sourceTree = "<group>"; };
 		8E403B491723CD5700B46570 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E422B5D172B24570028DCDD /* menu_refresh_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_refresh_icon.png; sourceTree = "<group>"; };
 		8E422B5E172B24570028DCDD /* menu_refresh_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_refresh_icon@2x.png"; sourceTree = "<group>"; };
@@ -196,6 +194,8 @@
 		8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		8ECDBCAB172A6AD6007778E7 /* QTouchposeApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTouchposeApplication.h; sourceTree = "<group>"; };
 		8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTouchposeApplication.m; sourceTree = "<group>"; };
+		8EF8F9A41730446400531D07 /* PSHFeedComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHFeedComment.h; sourceTree = "<group>"; };
+		8EF8F9A51730446400531D07 /* PSHFeedComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHFeedComment.m; sourceTree = "<group>"; };
 		DA567A19A021492194B15157 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -307,12 +307,12 @@
 		8E403AD71723C96400B46570 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				8EF8F9A41730446400531D07 /* PSHFeedComment.h */,
+				8EF8F9A51730446400531D07 /* PSHFeedComment.m */,
 				8EB47D49172E33FA00BF3476 /* FeedItem.h */,
 				8EB47D4A172E33FA00BF3476 /* FeedItem.m */,
 				8E403B441723CAD700B46570 /* ItemSource.h */,
 				8E403B451723CAD700B46570 /* ItemSource.m */,
-				8E403B471723CB1100B46570 /* PSHFeedComment.h */,
-				8E403B481723CB1100B46570 /* PSHFeedComment.m */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -671,7 +671,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E403AC31723C89700B46570 /* main.m in Sources */,
-				8E403B4B1723CD9400B46570 /* PSHFeedComment.m in Sources */,
 				8E403AC71723C89700B46570 /* PSHAppDelegate.m in Sources */,
 				8E403AEF1723C96400B46570 /* PSHFacebookDataService.m in Sources */,
 				8E403AF31723C96400B46570 /* PSHConstants.m in Sources */,
@@ -689,6 +688,7 @@
 				8E7C60E01725DA38004EAD40 /* PSHMenuGestureRecognizer.m in Sources */,
 				8ECDBCAD172A6AD6007778E7 /* QTouchposeApplication.m in Sources */,
 				8EB47D4B172E33FA00BF3476 /* FeedItem.m in Sources */,
+				8EF8F9A61730446400531D07 /* PSHFeedComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
