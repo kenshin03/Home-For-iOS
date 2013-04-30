@@ -1,6 +1,8 @@
 Home for iOS
 ===============================
 
+![Screenshot](cover_image.png)
+
 
 This is an attempt to replicate essential elements of the Facebook Home experience to iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
 controls and the Facebook Graph API.
@@ -32,12 +34,10 @@ License
 MIT (https://github.com/kenshin03/Home-For-iOS/blob/master/LICENSE)
 
 
-Screenshot
+Videos
 ---
 [Vimeo Video](https://vimeo.com/64940276 "Demo Video 1")
 
 [Vimeo Video](https://vimeo.com/63531931 "Demo Video 2")
 
-
-![Screenshot](cover_image.png)
 
