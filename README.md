@@ -11,6 +11,10 @@ I will be updating this documentation and writing development notes at:
 
 * http://corgitoergosum.net/2013/04/29/facebook-home-for-ios/
 
+Installation
+---
+See the project home page above.
+
 
 Working Features
 ---
@@ -23,6 +27,7 @@ Working Features
 
 Missing Features / Known Issues
 ---
+* Facebook authentication not working for some (error=7)
 * Notifications
 * Chat Heads
 * Non Retina 4-inch displays support
