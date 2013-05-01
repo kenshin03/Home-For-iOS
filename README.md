@@ -9,7 +9,7 @@ controls and the Facebook Graph API.
 
 I will be updating this documentation and writing development notes at:
 
-* http://corgitoergosum.net/2013/04/29/facebook-home-for-ios/
+* http://corgitoergosum.net/facebook-home-for-ios/
 
 Installation
 ---
