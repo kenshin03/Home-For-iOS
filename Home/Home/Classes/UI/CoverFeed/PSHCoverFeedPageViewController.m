@@ -74,12 +74,6 @@
 {
     [super viewDidLoad];
     
-    self.likesCountString = [NSString stringWithFormat:@"%i likes", self.likesCount];
-    self.commentsCountString = [NSString stringWithFormat:@"%i comments", self.commentsCount];
-    
-    self.likesCountLabel.text = self.likesCountString;
-    self.commentsCountLabel.text = self.commentsCountString;
-    
     [self initViews];
     
     if (self.currentIndex == 0){
@@ -89,7 +83,6 @@
     }else{
         self.currentTimeView.hidden = YES;
     }
-    self.commentsPostingView.hidden = YES;
     
 
     UILongPressGestureRecognizer * longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
@@ -141,12 +134,19 @@
 
 - (void)initViews {
     
+    self.likesCountString = [NSString stringWithFormat:@"%i likes", self.likesCount];
+    self.commentsCountString = [NSString stringWithFormat:@"%i comments", self.commentsCount];
+    
+    self.likesCountLabel.text = self.likesCountString;
+    self.commentsCountLabel.text = self.commentsCountString;
+    
     if (self.likesCount == 0){
         self.likesCountLabel.hidden = YES;
     }
     if (self.commentsCount == 0){
         self.commentsCountLabel.hidden = YES;
     }
+    self.commentsPostingView.hidden = YES;
     
     if ([self.feedType isEqualToString:@"photo"]){
         self.photosCommentsView.hidden = NO;
@@ -181,7 +181,6 @@
         self.likeImageView.image = [UIImage imageNamed:@"coverfeed-like_button"];
         
     }
-    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -415,7 +414,7 @@
 }
 
 -(IBAction)commentButtonTapped:(id)sender {
-    // do nothing
+
     if (self.commentsPostingView.hidden == YES){
         if (self.commentsViewController != nil){
             self.commentsViewController = nil;

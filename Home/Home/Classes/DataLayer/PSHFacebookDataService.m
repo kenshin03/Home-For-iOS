@@ -59,41 +59,65 @@ typedef void (^InitAccountSuccessBlock)();
         self.accountStore = [[ACAccountStore alloc] init];
     }
     
-    NSDictionary * facebookOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"email", @"publish_stream", @"read_stream", @"user_photos"], ACFacebookAudienceKey:ACFacebookAudienceFriends};
-    
+    // separate request for read and writes
     ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:facebookOptions
-                                            completion: ^(BOOL granted, NSError *error) {
+    NSDictionary * readOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"email", @"read_stream", @"user_photos"], ACFacebookAudienceKey:ACFacebookAudienceOnlyMe};
+    [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:readOptions
+                                            completion: ^(BOOL granted, NSError *e) {
+                                                
                                                 NSLog(@"granted: %i", granted);
+                                                NSLog(@"error: %@", e);
+                                                
+                                                // to-do: clean up this code
+                                                
                                                 if (granted) {
                                                     NSArray *accounts = [self.accountStore accountsWithAccountType:facebookAccountType];
-                                                    
-                                                    NSLog(@"accounts: %@", accounts);
                                                     //it will always be the last object with SSO
                                                     self.facebookAccount = [accounts lastObject];
-                                                    success();
-                                                } else {
                                                     
-                                                    dispatch_sync(dispatch_get_main_queue(), ^{
-                                                        
-                                                        if ((error.code == 7) || (error.code == 6)){
-                                                            // User tapped 'Don't Allow'
-                                                            // Error Domain=com.apple.accounts Code=7 "The operation couldn’t be completed. (com.apple.accounts error 7.)"
-                                                            // FB account not set up on device
-                                                            // The operation couldn’t be completed. (com.apple.accounts error 6.)
-                                                            
-                                                            UIAlertView *alert = [[UIAlertView alloc]
-                                                                                  initWithTitle:@"Facebook account not set up"
-                                                                                  message:@"Please set up facebook account in Settings first"
-                                                                                  delegate:self
-                                                                                  cancelButtonTitle:@"Okay"
-                                                                                  otherButtonTitles:nil,nil];
-                                                            
-                                                            [alert show];
-                                                            
-                                                        }
-                                                    });
+                                                    NSDictionary * facebookOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"publish_stream"], ACFacebookAudienceKey:ACFacebookAudienceFriends};
+                                                    
+                                                    //    ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+                                                    [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:facebookOptions
+                                                                                            completion: ^(BOOL granted, NSError *error) {
+                                                                                                NSLog(@"granted: %i", granted);
+                                                                                                NSLog(@"error: %@", error);
+                                                                                                if (granted) {
+                                                                                                    NSArray *accounts = [self.accountStore accountsWithAccountType:facebookAccountType];
+                                                                                                    
+                                                                                                    NSLog(@"accounts: %@", accounts);
+                                                                                                    //it will always be the last object with SSO
+                                                                                                    self.facebookAccount = [accounts lastObject];
+                                                                                                    success();
+                                                                                                } else {
+                                                                                                    
+                                                                                                    dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                                                        
+                                                                                                        if ((error.code == 7) || (error.code == 6)){
+                                                                                                            // User tapped 'Don't Allow'
+                                                                                                            // Error Domain=com.apple.accounts Code=7 "The operation couldn’t be completed. (com.apple.accounts error 7.)"
+                                                                                                            // FB account not set up on device
+                                                                                                            // The operation couldn’t be completed. (com.apple.accounts error 6.)
+                                                                                                            
+                                                                                                            UIAlertView *alert = [[UIAlertView alloc]
+                                                                                                                                  initWithTitle:@"Facebook account not set up"
+                                                                                                                                  message:@"Please set up facebook account in Settings first"
+                                                                                                                                  delegate:self
+                                                                                                                                  cancelButtonTitle:@"Okay"
+                                                                                                                                  otherButtonTitles:nil,nil];
+                                                                                                            
+                                                                                                            [alert show];
+                                                                                                            
+                                                                                                        }
+                                                                                                    });
+                                                                                                } }];
+                                                    
+                                                } else {
+                                                    //Fail gracefully...
+                                                    NSLog(@"error getting permission %@",e);
                                                 } }];
+    
+
 }
 
 

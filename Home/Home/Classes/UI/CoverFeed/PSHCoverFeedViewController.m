@@ -92,6 +92,10 @@
         [self.view addSubview:self.feedsPageViewController.view];
         [self.feedsPageViewController didMoveToParentViewController:self];
     }
+    if ([self.feedItemsArray count] == 0){
+        // do nothing
+        return;
+    }
     
     FeedItem * firstFeedItem = self.feedItemsArray[0];
     PSHCoverFeedPageViewController * currentPagePageViewController = [[PSHCoverFeedPageViewController alloc] init];
