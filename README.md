@@ -4,12 +4,16 @@ Home for iOS
 ![Screenshot](cover_image.png)
 
 
-This is an attempt to replicate essential elements of the Facebook Home experience to iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
+This is an attempt to replicate essential elements of the Facebook Home experience in iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
 controls and the Facebook Graph API.
 
 I will be updating this documentation and writing development notes at:
 
-* http://corgitoergosum.net/2013/04/29/facebook-home-for-ios/
+* http://corgitoergosum.net/facebook-home-for-ios/
+
+Installation
+---
+See the project home page above.
 
 
 Working Features
@@ -23,6 +27,7 @@ Working Features
 
 Missing Features / Known Issues
 ---
+* Facebook authentication not working for some (error=7)
 * Notifications
 * Chat Heads
 * Non Retina 4-inch displays support
