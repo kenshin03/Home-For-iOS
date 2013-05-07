@@ -292,7 +292,7 @@
 							<object class="IBUIImageView" id="731958162">
 								<reference key="NSNextResponder" ref="439856586"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, 14}, {32, 32}}</string>
+								<string key="NSFrame">{{7, 10}, {32, 32}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="408676559"/>
@@ -307,7 +307,7 @@
 							<object class="IBUIButton" id="668628678">
 								<reference key="NSNextResponder" ref="439856586"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 8}, {44, 44}}</string>
+								<string key="NSFrame">{{0, 4}, {44, 44}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="731958162"/>
@@ -339,22 +339,22 @@
 							<object class="IBUIImageView" id="614446438">
 								<reference key="NSNextResponder" ref="439856586"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{57, 8}, {40, 40}}</string>
+								<string key="NSFrame">{{57, 4}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="681005324"/>
+								<reference key="NSNextKeyView" ref="967801133"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">coverfeed-comments_button.png</string>
+									<string key="NSResourceName">coverfeed-comments-button.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="408676559">
 								<reference key="NSNextResponder" ref="439856586"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{54, 8}, {44, 44}}</string>
+								<string key="NSFrame">{{54, 4}, {264, 44}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="614446438"/>
@@ -376,7 +376,7 @@
 							<object class="IBUILabel" id="681005324">
 								<reference key="NSNextResponder" ref="439856586"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{127, 19}, {80, 21}}</string>
+								<string key="NSFrame">{{127, 15}, {80, 21}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="246747960"/>
@@ -413,7 +413,7 @@
 							<object class="IBUILabel" id="246747960">
 								<reference key="NSNextResponder" ref="439856586"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{211, 19}, {93, 21}}</string>
+								<string key="NSFrame">{{211, 15}, {93, 21}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="362627815"/>
@@ -434,6 +434,42 @@
 								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="292676687"/>
 								<reference key="IBUIFont" ref="631231754"/>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+							</object>
+							<object class="IBUILabel" id="967801133">
+								<reference key="NSNextResponder" ref="439856586"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{7, 38}, {297, 21}}</string>
+								<reference key="NSSuperview" ref="439856586"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="681005324"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<float key="IBUIAlpha">0.5</float>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<string key="IBUIText">Label</string>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MSAxIDEAA</bytes>
+									<reference key="NSCustomColorSpace" ref="158126175"/>
+								</object>
+								<nil key="IBUIHighlightedColor"/>
+								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">2</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<string key="name">HelveticaNeue-Medium</string>
+									<string key="family">Helvetica Neue</string>
+									<int key="traits">0</int>
+									<double key="pointSize">11</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">HelveticaNeue-Medium</string>
+									<double key="NSSize">11</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
@@ -663,6 +699,14 @@
 					<int key="connectionID">52</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">latestCommentatorsLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="967801133"/>
+					</object>
+					<int key="connectionID">55</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">likeButtonTapped:</string>
 						<reference key="source" ref="668628678"/>
@@ -744,6 +788,7 @@
 							<reference ref="408676559"/>
 							<reference ref="681005324"/>
 							<reference ref="246747960"/>
+							<reference ref="967801133"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">actions panel view</string>
@@ -761,12 +806,6 @@
 						<string key="objectName">comment button image view</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="681005324"/>
-						<reference key="parent" ref="439856586"/>
-						<string key="objectName">likes label</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
 						<reference key="object" ref="668628678"/>
 						<reference key="parent" ref="439856586"/>
@@ -777,12 +816,6 @@
 						<reference key="object" ref="408676559"/>
 						<reference key="parent" ref="439856586"/>
 						<string key="objectName">comment button</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="246747960"/>
-						<reference key="parent" ref="439856586"/>
-						<string key="objectName">comments label</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">24</int>
@@ -871,6 +904,24 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">comments view</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">53</int>
+						<reference key="object" ref="967801133"/>
+						<reference key="parent" ref="439856586"/>
+						<string key="objectName">latest commentators label</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">12</int>
+						<reference key="object" ref="246747960"/>
+						<reference key="parent" ref="439856586"/>
+						<string key="objectName">comments label</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">13</int>
+						<reference key="object" ref="681005324"/>
+						<reference key="parent" ref="439856586"/>
+						<string key="objectName">likes label</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -901,12 +952,13 @@
 				<string key="46.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">52</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -935,6 +987,7 @@
 						<string key="commentsPostingView">UIView</string>
 						<string key="currentTimeLabel">UILabel</string>
 						<string key="currentTimeView">UIView</string>
+						<string key="latestCommentatorsLabel">UILabel</string>
 						<string key="likeImageView">UIImageView</string>
 						<string key="likesCountLabel">UILabel</string>
 						<string key="photosCommentsMessageLabel">UILabel</string>
@@ -974,6 +1027,10 @@
 						<object class="IBToOneOutletInfo" key="currentTimeView">
 							<string key="name">currentTimeView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="latestCommentatorsLabel">
+							<string key="name">latestCommentatorsLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="likeImageView">
 							<string key="name">likeImageView</string>
@@ -1029,7 +1086,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="coverfeed-bottom_gradient.png">{323, 107}</string>
-			<string key="coverfeed-comments_button.png">{16, 16}</string>
+			<string key="coverfeed-comments-button.png">{45, 50}</string>
 			<string key="coverfeed-like_button.png">{28, 32}</string>
 			<string key="coverfeed-top_gradient.png">{323, 107}</string>
 		</dictionary>

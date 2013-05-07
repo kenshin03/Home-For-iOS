@@ -251,13 +251,22 @@ typedef void (^InitAccountSuccessBlock)();
             // likes and comments
             NSNumber * likesCount;
             NSNumber * commentsCount;
+            NSString * latestCommentators;
             BOOL likedByMe = NO;
             if (dataDict[@"likes"]){
                 likesCount = [NSNumber numberWithInt:[dataDict[@"likes"][@"count"] integerValue]];
                 likedByMe = [self checkIfPostIsLikedByMe:dataDict[@"likes"]];
             }
-            if (dataDict[@"comments"]){
+            if (dataDict[@"comments"][@"data"]){
                 commentsCount = [NSNumber numberWithInt:[dataDict[@"comments"][@"count"] integerValue]];
+                NSArray * commentatorsArray = dataDict[@"comments"][@"data"];
+                if ([commentatorsArray count] > 1){
+                    NSString * commentatorNames = [NSString stringWithFormat:@"%@, %@", commentatorsArray[0][@"from"][@"name"], commentatorsArray[1][@"from"][@"name"]];
+                    
+                    if ([commentsCount integerValue] > 2){
+                        latestCommentators = [NSString stringWithFormat:@"%@ and %i others", commentatorNames, [commentsCount integerValue]];
+                    }
+                }
             }
             
             // place
@@ -293,6 +302,7 @@ typedef void (^InitAccountSuccessBlock)();
             }
             feedItem.likesCount = likesCount;
             feedItem.commentsCount = commentsCount;
+            feedItem.latestCommentors = latestCommentators;
             feedItem.likedByMe = [NSNumber numberWithBool:likedByMe];
             
             // handling for photos

@@ -42,6 +42,7 @@
 // comments
 @property (nonatomic, strong) PSHCommentsViewController * commentsViewController;
 @property (nonatomic, weak) IBOutlet UIView * commentsPostingView;
+@property (nonatomic, weak) IBOutlet UILabel * latestCommentatorsLabel;
 
 // background
 @property (nonatomic, weak) IBOutlet UIImageView * backgroundImageView;
@@ -139,13 +140,16 @@
     
     self.likesCountLabel.text = self.likesCountString;
     self.commentsCountLabel.text = self.commentsCountString;
+    self.latestCommentatorsLabel.text = self.lastestCommentatorsString;
     
     if (self.likesCount == 0){
         self.likesCountLabel.hidden = YES;
     }
     if (self.commentsCount == 0){
         self.commentsCountLabel.hidden = YES;
+        self.latestCommentatorsLabel.hidden = YES;
     }
+    
     self.commentsPostingView.hidden = YES;
     
     if ([self.feedType isEqualToString:@"photo"]){

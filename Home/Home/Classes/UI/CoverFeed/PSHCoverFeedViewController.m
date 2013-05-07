@@ -104,6 +104,7 @@
     currentPagePageViewController.infoLabelString = [NSString stringWithFormat:@"%@ - %@", [self.dateFormatter stringFromDate:firstFeedItem.updatedTime], firstFeedItem.source.name];
     currentPagePageViewController.likesCount = [firstFeedItem.likesCount integerValue];
     currentPagePageViewController.commentsCount = [firstFeedItem.commentsCount integerValue];
+    currentPagePageViewController.lastestCommentatorsString = firstFeedItem.latestCommentors;
     currentPagePageViewController.feedItemGraphID = firstFeedItem.graphID;
     currentPagePageViewController.feedType = firstFeedItem.type;
     currentPagePageViewController.likedByMe = firstFeedItem.likedByMe.boolValue;
@@ -152,6 +153,7 @@
         prevPageViewController.infoLabelString = [NSString stringWithFormat:@"%@ - %@", [self.dateFormatter stringFromDate:previousFeedItem.updatedTime], previousFeedItem.source.name];
         prevPageViewController.likesCount = [previousFeedItem.likesCount integerValue];
         prevPageViewController.commentsCount = [previousFeedItem.commentsCount integerValue];
+        prevPageViewController.lastestCommentatorsString = previousFeedItem.latestCommentors;
         prevPageViewController.feedItemGraphID = previousFeedItem.graphID;
         prevPageViewController.feedType = previousFeedItem.type;
         prevPageViewController.currentIndex = previousIndex;
@@ -183,6 +185,7 @@
         nextPageViewController.infoLabelString = [NSString stringWithFormat:@"%@ - %@", [self.dateFormatter stringFromDate:nextFeedItem.updatedTime], nextFeedItem.source.name];
         nextPageViewController.likesCount = [nextFeedItem.likesCount integerValue];
         nextPageViewController.commentsCount = [nextFeedItem.commentsCount integerValue];
+        nextPageViewController.lastestCommentatorsString = nextFeedItem.latestCommentors;
         nextPageViewController.feedItemGraphID = nextFeedItem.graphID;
         nextPageViewController.feedType = nextFeedItem.type;
         nextPageViewController.currentIndex = nextIndex;

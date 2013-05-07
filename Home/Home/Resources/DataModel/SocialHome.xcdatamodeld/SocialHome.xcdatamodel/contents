@@ -5,6 +5,7 @@
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="graphID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latestCommentors" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="likedByMe" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="likesCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,7 +21,7 @@
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FeedItem" inverseName="source" inverseEntity="FeedItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FeedItem" positionX="124" positionY="189" width="128" height="195"/>
+        <element name="FeedItem" positionX="124" positionY="189" width="128" height="208"/>
         <element name="ItemSource" positionX="-47" positionY="231" width="128" height="120"/>
     </elements>
 </model>

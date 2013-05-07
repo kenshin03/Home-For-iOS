@@ -23,6 +23,7 @@
 
 @property (nonatomic) NSInteger likesCount;
 @property (nonatomic) NSInteger commentsCount;
+@property (nonatomic, strong) NSString * lastestCommentatorsString;
 @property (nonatomic) BOOL likedByMe;
 
 
