@@ -27,6 +27,8 @@
 
 @implementation PSHCommentsViewController
 
+static dispatch_once_t pullToDismissLock;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,12 +46,6 @@
     [self fetchCommentsForItem:self.feedItemGraphID];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"MM:dd";
-    
-    UISwipeGestureRecognizer * swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] init];
-    [swipeGestureRecognizer addTarget:self action:@selector(viewDidSwipeDown:)];
-    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    swipeGestureRecognizer.delaysTouchesBegan = YES;
-    [self.commentsTableView addGestureRecognizer:swipeGestureRecognizer];
     
 }
 
@@ -162,13 +158,21 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([textField.text length] > 0){
-        [self postComment:textField.text];
     }
     [self textFieldDidEndEditing:textField];
     return YES;
 }
 
 #pragma mark - Post Comment
+
+- (IBAction)doneButtonTapped:(id)sender {
+    [self.delegate commentsViewController:self viewDidSwipeDown:YES];
+}
+
+- (IBAction)postButtonTapped:(id)sender {
+    [self postComment:self.commentsTextField.text];
+}
+
 
 - (void) postComment: (NSString*) commentString {
     PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
@@ -180,16 +184,26 @@
     
 }
 
-#pragma mark - UISwipeGestureRecognizer
 
-- (void)viewDidSwipeDown: (id)sender {
-    
-    if ([self.delegate respondsToSelector:@selector(commentsViewController:viewDidSwipeDown:)]){
-        [self.delegate commentsViewController:self viewDidSwipeDown:YES];
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView.contentOffset.y < -120.0f){
+        dispatch_once(&pullToDismissLock, ^{
+            [self.delegate commentsViewController:self viewDidSwipeDown:YES];
+            
+            double delayInSeconds = 1.2;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    pullToDismissLock = 0;
+                });
+            });
+            
+        });
     }
-    
-    
-    
 }
+
+
 
 @end

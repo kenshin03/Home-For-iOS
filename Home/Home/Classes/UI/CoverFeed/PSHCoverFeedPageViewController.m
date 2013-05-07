@@ -529,12 +529,15 @@
     
     bounceAnimation.values = [NSArray arrayWithObjects:
                               [NSNumber numberWithFloat:0.9],
-                              [NSNumber numberWithFloat:1.1],
+                              [NSNumber numberWithFloat:1.2],
+                              [NSNumber numberWithFloat:0.9],
                               [NSNumber numberWithFloat:1.0],
                               nil];
     
-    bounceAnimation.duration = 0.2;
+    bounceAnimation.duration = 0.4;
     [bounceAnimation setTimingFunctions:[NSArray arrayWithObjects:
+                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],
@@ -555,7 +558,7 @@
                               [NSNumber numberWithFloat:0.0],
                               nil];
     
-    bounceAnimation.duration = 0.2;
+    bounceAnimation.duration = 0.4;
     [bounceAnimation setTimingFunctions:[NSArray arrayWithObjects:
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
@@ -564,7 +567,23 @@
     bounceAnimation.removedOnCompletion = NO;
     bounceAnimation.fillMode = kCAFillModeForwards;
     
-    [self.commentsPostingView.layer addAnimation:bounceAnimation forKey:@"bounce"];
+    
+    CGPoint currentPoint = [self.commentsPostingView.layer position];
+    CGPoint endPoint = CGPointMake(currentPoint.x-self.commentsPostingView.layer.frame.size.width/2,  self.commentsPostingView.layer.frame.size.height);
+    
+    CABasicAnimation * positionAnim = [CABasicAnimation animationWithKeyPath:@"position"];
+    positionAnim.fromValue = [NSValue valueWithCGPoint:currentPoint];
+    positionAnim.toValue = [NSValue valueWithCGPoint:endPoint];
+    positionAnim.duration = 0.4;
+    
+    CAAnimationGroup* group = [CAAnimationGroup animation];
+    group.animations = @[bounceAnimation, positionAnim];
+    group.duration = positionAnim.duration;
+    group.removedOnCompletion = YES;
+    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    group.fillMode = kCAFillModeForwards;
+    [self.commentsPostingView.layer addAnimation:group forKey:@"scale-down"];
+
     double delayInSeconds = 0.2;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

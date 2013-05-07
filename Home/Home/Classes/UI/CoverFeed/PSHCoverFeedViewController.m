@@ -239,7 +239,7 @@
 }
 
 - (void) animateShowMenu {
-    
+    [self.menuViewController animateHideMenuButtons];
     CGRect originFrame = self.menuViewController.view.frame;
     originFrame.origin.y = 0.0f;
     CGRect destFrame = self.menuViewController.view.frame;

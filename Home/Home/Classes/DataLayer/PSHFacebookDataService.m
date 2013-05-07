@@ -114,7 +114,18 @@ typedef void (^InitAccountSuccessBlock)();
                                                     
                                                 } else {
                                                     //Fail gracefully...
-                                                    NSLog(@"error getting permission %@",e);
+                                                    dispatch_sync(dispatch_get_main_queue(), ^{
+                                                        NSLog(@"error getting permission %@",e);
+                                                        UIAlertView *alert = [[UIAlertView alloc]
+                                                                              initWithTitle:@"Facebook account not set up"
+                                                                              message:@"Please set up facebook account in Settings first"
+                                                                              delegate:self
+                                                                              cancelButtonTitle:@"Okay"
+                                                                              otherButtonTitles:nil,nil];
+                                                        
+                                                        [alert show];
+                                                    });
+                                                    
                                                 } }];
     
 

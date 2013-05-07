@@ -86,7 +86,7 @@
 						<string key="NSFrame">{{0, 435}, {320, 133}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="362627815"/>
+						<reference key="NSNextKeyView" ref="439856586"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<float key="IBUIAlpha">0.69999998807907104</float>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -416,6 +416,7 @@
 								<string key="NSFrame">{{211, 19}, {93, 21}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="362627815"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -497,7 +498,6 @@
 						<string key="NSFrame">{{5, 0}, {310, 535}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="439856586"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="457789819"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1029,7 +1029,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="coverfeed-bottom_gradient.png">{323, 107}</string>
-			<string key="coverfeed-comments_button.png">{29, 32}</string>
+			<string key="coverfeed-comments_button.png">{16, 16}</string>
 			<string key="coverfeed-like_button.png">{28, 32}</string>
 			<string key="coverfeed-top_gradient.png">{323, 107}</string>
 		</dictionary>
