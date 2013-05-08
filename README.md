@@ -13,10 +13,10 @@ I will be updating this documentation and writing development notes at:
 
 Installation
 ---
-git clone / pull
-cd Home-For-iOS/Home
-(optional) pod install / pod update
-open and build from Home.xcworkspace
+* git clone / pull
+* cd Home-For-iOS/Home
+* (optional) pod install / pod update
+* open and build from Home.xcworkspace
 
 
 Working Features
