@@ -13,7 +13,10 @@ I will be updating this documentation and writing development notes at:
 
 Installation
 ---
-See the project home page above.
+git clone / pull
+cd Home-For-iOS/Home
+(optional) pod install / pod update
+open and build from Home.xcworkspace
 
 
 Working Features
@@ -27,12 +30,11 @@ Working Features
 
 Missing Features / Known Issues
 ---
-* Facebook authentication not working for some (error=7)
 * Notifications
 * Chat Heads
-* Non Retina 4-inch displays support
+* Non Retina 4-inch displays support 
 * Intermittent crashes
-
+* Unlike isn't working anymore
 
 License
 ---
