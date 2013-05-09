@@ -220,6 +220,7 @@
     [self.view addSubview:self.menuViewController.view];
     [self.menuViewController didMoveToParentViewController:self];
     [self.view bringSubviewToFront:self.menuViewController.view];
+    [self.menuViewController animateHideMenuButtons];
     self.menuView = self.menuViewController.view;
     
 }
@@ -234,8 +235,6 @@
         self.menuViewController.view.frame = destFrame;
         
     } completion:^(BOOL finished) {
-//        [self.menuViewController.view removeFromSuperview];
-//        [self.menuViewController removeFromParentViewController];
         [self.menuViewController animateHideMenuButtons];
     }];
     

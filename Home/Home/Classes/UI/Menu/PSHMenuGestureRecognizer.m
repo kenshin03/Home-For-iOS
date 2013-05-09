@@ -40,7 +40,7 @@
     CGPoint touchPoint = [touch locationInView:self.view];
     CGRect menuViewFrame = self.menuViewBeingMoved.frame;
     
-    menuViewFrame.origin = CGPointMake(touchPoint.x-self.menuViewBeingMoved.frame.size.width/1.1, touchPoint.y-self.menuViewBeingMoved.frame.size.height/1.1);
+    menuViewFrame.origin = CGPointMake(touchPoint.x-44.0f, touchPoint.y-44.0f);
     
     [UIView animateWithDuration:0.1 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.menuViewBeingMoved.frame = menuViewFrame;

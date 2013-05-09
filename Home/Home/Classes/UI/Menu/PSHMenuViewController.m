@@ -28,15 +28,27 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 @interface PSHMenuViewController ()<UIGestureRecognizerDelegate>
 
+// own profile or menu button
 @property (nonatomic, weak) IBOutlet UIView * menuButtonView;
 @property (nonatomic, weak) IBOutlet UIImageView * menuButtonImageView;
 
+// messenger button
 @property (nonatomic, weak) IBOutlet UIView * messengerButtonView;
 @property (nonatomic, weak) IBOutlet UIImageView * messengerButtonImageView;
+@property (nonatomic, weak) IBOutlet UILabel * messengerButtonLabel;
 
+// notification button
 @property (nonatomic, weak) IBOutlet UIView * notificationsButtonView;
+@property (nonatomic, weak) IBOutlet UIImageView * notificationsButtonImageView;
+@property (nonatomic, weak) IBOutlet UILabel * notificationsButtonLabel;
 
+// launcher button
 @property (nonatomic, weak) IBOutlet UIView * launcherButtonView;
+@property (nonatomic, weak) IBOutlet UIImageView * launcherButtonImageView;
+@property (nonatomic, weak) IBOutlet UILabel * launcherButtonLabel;
+
+
+// launcher menu
 @property (nonatomic, weak) IBOutlet UIView * launcherMenuView;
 
 @property (nonatomic) BOOL menuExpanded;
@@ -47,17 +59,20 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 @property (nonatomic, strong) UITapGestureRecognizer * menuTapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer * menuLongGestureRecognizer;
 
+// expanded positions of container frames (including top labels). 
+@property (nonatomic) CGRect expandedMenuButtonFrame;
+@property (nonatomic) CGRect expandedMessengerButtonFrame;
+@property (nonatomic) CGRect expandedNotificationsButtonFrame;
+@property (nonatomic) CGRect expandedLauncherButtonFrame;
 
-@property (nonatomic) CGRect defaultMenuButtonFrame;
-@property (nonatomic) CGRect defaultMessengerButtonFrame;
-@property (nonatomic) CGRect defaultNotificationsButtonFrame;
-@property (nonatomic) CGRect defaultLauncherButtonFrame;
+// collapsed positions
+@property (nonatomic) CGRect collapsedButtonsFrame;
+
 
 - (IBAction)launchAppButtonTapped:(id)sender;
 
 - (IBAction)statusUpdateButtonTapped:(id)sender;
 - (IBAction)photosButtonTapped:(id)sender;
-- (IBAction)checkinButtonTapped:(id)sender;
 - (IBAction)reloadButtonTapped:(id)sender;
 
 
@@ -77,29 +92,32 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self initMenuButton];
-    [self initMessengerButton];
-    [self initAppLauncherButton];
-    [self initAppLauncher];
-    [self initNotificationsButton];
-    self.menuExpanded = NO;
     
-    self.menuGestureRecognizer = [[PSHMenuGestureRecognizer alloc] init];
-    [self.menuGestureRecognizer addTarget:self action:@selector(menuGestureRecognizerAction:)];
-    
-    self.menuGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:self.menuGestureRecognizer];
-    
+    // single tap
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     [tapGestureRecognizer addTarget:self action:@selector(viewTapped:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
+    // swipe left or right on view
     UISwipeGestureRecognizer * swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] init];
     swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
     [swipeGestureRecognizer addTarget:self action:@selector(viewSwiped:)];
     [self.view addGestureRecognizer:swipeGestureRecognizer];
     
+    // custom gesture recognizer
+    self.menuGestureRecognizer = [[PSHMenuGestureRecognizer alloc] init];
+    [self.menuGestureRecognizer addTarget:self action:@selector(menuGestureRecognizerAction:)];
+    self.menuGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:self.menuGestureRecognizer];
+    
+    
+    [super viewDidLoad];
+    [self initMenuButton];
+    [self initMessengerButton];
+    [self initAppLauncherButton];
+    [self initNotificationsButton];
+    [self initAppLauncher];
+    self.menuExpanded = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,21 +128,47 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 
 - (void) initMenuButton {
-    self.defaultMenuButtonFrame = self.menuButtonView.frame;
-    self.menuButtonView.tag = kPSHMenuViewControllerMenuButtonViewTag;
-    [self.menuButtonView.layer setCornerRadius:30.0f];
-    [self.menuButtonView.layer setMasksToBounds:YES];
-    [self.menuButtonView.layer setBorderWidth:2.0f];
-    [self.menuButtonView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    self.menuButtonView.backgroundColor = [UIColor clearColor];
-    self.menuButtonImageView.backgroundColor = [UIColor blackColor];
+    // expanded
+    self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f, 90.0f, 90.0f);
+    self.expandedMessengerButtonFrame = CGRectMake(10.0f, 429.0f, 72.0f, 110.0f);
+    self.expandedLauncherButtonFrame = CGRectMake(124.0f, 306.0f, 72.0f, 110.0f);
+    self.expandedNotificationsButtonFrame = CGRectMake(240.0f, 429.0f, 72.0f, 110.0f);
     
+    // collapsed
+    self.collapsedButtonsFrame = CGRectMake(124.0f, 430.0f, 72.0f, 110.0f);
+    
+    
+    self.menuButtonView.tag = kPSHMenuViewControllerMenuButtonViewTag;
+    self.menuButtonView.backgroundColor = [UIColor clearColor];
+
     FetchProfileSuccess fetchProfileSuccess =^(NSString * graphID, NSString * avartarImageURL, NSError * error){
         self.ownGraphID = graphID;
+        
+        __block UIImageView * tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"empty_profile"]];
+        tempImageView.contentMode = UIViewContentModeScaleToFill;
+        tempImageView.frame = CGRectMake(12.0f, 12.0f, 65.0f, 65.0f);
+        tempImageView.clipsToBounds = NO;
+        [tempImageView.layer setCornerRadius:30.0f];
+        [tempImageView.layer setMasksToBounds:YES];
+        [self.menuButtonView insertSubview:tempImageView belowSubview:self.menuButtonImageView];
+        
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage * profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.menuButtonImageView.image = profileImage;
+                
+                UIImageView * profileImageView = [[UIImageView alloc] initWithImage:profileImage];
+                profileImageView.contentMode = UIViewContentModeScaleToFill;
+                profileImageView.frame = CGRectMake(12.0f, 12.0f, 65.0f, 65.0f);
+                profileImageView.clipsToBounds = NO;
+                
+                [profileImageView.layer setCornerRadius:30.0f];
+                [profileImageView.layer setMasksToBounds:YES];
+                
+                [self.menuButtonView insertSubview:profileImageView belowSubview:self.menuButtonImageView];
+                
+                [tempImageView removeFromSuperview];
+                
             });
         });
     };
@@ -136,22 +180,13 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [self.menuTapGestureRecognizer addTarget:self action:@selector(menuButtonTapped:)];
     [self.menuButtonView addGestureRecognizer:self.menuTapGestureRecognizer];
     
-    self.menuLongGestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
-    self.menuLongGestureRecognizer.delegate = self;
-    self.menuLongGestureRecognizer.minimumPressDuration = .5f;
-    [self.menuLongGestureRecognizer addTarget:self action:@selector(menuButtonLongPressed:)];
-    [self.menuButtonView addGestureRecognizer:self.menuLongGestureRecognizer];
-    
+    // if simply tapped on menu button, don't fire off the other gesture recognizer
+    [self.menuGestureRecognizer requireGestureRecognizerToFail:self.menuTapGestureRecognizer];
     
     
 }
 
 - (void) initMessengerButton {
-    [self.messengerButtonView.layer setCornerRadius:45.0f/2];
-    [self.messengerButtonView.layer setMasksToBounds:YES];
-    [self.messengerButtonView.layer setBorderWidth:.5f];
-    [self.messengerButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    self.messengerButtonView.backgroundColor = [UIColor lightGrayColor];
     
     UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateShowMessenger)];
     [self.messengerButtonView addGestureRecognizer:tapRecognizer];
@@ -159,11 +194,6 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 }
 
 - (void) initAppLauncherButton {
-    [self.launcherButtonView.layer setCornerRadius:45.0f/2];
-    [self.launcherButtonView.layer setMasksToBounds:YES];
-    [self.launcherButtonView.layer setBorderWidth:.5f];
-    [self.launcherButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    self.launcherButtonView.backgroundColor = [UIColor lightGrayColor];
     
     UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateShowLauncher)];
     [self.launcherButtonView addGestureRecognizer:tapRecognizer];
@@ -180,110 +210,73 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 }
 
 - (void) initNotificationsButton {
-    [self.notificationsButtonView.layer setCornerRadius:45.0f/2];
-    [self.notificationsButtonView.layer setMasksToBounds:YES];
-    [self.notificationsButtonView.layer setBorderWidth:.5f];
-    [self.notificationsButtonView.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    self.notificationsButtonView.backgroundColor = [UIColor lightGrayColor];
-    
     
     UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateShowNotifications)];
     [self.notificationsButtonView addGestureRecognizer:tapRecognizer];
 }
 
-- (void)menuButtonLongPressed:(UILongPressGestureRecognizer*)longRecognizer {
-    if (longRecognizer.state == UIGestureRecognizerStateBegan){
-        if (self.menuExpanded){
-            [self animateHideMenuButtons];
-        }else{
-            [self animateExpandMenuButtons];
-        }
-    }else{
-        [self animateHideMenuButtons];
-        
-    }
-}
+
 
 - (void) menuGestureRecognizerAction:(PSHMenuGestureRecognizer*)recognizer {
-//    NSLog(@"menuGestureRecognizerAction state: %i", recognizer.state);
-    CGRect launcherFrame = self.launcherButtonView.frame;
-    CGRect messengerFrame = self.messengerButtonView.frame;
-    CGRect notificationFrame = self.notificationsButtonView.frame;
     
-
     if (recognizer.state == UIGestureRecognizerStateBegan){
         
-        launcherFrame = self.launcherButtonView.frame;
-        messengerFrame = self.messengerButtonView.frame;
-        notificationFrame = self.notificationsButtonView.frame;
+        // began moving
     
     } else if (recognizer.state == UIGestureRecognizerStateChanged){
-//        NSLog(@"UIGestureRecognizerStateChanged");
-        CGPoint currentTouchPoint = [recognizer locationInView:self.view];
-        if (CGRectContainsPoint(self.defaultLauncherButtonFrame, currentTouchPoint)){
-            if (CGRectEqualToRect(self.launcherButtonView.frame, self.defaultLauncherButtonFrame)){
-                [self animateShowLauncher];
-                [self resetMenuButton];
-//                [self animateHideMenuButtons];
-                recognizer.enabled = NO;
-                recognizer.enabled = YES;
-            }
+        
+        CGRect launcherButtonImageViewFrame = [self.view convertRect:self.launcherButtonImageView.frame fromView:self.launcherButtonImageView.superview];
+        
+        CGRect messengerButtonImageViewFrame = [self.view convertRect:self.messengerButtonImageView.frame fromView:self.messengerButtonImageView.superview];
+        
+        CGRect notificationsButtonImageViewFrame = [self.view convertRect:self.notificationsButtonImageView.frame fromView:self.notificationsButtonImageView.superview];
+        
+        
+        
+        CGRect menuButtonViewFrame = self.menuButtonView.frame;
+        menuButtonViewFrame = [self.view convertRect:self.menuButtonView.frame fromView:self.menuButtonView.superview];
+        
+        if (self.menuExpanded){
             
-        }else if (CGRectContainsPoint(self.defaultMessengerButtonFrame, currentTouchPoint)){
-            if (CGRectEqualToRect(self.messengerButtonView.frame, self.defaultMessengerButtonFrame)){
-                [self animateShowMessenger];
-                [self animateHideMenuButtons];
-                [self resetMenuButton];
-                recognizer.enabled = NO;
-                recognizer.enabled = YES;
-            }
-            
-        }else if (CGRectContainsPoint(self.defaultNotificationsButtonFrame, currentTouchPoint)){
-            if (CGRectEqualToRect(self.notificationsButtonView.frame, self.defaultNotificationsButtonFrame)){
-                [self animateShowNotifications];
-                [self animateHideMenuButtons];
-                [self resetMenuButton];
-                recognizer.enabled = NO;
-                recognizer.enabled = YES;
-            }
-        }else{
-            CGRect upperFrameRect = self.view.frame;
-            upperFrameRect.size.height = upperFrameRect.size.height/1.5;
-            if (CGRectContainsPoint(upperFrameRect, currentTouchPoint)){
-                [self animateHideMenuButtonsFollowTouchPoint:currentTouchPoint];
+            BOOL actionsTriggered = YES;
+            if (CGRectContainsRect(menuButtonViewFrame, launcherButtonImageViewFrame)){
                 
+                // intersects launcher
+                [self animateShowLauncher];
+
+            } else if (CGRectContainsRect(menuButtonViewFrame, messengerButtonImageViewFrame)){
+                
+                // intersects messenger
+                [self animateShowMessenger];
+                
+            } else if (CGRectContainsRect(menuButtonViewFrame, notificationsButtonImageViewFrame)){
+                
+                // intersects notification
+                [self animateShowNotifications];
+            }else{
+                actionsTriggered = NO;
+            }
+            
+            if (actionsTriggered){
+                [self animateHideMenuButtons];
+                recognizer.enabled = NO;
+                recognizer.enabled = YES;
             }
         }
+        
         
     }else if (recognizer.state == UIGestureRecognizerStateEnded){
         NSLog(@"UIGestureRecognizerStateEnded");
-        
-        CGPoint currentTouchPoint = [recognizer locationInView:self.view];
-        CGRect upperFrameRect = self.view.frame;
-        upperFrameRect.size.height = upperFrameRect.size.height/1.5;
-        if (CGRectContainsPoint(upperFrameRect, currentTouchPoint)){
-            [self animateHideMenuButtonsFollowTouchPoint:currentTouchPoint];
-        }
-        if (!CGRectEqualToRect(self.launcherButtonView.frame, self.defaultLauncherButtonFrame)){
-            [self resetMenuButton];
-            [self animateHideMenuButtons];
-        }
-        
-//            [self resetMenuButton];
-//            [self animateHideMenuButtons];
-        
+        [self animateHideMenuButtons];
         
     } else if (recognizer.state == UIGestureRecognizerStateFailed){
         NSLog(@"UIGestureRecognizerStateFailed");
-        [self resetMenuButton];
         [self animateHideMenuButtons];
-        
     }
 }
 
 - (void)menuButtonTapped:(UITapGestureRecognizer*)longRecognizer {
     if (self.menuExpanded){
-        [self resetMenuButton];
         [self animateHideMenuButtons];
     }else{
         [self animateExpandMenuButtons];
@@ -292,7 +285,6 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 }
 
 - (void) animateShowLauncher {
-    NSLog(@"animateShowLauncher");
     [self.view bringSubviewToFront:self.launcherMenuView];
     
     CGRect origLauncherMenuRect = self.launcherMenuView.frame;
@@ -309,7 +301,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.launcherMenuView.frame = origLauncherMenuRect;
-        self.launcherMenuView.alpha = 1.0f;
+        self.launcherMenuView.alpha = .9f;
     } completion:^(BOOL finished) {
         //
     }];
@@ -318,7 +310,6 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 
 - (void) animateHideLauncher {
-    NSLog(@"animateHideLauncher");
     
     CGRect destLauncherMenuRect = self.launcherMenuView.frame;
     destLauncherMenuRect.origin.y = self.launcherMenuView.frame.size.height;
@@ -346,111 +337,69 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 }
 
 
-- (void) resetMenuButton {
-    [UIView animateWithDuration:0.2f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.menuButtonView.frame = CGRectMake(130.0f, 474.0f, self.menuButtonView.frame.size.width, self.menuButtonView.frame.size.height);
-    } completion:^(BOOL finished) {
-        //
-    }];
-}
+#pragma mark - expand / collapse menu
 
 - (void) animateExpandMenuButtons {
     
-    
-    CGRect messengerButtonViewDestFrame = self.messengerButtonView.frame;
-    messengerButtonViewDestFrame.origin.x = 30.0f;
-    
-    CGRect launcherButtonViewDestFrame = self.launcherButtonView.frame;
-    launcherButtonViewDestFrame.origin.y = 360.0f;
-    self.launcherButtonView.alpha = 0.0f;
-    
-    CGRect notificationsViewDestFrame = self.notificationsButtonView.frame;
-    notificationsViewDestFrame.origin.x = 240.0f;
-    self.notificationsButtonView.alpha = 0.0f;
-    
+    self.launcherButtonView.hidden = NO;
+    self.notificationsButtonView.hidden = NO;
+    self.messengerButtonView.hidden = NO;
+    self.launcherButtonLabel.hidden = NO;
+    self.notificationsButtonLabel.hidden = NO;
+    self.messengerButtonLabel.hidden = NO;
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.messengerButtonView.frame = messengerButtonViewDestFrame;
-        self.launcherButtonView.frame = launcherButtonViewDestFrame;
-        self.notificationsButtonView.frame = notificationsViewDestFrame;
-        
-        self.defaultMessengerButtonFrame = messengerButtonViewDestFrame;
-        self.defaultNotificationsButtonFrame = notificationsViewDestFrame;
-        self.defaultLauncherButtonFrame = launcherButtonViewDestFrame;
+        self.messengerButtonView.frame = self.expandedMessengerButtonFrame;
+        self.launcherButtonView.frame = self.expandedLauncherButtonFrame;
+        self.notificationsButtonView.frame = self.expandedNotificationsButtonFrame;
         
         self.launcherButtonView.alpha = 1.0f;
         self.notificationsButtonView.alpha = 1.0f;
         self.messengerButtonView.alpha = 1.0f;
+        self.launcherButtonLabel.alpha = 1.0f;
+        self.notificationsButtonLabel.alpha = 1.0f;
+        self.messengerButtonLabel.alpha = 1.0f;
         
     } completion:^(BOOL finished) {
-        // nothing
         self.menuExpanded = YES;
     }];
-}
-
-- (void) animateHideMenuButtonsFollowTouchPoint:(CGPoint)currentTouchPoint {
-    
-    CGRect messengerButtonViewFrame = self.messengerButtonView.frame;
-    CGRect notificationsButtonViewFrame = self.notificationsButtonView.frame;
-    CGRect launcherButtonViewFrame = self.launcherButtonView.frame;
-    
-    messengerButtonViewFrame.origin = CGPointMake(currentTouchPoint.x- messengerButtonViewFrame.size.width/1.1, currentTouchPoint.y- messengerButtonViewFrame.size.height/1.1);
-    
-    notificationsButtonViewFrame.origin = CGPointMake(currentTouchPoint.x- notificationsButtonViewFrame.size.width/1.1, currentTouchPoint.y- notificationsButtonViewFrame.size.height/1.1);
-    
-    launcherButtonViewFrame.origin = CGPointMake(currentTouchPoint.x- launcherButtonViewFrame.size.width/1.1, currentTouchPoint.y- launcherButtonViewFrame.size.height/1.1);
     
     
-    [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState animations:^{
-        self.messengerButtonView.frame = messengerButtonViewFrame;
-        
-    } completion:^(BOOL finished) {
-    }];
-    
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState animations:^{
-        self.notificationsButtonView.frame = notificationsButtonViewFrame;
-        
-    } completion:^(BOOL finished) {
-    }];
-
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState animations:^{
-        self.launcherButtonView.frame = launcherButtonViewFrame;
-        
-    } completion:^(BOOL finished) {
-    }];
-    
-
 }
 
 - (void) animateHideMenuButtons {
-    CGRect messengerButtonViewDestFrame = self.messengerButtonView.frame;
-    messengerButtonViewDestFrame.origin.x = 145.0f;
-    messengerButtonViewDestFrame.origin.y = 485.0f;
-    
-    CGRect launcherButtonViewDestFrame = self.launcherButtonView.frame;
-    launcherButtonViewDestFrame.origin.x = 138.0f;
-    launcherButtonViewDestFrame.origin.y = 474.0f;
-    
-    CGRect notificationsViewDestFrame = self.notificationsButtonView.frame;
-    notificationsViewDestFrame.origin.x = 145.0f;
-    notificationsViewDestFrame.origin.y = 485.0f;
-    
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.messengerButtonView.frame = messengerButtonViewDestFrame;
-        self.launcherButtonView.frame = launcherButtonViewDestFrame;
-        self.notificationsButtonView.frame = notificationsViewDestFrame;
+        self.messengerButtonView.frame = self.collapsedButtonsFrame;
+        self.launcherButtonView.frame = self.collapsedButtonsFrame;
+        self.notificationsButtonView.frame = self.collapsedButtonsFrame;
+        self.menuButtonView.frame = self.expandedMenuButtonFrame;
         
         self.launcherButtonView.alpha = 0.0f;
         self.notificationsButtonView.alpha = 0.0f;
         self.messengerButtonView.alpha = 0.0f;
         
+        self.launcherButtonLabel.alpha = 0.0f;
+        self.notificationsButtonLabel.alpha = 0.0f;
+        self.messengerButtonLabel.alpha = 0.0f;
+        
     } completion:^(BOOL finished) {
-        // nothing
         self.menuExpanded = NO;
-
+        
+        self.launcherButtonView.hidden = YES;
+        self.notificationsButtonView.hidden = YES;
+        self.messengerButtonView.hidden = YES;
+        self.launcherButtonLabel.hidden = YES;
+        self.notificationsButtonLabel.hidden = YES;
+        self.messengerButtonLabel.hidden = YES;
+        
     }];
 }
+
+
+
+#pragma mark - Gesture Recognizer
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     if ((([gestureRecognizer isEqual:self.menuLongGestureRecognizer]) && ([otherGestureRecognizer isEqual:self.menuGestureRecognizer])) ||

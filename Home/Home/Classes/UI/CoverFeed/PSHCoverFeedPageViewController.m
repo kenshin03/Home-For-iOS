@@ -12,7 +12,7 @@
 #import "LEColorPicker.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface PSHCoverFeedPageViewController ()<PSHCommentsViewControllerDelegate>
+@interface PSHCoverFeedPageViewController ()
 
 // time
 @property (nonatomic, weak) IBOutlet UIView * currentTimeView;
@@ -41,7 +41,6 @@
 
 // comments
 @property (nonatomic, strong) PSHCommentsViewController * commentsViewController;
-@property (nonatomic, weak) IBOutlet UIView * commentsPostingView;
 @property (nonatomic, weak) IBOutlet UILabel * latestCommentatorsLabel;
 
 // background
@@ -102,7 +101,6 @@
     
     [singleTapGestureRecognizer requireGestureRecognizerToFail:doubleTapGestureRecognizer];
 
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,8 +148,6 @@
         self.latestCommentatorsLabel.hidden = YES;
     }
     
-    self.commentsPostingView.hidden = YES;
-    
     if ([self.feedType isEqualToString:@"photo"]){
         self.photosCommentsView.hidden = NO;
         self.backgroundOverlayImageView.hidden = YES;
@@ -177,7 +173,6 @@
         });
         self.sourceNameLabel.text = self.sourceName;
     }
-    self.commentsPostingView.hidden = YES;
     
     if (self.likedByMe){
         self.likeImageView.image = [UIImage imageNamed:@"coverfeed-liked_by_me_button"];
@@ -385,6 +380,7 @@
 }
 
 -(void)doubleTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer {
+    
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
         if (self.likedByMe){
             [self unlikeFeed];
@@ -396,9 +392,9 @@
 }
 
 -(void) singleTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer {
+    
     if ([self.delegate respondsToSelector:@selector(coverfeedPageViewController:mainViewTapped:)]){
         [self animateHideActionsPanelView];
-        [self hideCommentsPostingView];
         
         [self.delegate coverfeedPageViewController:self mainViewTapped:YES];
     }
@@ -419,23 +415,16 @@
 
 -(IBAction)commentButtonTapped:(id)sender {
 
-    if (self.commentsPostingView.hidden == YES){
-        if (self.commentsViewController != nil){
-            self.commentsViewController = nil;
-            [self.commentsViewController.view removeFromSuperview];
-            [self.commentsViewController removeFromParentViewController];
-        }
-        self.commentsViewController = [[PSHCommentsViewController alloc] init];
-        self.commentsViewController.delegate = self;
-        self.commentsViewController.feedItemGraphID = self.feedItemGraphID;
-        [self addChildViewController:self.commentsViewController];
-        [self.commentsPostingView addSubview:self.commentsViewController.view];
-        [self animateShowCommentsPostingView];
-        
-    }else{
-        [self animateHideCommentsPostingView];
-        
+    NSLog(@"commentButtonTapped...");
+    if (self.commentsViewController != nil){
+        self.commentsViewController = nil;
+        [self.commentsViewController.view removeFromSuperview];
+        [self.commentsViewController removeFromParentViewController];
     }
+    self.commentsViewController = [[PSHCommentsViewController alloc] init];
+    self.commentsViewController.feedItemGraphID = self.feedItemGraphID;
+    [self addChildViewController:self.commentsViewController];
+    [self.navigationController pushViewController:self.commentsViewController animated:NO];
 }
 
 - (void) unlikeFeed {
@@ -525,82 +514,7 @@
     });
 }
 
-- (void) animateShowCommentsPostingView {
-    
-    self.commentsPostingView.hidden = NO;
-    self.commentsPostingView.layer.anchorPoint = CGPointMake(0.50, 0.5);
-    CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-    
-    bounceAnimation.values = [NSArray arrayWithObjects:
-                              [NSNumber numberWithFloat:0.9],
-                              [NSNumber numberWithFloat:1.2],
-                              [NSNumber numberWithFloat:0.9],
-                              [NSNumber numberWithFloat:1.0],
-                              nil];
-    
-    bounceAnimation.duration = 0.4;
-    [bounceAnimation setTimingFunctions:[NSArray arrayWithObjects:
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],
-                                         nil]];
-    bounceAnimation.removedOnCompletion = YES;
-    
-    [self.commentsPostingView.layer addAnimation:bounceAnimation forKey:@"bounce"];
-}
 
-- (void) animateHideCommentsPostingView {
-    
-    self.commentsPostingView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-    
-    bounceAnimation.values = [NSArray arrayWithObjects:
-                              [NSNumber numberWithFloat:1.0],
-                              [NSNumber numberWithFloat:0.5],
-                              [NSNumber numberWithFloat:0.0],
-                              nil];
-    
-    bounceAnimation.duration = 0.4;
-    [bounceAnimation setTimingFunctions:[NSArray arrayWithObjects:
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                         nil]];
-    bounceAnimation.removedOnCompletion = NO;
-    bounceAnimation.fillMode = kCAFillModeForwards;
-    
-    
-    CGPoint currentPoint = [self.commentsPostingView.layer position];
-    CGPoint endPoint = CGPointMake(currentPoint.x-self.commentsPostingView.layer.frame.size.width/2,  self.commentsPostingView.layer.frame.size.height);
-    
-    CABasicAnimation * positionAnim = [CABasicAnimation animationWithKeyPath:@"position"];
-    positionAnim.fromValue = [NSValue valueWithCGPoint:currentPoint];
-    positionAnim.toValue = [NSValue valueWithCGPoint:endPoint];
-    positionAnim.duration = 0.4;
-    
-    CAAnimationGroup* group = [CAAnimationGroup animation];
-    group.animations = @[bounceAnimation, positionAnim];
-    group.duration = positionAnim.duration;
-    group.removedOnCompletion = YES;
-    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    group.fillMode = kCAFillModeForwards;
-    [self.commentsPostingView.layer addAnimation:group forKey:@"scale-down"];
-
-    double delayInSeconds = 0.2;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.commentsPostingView.hidden = YES;
-        });
-    });
-    
-}
-
-- (void) hideCommentsPostingView {
-    self.commentsPostingView.hidden = YES;
-}
 
 - (void) hideStatusUpdateView {
     self.statusUpdateView.hidden = YES;
@@ -613,11 +527,6 @@
 
 - (void) hideActionsPanelView {
     self.actionsPanelView.hidden = YES;
-}
-
-
-- (void) showCommentsPostingView {
-    self.commentsPostingView.hidden = NO;
 }
 
 - (void) showStatusUpdateView {
@@ -662,11 +571,7 @@
     }];
 }
 
-#pragma mark - PSHCommentsViewControllerDelegate methods
 
-- (void) commentsViewController:(PSHCommentsViewController*)viewController viewDidSwipeDown:(BOOL)swiped {
-    [self animateHideCommentsPostingView];
-}
 
 
 @end

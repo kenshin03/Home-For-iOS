@@ -21,8 +21,13 @@ int main(int argc, char *argv[])
     @autoreleasepool
     {
         return UIApplicationMain(argc, argv,
-                                 NSStringFromClass([QTouchposeApplication class]),
+                                 nil,
                                  NSStringFromClass([PSHAppDelegate class]));
     }
+    
+//    return UIApplicationMain(argc, argv,
+//                             NSStringFromClass([QTouchposeApplication class]),
+//                             NSStringFromClass([PSHAppDelegate class]));
+    
     
 }

@@ -16,10 +16,3 @@
 @property (nonatomic, weak) id<PSHCommentsViewControllerDelegate> delegate;
 
 @end
-
-
-@protocol PSHCommentsViewControllerDelegate <NSObject>
-
-- (void) commentsViewController:(PSHCommentsViewController*)viewController viewDidSwipeDown:(BOOL)swiped;
-
-@end
