@@ -98,7 +98,9 @@ static dispatch_once_t pullToDismissLock;
         [self.commentsArray addObjectsFromArray:resultsArray];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.commentsTableView reloadData];
-            [self.commentsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:([self.commentsArray count]-1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            if ([self.commentsArray count] > 0){
+                [self.commentsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:([self.commentsArray count]-1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
         });
     }];
     
