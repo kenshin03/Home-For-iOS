@@ -1,7 +1,7 @@
 Home for iOS
 ===============================
 
-![Screenshot](cover_image.png)
+![Screenshot](cover_image.jpg)
 
 
 This is an attempt to replicate essential elements of the Facebook Home experience in iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
