@@ -7,9 +7,14 @@ Home for iOS
 This is an attempt to replicate essential elements of the Facebook Home experience in iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
 controls and the Facebook Graph API.
 
-I will be updating this documentation and writing development notes at:
+Development Notes:
 
-* http://corgitoergosum.net/facebook-home-for-ios/
+* [Project Page](http://corgitoergosum.net/facebook-home-for-ios/ "Project Page")
+* [Intro](http://corgitoergosum.net/2013/04/29/facebook-home-for-ios/ "Intro")
+* [Building Home (1) – Data Layer](http://corgitoergosum.net/2013/04/30/building-facebook-home-for-ios-1-data-layer/ "Building Home (1) – Data Layer")
+* [Building Home (2) – Cover Feed](http://corgitoergosum.net/2013/05/01/building-facebook-home-for-ios-2-cover-feed/ "Building Home (2) – Cover Feed")
+* [Building Home (3) – Menu and App Launcher](http://corgitoergosum.net/2013/05/09/building-facebook-home-for-ios-3-menu-and-app-launcher/ "Building Home (3) – Menu and App Launcher")
+
 
 Installation
 ---
@@ -35,6 +40,12 @@ Missing Features / Known Issues
 * Non Retina 4-inch displays support 
 * Intermittent crashes
 * Unlike isn't working anymore
+
+
+Contribution
+---
+Feel free to fork and implement any features or fix any issues as you see fit. Or submit an issue with an feature requests or bug reports.
+
 
 License
 ---
