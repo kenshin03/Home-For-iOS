@@ -17,7 +17,7 @@ static NSInteger const kPSHMenuViewControllerMenuButtonViewTag = 1111;
 @property (nonatomic, weak) id<PSHMenuViewControllerDelegate> delegate;
 
 - (void) animateHideMenuButtons;
-
+- (void) animateHideLauncher;
 
 @end
 

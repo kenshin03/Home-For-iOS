@@ -228,7 +228,7 @@
 - (void) animateHideMenu {
     
     CGRect destFrame = self.menuViewController.view.frame;
-    destFrame.origin.y = destFrame.size.height;
+    destFrame.origin.y = self.view.frame.size.height;
     
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         
@@ -242,6 +242,7 @@
 
 - (void) animateShowMenu {
     [self.menuViewController animateHideMenuButtons];
+    [self.menuViewController animateHideLauncher];
     CGRect originFrame = self.menuViewController.view.frame;
     originFrame.origin.y = 0.0f;
     CGRect destFrame = self.menuViewController.view.frame;
