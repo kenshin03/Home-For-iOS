@@ -16,6 +16,18 @@ Development Notes:
 * [Building Home (3) – Menu and App Launcher](http://corgitoergosum.net/2013/05/09/building-facebook-home-for-ios-3-menu-and-app-launcher/ "Building Home (3) – Menu and App Launcher")
 
 
+Videos
+---
+![Animated GIF](home_animated.gif)
+
+
+[Vimeo Video](https://vimeo.com/64940276 "Demo Video 1")
+
+[Vimeo Video](https://vimeo.com/63531931 "Demo Video 2")
+
+
+
+
 Installation
 ---
 * git clone / pull
@@ -51,12 +63,5 @@ Feel free to fork and implement any features or fix any issues as you see fit. O
 License
 ---
 MIT (https://github.com/kenshin03/Home-For-iOS/blob/master/LICENSE)
-
-
-Videos
----
-[Vimeo Video](https://vimeo.com/64940276 "Demo Video 1")
-
-[Vimeo Video](https://vimeo.com/63531931 "Demo Video 2")
 
 
