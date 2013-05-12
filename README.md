@@ -22,22 +22,23 @@ Installation
 * cd Home-For-iOS/Home
 * (optional) pod install / pod update
 * open and build from Home.xcworkspace
+* For installation on devices, please create a facebook app that matches the app bundle id you are using. See https://github.com/kenshin03/Home-For-iOS/issues/5.
 
 
 Working Features
 ---
 * Coverfeed. Supports posts of type photo (added_photos/mobile_status_update/shared_story) and status (picture/mobile_status_update/wall_post).
-* Double tap to like/unlike a post from Coverfeed.
-* View comments and add comments to a post.
+* Double tap to like a post from Coverfeed.
+* View comments and add comments to a post. (iPhone5 only)
 * Post to your own timeline.
-* Fake launcher that opens apps like Facebook Camera, Twitter, Instagram, Mail.
+* Fake launcher that opens pre-installed apps like Facebook Camera, Twitter, Instagram, Mail via URL schemes.
 * SSO to Facebook using iOS 6's SocialFramework.
 
 Missing Features / Known Issues
 ---
 * Notifications
 * Chat Heads
-* Non Retina 4-inch displays support 
+* Comments view not re-sized properly for 3.5 inch screen sizes. 
 * Intermittent crashes
 * Unlike isn't working anymore
 
