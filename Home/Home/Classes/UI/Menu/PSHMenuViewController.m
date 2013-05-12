@@ -9,7 +9,7 @@
 #import "PSHMenuViewController.h"
 #import "PSHFacebookDataService.h"
 #import "PSHMenuGestureRecognizer.h"
-
+#import "PSHNotificationsViewController.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <QuartzCore/QuartzCore.h>
@@ -378,8 +378,13 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 - (void) animateShowNotifications {
     DDLogVerbose(@"animateShowNotifications");
+
     NSURL *url = [NSURL URLWithString:@"fb://notifications"];
     [[UIApplication sharedApplication] openURL:url];
+/*
+    PSHNotificationsViewController * notificationsVC = [[PSHNotificationsViewController alloc] init];
+    [self.navigationController pushViewController:notificationsVC animated:YES];
+ */
 }
 
 

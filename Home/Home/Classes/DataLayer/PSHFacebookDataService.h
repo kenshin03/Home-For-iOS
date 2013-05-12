@@ -11,6 +11,8 @@
 
 typedef void (^Success)();
 typedef void (^FetchFeedSuccess)(NSArray * resultsArray, NSError * error);
+typedef void (^FetchNotificationsSuccess)(NSArray * resultsArray, NSError * error);
+
 typedef void (^FetchProfileSuccess)(NSString * graphID, NSString * avartarImageURL, NSError * error);
 typedef void (^FetchCommentsSuccess)(NSArray * resultsArray, NSError * error);
 typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSString * avartarImageURL);
@@ -26,6 +28,9 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 - (void) likeFeed:(NSString*)graphID;
 
 - (void) unlikeFeed:(NSString*)graphID;
+
+
+- (void) fetchNotifications:(FetchNotificationsSuccess)fetchNotificationsSuccess;
 
 
 - (void) fetchComments:(NSString*)graphID success:(FetchCommentsSuccess)fetchCommentsSuccess;

@@ -14,6 +14,7 @@
 #import "FeedItem.h"
 #import "ItemSource.h"
 #import "PSHFeedComment.h"
+#import "PSHNotification.h"
 
 typedef void (^InitAccountSuccessBlock)();
 
@@ -61,7 +62,7 @@ typedef void (^InitAccountSuccessBlock)();
     
     // separate request for read and writes
     ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSDictionary * readOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"email", @"read_stream", @"user_photos"], ACFacebookAudienceKey:ACFacebookAudienceOnlyMe};
+    NSDictionary * readOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"email", @"read_stream", @"user_photos", @"user_activities", @"friends_activities"], ACFacebookAudienceKey:ACFacebookAudienceEveryone};
     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:readOptions
                                             completion: ^(BOOL granted, NSError *e) {
                                                 
@@ -75,7 +76,7 @@ typedef void (^InitAccountSuccessBlock)();
                                                     //it will always be the last object with SSO
                                                     self.facebookAccount = [accounts lastObject];
                                                     
-                                                    NSDictionary * facebookOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"publish_stream"], ACFacebookAudienceKey:ACFacebookAudienceFriends};
+                                                    NSDictionary * facebookOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"publish_actions", @"publish_stream", @"manage_notifications"], ACFacebookAudienceKey:ACFacebookAudienceFriends};
                                                     
                                                     //    ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
                                                     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:facebookOptions
@@ -435,6 +436,50 @@ typedef void (^InitAccountSuccessBlock)();
     }else{
         successBlock();
     }
+}
+
+
+- (void) fetchNotifications:(FetchNotificationsSuccess)fetchNotificationsSuccess {
+    
+    InitAccountSuccessBlock successBlock = ^{
+        
+//        NSURL *url = [NSURL URLWithString:@"https://graph.facebook.com/me/notifications?include_read=true"];
+        NSURL *url = [NSURL URLWithString:@"https://graph.facebook.com/me/notifications"];
+        SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:url parameters:@{@"include_read":@"true"}];
+        DDLogVerbose(@"request.URL: %@", request.URL);
+        request.account = self.facebookAccount;
+        
+        NSMutableArray * notificationResultsArray = [@[] mutableCopy];
+        
+        [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            DDLogVerbose(@"responseString: %@", responseString);
+            NSError* responseError;
+            NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
+            
+            NSArray * notificationsJSONArray = jsonDict[@"data"];
+            [notificationsJSONArray enumerateObjectsUsingBlock:^(NSDictionary * notificationJSONDict, NSUInteger idx, BOOL *stop) {
+                
+                PSHNotification * notification = [[PSHNotification alloc] init];
+                
+                id fromID = notificationJSONDict[@"from"][@"id"];
+                notification.fromGraphID = fromID;
+                notification.title = notificationJSONDict[@"title"];
+                
+                [notificationResultsArray addObject:notification];
+            }];
+            fetchNotificationsSuccess(notificationResultsArray, nil);
+            
+        }];
+    };
+    
+    
+    if (self.facebookAccount == nil){
+        [self initAccount:successBlock];
+    }else{
+        successBlock();
+    }
+    
 }
 
 

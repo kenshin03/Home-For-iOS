@@ -69,18 +69,6 @@ static dispatch_once_t pullToDismissLock;
 
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
-    NSLog(@"viewWillDisappear...");
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
-        // View is disappearing because a new view controller was pushed onto the stack
-        NSLog(@"New view controller was pushed");
-    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
-        // View is disappearing because it was popped from the stack
-        NSLog(@"View controller was popped");
-    }
-    [super viewWillDisappear:animated];
-}
 
 #pragma mark - UI
 
