@@ -65,8 +65,8 @@ typedef void (^InitAccountSuccessBlock)();
     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:readOptions
                                             completion: ^(BOOL granted, NSError *e) {
                                                 
-                                                NSLog(@"granted: %i", granted);
-                                                NSLog(@"error: %@", e);
+                                                DDLogVerbose(@"granted: %i", granted);
+                                                DDLogVerbose(@"error: %@", e);
                                                 
                                                 // to-do: clean up this code
                                                 
@@ -80,12 +80,12 @@ typedef void (^InitAccountSuccessBlock)();
                                                     //    ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
                                                     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:facebookOptions
                                                                                             completion: ^(BOOL granted, NSError *error) {
-                                                                                                NSLog(@"granted: %i", granted);
-                                                                                                NSLog(@"error: %@", error);
+                                                                                                DDLogVerbose(@"granted: %i", granted);
+                                                                                                DDLogError(@"error: %@", error);
                                                                                                 if (granted) {
                                                                                                     NSArray *accounts = [self.accountStore accountsWithAccountType:facebookAccountType];
                                                                                                     
-                                                                                                    NSLog(@"accounts: %@", accounts);
+                                                                                                    DDLogVerbose(@"accounts: %@", accounts);
                                                                                                     //it will always be the last object with SSO
                                                                                                     self.facebookAccount = [accounts lastObject];
                                                                                                     success();
@@ -115,7 +115,7 @@ typedef void (^InitAccountSuccessBlock)();
                                                 } else {
                                                     //Fail gracefully...
                                                     dispatch_sync(dispatch_get_main_queue(), ^{
-                                                        NSLog(@"error getting permission %@",e);
+                                                        DDLogVerbose(@"error getting permission %@",e);
                                                         UIAlertView *alert = [[UIAlertView alloc]
                                                                               initWithTitle:@"Facebook account not set up"
                                                                               message:@"Please set up facebook account in Settings first"
@@ -152,11 +152,11 @@ typedef void (^InitAccountSuccessBlock)();
     
     NSDictionary * params = @{@"fields":@"picture"};
     SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:params];
-    NSLog(@"request.URL: %@", request.URL);
+    DDLogVerbose(@"request.URL: %@", request.URL);
     request.account = self.facebookAccount;
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"responseString: %@", responseString);
+        DDLogVerbose(@"responseString: %@", responseString);
         NSError* responseError;
         NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
         
@@ -172,13 +172,13 @@ typedef void (^InitAccountSuccessBlock)();
 //    NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
 //    [feedItemsArray enumerateObjectsUsingBlock:^(FeedItem * feed, NSUInteger idx, BOOL *stop) {
 //        [feed deleteInContext:[NSManagedObjectContext defaultContext]];
-//        NSLog(@"deleteing feed...");
+//        DDLogVerbose(@"deleteing feed...");
 //    }];
     
     [FeedItem MR_truncateAllInContext:[NSManagedObjectContext defaultContext]];
     [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         //
-        NSLog(@"removeAllCachedFeeds");
+        DDLogVerbose(@"removeAllCachedFeeds");
         successBlock();
     }];
     
@@ -205,11 +205,11 @@ typedef void (^InitAccountSuccessBlock)();
     
     NSDictionary * params = @{@"limit":@"100"};
     SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:params];
-    NSLog(@"request.URL: %@", request.URL);
+    DDLogVerbose(@"request.URL: %@", request.URL);
     request.account = self.facebookAccount;
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"responseString: %@", responseString);
+        DDLogVerbose(@"responseString: %@", responseString);
         NSError* responseError;
         NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
         [self parseHomeDataJSON:jsonDict fetchFeedSuccess:fetchFeedSuccess];
@@ -227,7 +227,7 @@ typedef void (^InitAccountSuccessBlock)();
         NSString * story = dataDict[@"story"];
         
         NSArray * foundItems = [FeedItem findByAttribute:@"graphID" withValue:graphID];
-        NSLog(@"found?:%i type:%@ subType:%@", [foundItems count], type, statusType);
+        DDLogVerbose(@"found?:%i type:%@ subType:%@", [foundItems count], type, statusType);
         if (([foundItems count] == 0) && [self isHandledFeedType:type subType:statusType]){
             
             // timestamps
@@ -323,7 +323,7 @@ typedef void (^InitAccountSuccessBlock)();
                         
                         [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
                             //
-                            NSLog(@"saving cover images");
+                            DDLogVerbose(@"saving cover images");
                         }];
                         
                     };
@@ -344,7 +344,7 @@ typedef void (^InitAccountSuccessBlock)();
     
     [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         //
-        NSLog(@"saving all feed items");
+        DDLogVerbose(@"saving all feed items");
         NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
         fetchFeedSuccess(feedItemsArray, nil);
         
@@ -389,7 +389,7 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void) unlikeFeed:(NSString*)graphID {
     
-    NSLog(@"unlikeFeed");
+    DDLogVerbose(@"unlikeFeed");
     
     InitAccountSuccessBlock successBlock = ^{
         NSString * graphIDSuffix = [graphID componentsSeparatedByString:@"_"][1];
@@ -397,11 +397,11 @@ typedef void (^InitAccountSuccessBlock)();
         NSURL * feedURL = [NSURL URLWithString:likeURLString];
         
         SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodDELETE URL:feedURL parameters:nil];
-        NSLog(@"request.URL: %@", request.URL);
+        DDLogVerbose(@"request.URL: %@", request.URL);
         request.account = self.facebookAccount;
         [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-            NSLog(@"responseString: %@", responseString);
+            DDLogVerbose(@"responseString: %@", responseString);
         }];
     };
     
@@ -415,18 +415,18 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void) likeFeed:(NSString*)graphID {
     
-    NSLog(@"likeFeed");
+    DDLogVerbose(@"likeFeed");
     
     InitAccountSuccessBlock successBlock = ^{
         NSString * likeURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", graphID];
         NSURL * feedURL = [NSURL URLWithString:likeURLString];
         
         SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodPOST URL:feedURL parameters:nil];
-        NSLog(@"request.URL: %@", request.URL);
+        DDLogVerbose(@"request.URL: %@", request.URL);
         request.account = self.facebookAccount;
         [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-            NSLog(@"responseString: %@", responseString);
+            DDLogVerbose(@"responseString: %@", responseString);
         }];
     };
     
@@ -445,14 +445,14 @@ typedef void (^InitAccountSuccessBlock)();
 
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/comments", graphID]];
         SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:url parameters:@{@"filter":@"toplevel"}];
-        NSLog(@"request.URL: %@", request.URL);
+        DDLogVerbose(@"request.URL: %@", request.URL);
         request.account = self.facebookAccount;
         
         NSMutableArray * commentsResultsArray = [@[] mutableCopy];
         
         [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-            NSLog(@"responseString: %@", responseString);
+            DDLogVerbose(@"responseString: %@", responseString);
             NSError* responseError;
             NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
                                                                               
@@ -496,12 +496,12 @@ typedef void (^InitAccountSuccessBlock)();
         NSDictionary * params = @{@"message": message};
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/comments", itemGraphID]];
         SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodPOST URL:url parameters:params];
-        NSLog(@"request.URL: %@", request.URL);
+        DDLogVerbose(@"request.URL: %@", request.URL);
         request.account = self.facebookAccount;
         
         [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-            NSLog(@"responseString: %@", responseString);
+            DDLogVerbose(@"responseString: %@", responseString);
             commentSuccessBlock();
         }];
         

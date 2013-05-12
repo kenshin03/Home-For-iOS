@@ -13,6 +13,9 @@
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+
+#import "PSHLogger.h"
+
 #import "AFNetworking.h"
 #import "AFJSONRequestOperation.h"
 #import "PSHConstants.h"

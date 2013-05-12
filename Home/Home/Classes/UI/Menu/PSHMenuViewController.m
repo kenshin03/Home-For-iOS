@@ -10,6 +10,8 @@
 #import "PSHFacebookDataService.h"
 #import "PSHMenuGestureRecognizer.h"
 
+
+#import <AudioToolbox/AudioToolbox.h>
 #import <QuartzCore/QuartzCore.h>
 #import <Social/Social.h>
 
@@ -69,6 +71,10 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 @property (nonatomic) CGRect collapsedButtonsFrame;
 
 
+// sound
+@property (nonatomic) SystemSoundID openMenuItemSoundID;
+
+
 - (IBAction)launchAppButtonTapped:(id)sender;
 
 - (IBAction)statusUpdateButtonTapped:(id)sender;
@@ -80,6 +86,12 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 @end
 
 @implementation PSHMenuViewController
+
+- (void)dealloc {
+    
+	AudioServicesDisposeSystemSoundID (_openMenuItemSoundID);
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -117,6 +129,8 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [self initAppLauncherButton];
     [self initNotificationsButton];
     [self initAppLauncher];
+    [self initAudioServices];
+    
     self.menuExpanded = NO;
 }
 
@@ -124,6 +138,18 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)initAudioServices {
+    
+	NSString * openMenuSoundResPath = [[NSBundle mainBundle] pathForResource:@"menu_item_open" ofType:@"wav"];
+    
+	NSURL * openMenuItemSoundURLRef = [NSURL fileURLWithPath:openMenuSoundResPath isDirectory:NO];
+	AudioServicesCreateSystemSoundID ((__bridge CFURLRef)openMenuItemSoundURLRef, &_openMenuItemSoundID);
+}
+
+- (void)playOpenMenuItemSound {
+    AudioServicesPlaySystemSound(self.openMenuItemSoundID);
 }
 
 
@@ -243,16 +269,20 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
                 
                 // intersects launcher
                 [self animateShowLauncher];
+                [self playOpenMenuItemSound];
 
             } else if (CGRectContainsRect(menuButtonViewFrame, messengerButtonImageViewFrame)){
                 
                 // intersects messenger
                 [self animateShowMessenger];
+                [self playOpenMenuItemSound];
                 
             } else if (CGRectContainsRect(menuButtonViewFrame, notificationsButtonImageViewFrame)){
                 
                 // intersects notification
                 [self animateShowNotifications];
+                [self playOpenMenuItemSound];
+                
             }else{
                 actionsTriggered = NO;
             }
@@ -266,11 +296,11 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
         
         
     }else if (recognizer.state == UIGestureRecognizerStateEnded){
-        NSLog(@"UIGestureRecognizerStateEnded");
+        DDLogVerbose(@"UIGestureRecognizerStateEnded");
         [self animateHideMenuButtons];
         
     } else if (recognizer.state == UIGestureRecognizerStateFailed){
-        NSLog(@"UIGestureRecognizerStateFailed");
+        DDLogVerbose(@"UIGestureRecognizerStateFailed");
         [self animateHideMenuButtons];
     }
 }
@@ -324,14 +354,14 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 
 - (void) animateShowMessenger {
-    NSLog(@"animateShowMessenger");
+    DDLogVerbose(@"animateShowMessenger");
     NSURL *url = [NSURL URLWithString:@"fb-messenger://compose"];
     [[UIApplication sharedApplication] openURL:url];
 }
 
 
 - (void) animateShowNotifications {
-    NSLog(@"animateShowNotifications");
+    DDLogVerbose(@"animateShowNotifications");
     NSURL *url = [NSURL URLWithString:@"fb://notifications"];
     [[UIApplication sharedApplication] openURL:url];
 }

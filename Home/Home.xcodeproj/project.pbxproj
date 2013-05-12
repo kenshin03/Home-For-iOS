@@ -106,6 +106,8 @@
 		8ECDBCA5172A4DC0007778E7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA3172A4DBF007778E7 /* Icon.png */; };
 		8ECDBCA6172A4DC0007778E7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */; };
 		8ECDBCAD172A6AD6007778E7 /* QTouchposeApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */; };
+		8EF0B6E1173F59FC006E8D91 /* menu_item_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */; };
+		8EF0B6E3173F5A07006E8D91 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */; };
 		8EF8F9A61730446400531D07 /* PSHFeedComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F9A51730446400531D07 /* PSHFeedComment.m */; };
 /* End PBXBuildFile section */
 
@@ -230,6 +232,9 @@
 		8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		8ECDBCAB172A6AD6007778E7 /* QTouchposeApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTouchposeApplication.h; sourceTree = "<group>"; };
 		8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTouchposeApplication.m; sourceTree = "<group>"; };
+		8EF0B6DF173F5665006E8D91 /* PSHLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHLogger.h; path = Classes/PSHLogger.h; sourceTree = "<group>"; };
+		8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menu_item_open.wav; sourceTree = "<group>"; };
+		8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8EF8F9A41730446400531D07 /* PSHFeedComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHFeedComment.h; sourceTree = "<group>"; };
 		8EF8F9A51730446400531D07 /* PSHFeedComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHFeedComment.m; sourceTree = "<group>"; };
 		DA567A19A021492194B15157 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF0B6E3173F5A07006E8D91 /* AudioToolbox.framework in Frameworks */,
 				8E403B4A1723CD5700B46570 /* QuartzCore.framework in Frameworks */,
 				8E403B401723CA6700B46570 /* SystemConfiguration.framework in Frameworks */,
 				8E403B3E1723CA6100B46570 /* MobileCoreServices.framework in Frameworks */,
@@ -277,6 +283,7 @@
 		8E403AB51723C89700B46570 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */,
 				8E403B491723CD5700B46570 /* QuartzCore.framework */,
 				8E403B3F1723CA6700B46570 /* SystemConfiguration.framework */,
 				8E403B3D1723CA6100B46570 /* MobileCoreServices.framework */,
@@ -299,6 +306,7 @@
 				8E403AFA1723C97800B46570 /* Externals */,
 				8E403AC51723C89700B46570 /* PSHAppDelegate.h */,
 				8E403AC61723C89700B46570 /* PSHAppDelegate.m */,
+				8EF0B6DF173F5665006E8D91 /* PSHLogger.h */,
 				8E403ABD1723C89700B46570 /* Supporting Files */,
 				8E403B041723C98100B46570 /* Resources */,
 			);
@@ -462,6 +470,7 @@
 		8E403B171723C98100B46570 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */,
 				8E403B181723C98100B46570 /* pop.mp3 */,
 			);
 			path = Sound;
@@ -701,6 +710,7 @@
 				8E8CA275173A172300BEBE00 /* back_button@2x.png in Resources */,
 				8E8CA276173A172300BEBE00 /* menu_apps_icon.png in Resources */,
 				8E8CA277173A172300BEBE00 /* menu_apps_icon@2x.png in Resources */,
+				8EF0B6E1173F59FC006E8D91 /* menu_item_open.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

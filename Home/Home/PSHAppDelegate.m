@@ -8,6 +8,13 @@
 
 #import "PSHAppDelegate.h"
 #import "PSHHomeViewController.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+#import "DDASLLogger.h"
+#import "DDFileLogger.h"
+
+
+int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation PSHAppDelegate
 
@@ -56,6 +63,22 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - set up lumberjack
+
+- (void)setupLogging {
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    [fileLogger setRollingFrequency:60 * 60 * 24];   // roll every day
+    [fileLogger setMaximumFileSize:1024 * 1024 * 2]; // max 2mb file size
+    [fileLogger.logFileManager setMaximumNumberOfLogFiles:7];
+    
+    [DDLog addLogger:fileLogger];
+    
+    DDLogVerbose(@"Logging is setup (\"%@\")", [fileLogger.logFileManager logsDirectory]);
 }
 
 @end
