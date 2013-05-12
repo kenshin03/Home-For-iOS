@@ -30,6 +30,10 @@
 {
     [super viewDidLoad];
     
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self.view.frame = screenBounds;
+    
+    
     PSHCoverFeedViewController * coverFeedViewController = [[PSHCoverFeedViewController alloc] init];
     [self.navigationController pushViewController:coverFeedViewController animated:NO];
     

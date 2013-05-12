@@ -104,6 +104,8 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 - (void)viewDidLoad
 {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self.view.frame = screenBounds;
     
     // single tap
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
@@ -154,14 +156,28 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 
 - (void) initMenuButton {
-    // expanded
-    self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f, 90.0f, 90.0f);
-    self.expandedMessengerButtonFrame = CGRectMake(10.0f, 429.0f, 72.0f, 110.0f);
-    self.expandedLauncherButtonFrame = CGRectMake(124.0f, 306.0f, 72.0f, 110.0f);
-    self.expandedNotificationsButtonFrame = CGRectMake(240.0f, 429.0f, 72.0f, 110.0f);
     
-    // collapsed
-    self.collapsedButtonsFrame = CGRectMake(124.0f, 430.0f, 72.0f, 110.0f);
+    if (self.view.frame.size.height == 480){
+        // expanded
+        self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f-88.0f, 90.0f, 90.0f);
+        self.expandedMessengerButtonFrame = CGRectMake(10.0f, 429.0f-88.0f, 72.0f, 110.0f);
+        self.expandedLauncherButtonFrame = CGRectMake(124.0f, 306.0f-88.0f, 72.0f, 110.0f);
+        self.expandedNotificationsButtonFrame = CGRectMake(240.0f, 429.0f-88.0f, 72.0f, 110.0f);
+        
+        // collapsed
+        self.collapsedButtonsFrame = CGRectMake(124.0f, 430.0f-88.0f, 72.0f, 110.0f);
+        
+    }else{
+        
+        // expanded
+        self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f, 90.0f, 90.0f);
+        self.expandedMessengerButtonFrame = CGRectMake(10.0f, 429.0f, 72.0f, 110.0f);
+        self.expandedLauncherButtonFrame = CGRectMake(124.0f, 306.0f, 72.0f, 110.0f);
+        self.expandedNotificationsButtonFrame = CGRectMake(240.0f, 429.0f, 72.0f, 110.0f);
+        
+        // collapsed
+        self.collapsedButtonsFrame = CGRectMake(124.0f, 430.0f, 72.0f, 110.0f);
+    }
     
     
     self.menuButtonView.tag = kPSHMenuViewControllerMenuButtonViewTag;

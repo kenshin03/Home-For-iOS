@@ -287,7 +287,7 @@
 					</object>
 					<object class="IBUIView" id="439856586">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">260</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="731958162">
 								<reference key="NSNextResponder" ref="439856586"/>
@@ -416,7 +416,6 @@
 								<string key="NSFrame">{{211, 15}, {93, 21}}</string>
 								<reference key="NSSuperview" ref="439856586"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -956,7 +955,6 @@
 						<string key="backgroundImageView">UIImageView</string>
 						<string key="backgroundOverlayImageView">UIView</string>
 						<string key="commentsCountLabel">UILabel</string>
-						<string key="commentsPostingView">UIView</string>
 						<string key="currentTimeLabel">UILabel</string>
 						<string key="currentTimeView">UIView</string>
 						<string key="latestCommentatorsLabel">UILabel</string>
@@ -987,10 +985,6 @@
 						<object class="IBToOneOutletInfo" key="commentsCountLabel">
 							<string key="name">commentsCountLabel</string>
 							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="commentsPostingView">
-							<string key="name">commentsPostingView</string>
-							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="currentTimeLabel">
 							<string key="name">currentTimeLabel</string>

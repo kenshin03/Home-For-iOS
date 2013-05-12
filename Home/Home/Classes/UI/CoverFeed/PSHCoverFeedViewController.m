@@ -44,6 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self.view.frame = screenBounds;
     
     self.navigationController.navigationBarHidden = YES;
     self.navigationItem.hidesBackButton = YES;

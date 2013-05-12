@@ -74,6 +74,10 @@
 {
     [super viewDidLoad];
     
+    
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self.view.frame = screenBounds;
     [self initViews];
     
     if (self.currentIndex == 0){
@@ -181,6 +185,11 @@
         
     }
     
+    CGRect originalFrame = self.actionsPanelView.frame;
+    originalFrame.origin.y = self.view.frame.size.height - self.actionsPanelView.frame.size.height;
+    self.actionsPanelView.frame = originalFrame;
+    
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         if (!self.imageURLString){
@@ -255,6 +264,8 @@
 - (void) animateActionsPanelView {
     
     CGRect originalFrame = self.actionsPanelView.frame;
+    originalFrame.origin.y = self.view.frame.size.height - self.actionsPanelView.frame.size.height;
+    
     CGRect destFrame = originalFrame;
     destFrame.origin.y = self.actionsPanelView.frame.origin.y + self.actionsPanelView.frame.size.height;
     self.actionsPanelView.frame = destFrame;
@@ -545,7 +556,8 @@
 
 - (void) animateShowActionsPanelView {
     CGRect destFrame = self.actionsPanelView.frame;
-    destFrame.origin.y = 507.0f;
+    
+    destFrame.origin.y = destFrame.origin.y - destFrame.size.height;
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
