@@ -41,4 +41,7 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 
 - (void) removeAllCachedFeeds:(Success)successBlock;
 
+- (void) removeAllCachedNotifications:(Success)successBlock;
+
+
 @end

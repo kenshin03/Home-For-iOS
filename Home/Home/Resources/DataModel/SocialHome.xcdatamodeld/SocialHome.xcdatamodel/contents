@@ -20,8 +20,18 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FeedItem" inverseName="source" inverseEntity="FeedItem" syncable="YES"/>
     </entity>
+    <entity name="Notification" representedClassName="Notification" syncable="YES">
+        <attribute name="applicationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="fromGraphID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fromImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedTime" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <elements>
         <element name="FeedItem" positionX="124" positionY="189" width="128" height="208"/>
         <element name="ItemSource" positionX="-47" positionY="231" width="128" height="120"/>
+        <element name="Notification" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>

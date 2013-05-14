@@ -28,7 +28,7 @@ static NSInteger const kPSHMenuViewControllerLaunchInstagramButton = 1119;
 static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 
-@interface PSHMenuViewController ()<UIGestureRecognizerDelegate>
+@interface PSHMenuViewController ()<UIGestureRecognizerDelegate, PSHNotificationsViewControllerDelegate>
 
 // own profile or menu button
 @property (nonatomic, weak) IBOutlet UIView * menuButtonView;
@@ -60,8 +60,9 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 @property (nonatomic, strong) PSHMenuGestureRecognizer * menuGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer * menuTapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer * menuLongGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer * tapGestureRecognizer;
 
-// expanded positions of container frames (including top labels). 
+// expanded positions of container frames (including top labels).
 @property (nonatomic) CGRect expandedMenuButtonFrame;
 @property (nonatomic) CGRect expandedMessengerButtonFrame;
 @property (nonatomic) CGRect expandedNotificationsButtonFrame;
@@ -73,6 +74,10 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 // sound
 @property (nonatomic) SystemSoundID openMenuItemSoundID;
+
+
+// notifications
+@property (nonatomic, strong) UIView * notificationsView;
 
 
 - (IBAction)launchAppButtonTapped:(id)sender;
@@ -108,9 +113,9 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     self.view.frame = screenBounds;
     
     // single tap
-    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-    [tapGestureRecognizer addTarget:self action:@selector(viewTapped:)];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    [self.tapGestureRecognizer addTarget:self action:@selector(viewTapped:)];
+    [self.view addGestureRecognizer:self.tapGestureRecognizer];
     
     // swipe left or right on view
     UISwipeGestureRecognizer * swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] init];
@@ -378,13 +383,33 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 - (void) animateShowNotifications {
     DDLogVerbose(@"animateShowNotifications");
+    
+    [self animateHideLauncher];
+    [self animateHideMenuButtons];
 
-    NSURL *url = [NSURL URLWithString:@"fb://notifications"];
-    [[UIApplication sharedApplication] openURL:url];
-/*
+    self.menuTapGestureRecognizer.enabled = NO;
+    self.menuGestureRecognizer.enabled = NO;
+    self.tapGestureRecognizer.enabled = NO;
+    
     PSHNotificationsViewController * notificationsVC = [[PSHNotificationsViewController alloc] init];
-    [self.navigationController pushViewController:notificationsVC animated:YES];
- */
+    notificationsVC.delegate = self;
+    [self addChildViewController:notificationsVC];
+    [notificationsVC didMoveToParentViewController:self];
+    
+    self.notificationsView = notificationsVC.view;
+    [self.view addSubview:notificationsVC.view];
+    notificationsVC.view.alpha = 0.5f;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        notificationsVC.view.alpha = 1.0f;
+        
+    } completion:^(BOOL finished) {
+        //
+    }];
+    
+    
+
 }
 
 
@@ -593,5 +618,14 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     }
 }
 
+#pragma mark - PSHNotificationsViewControllerDelegate methods
+
+- (void) notificationsViewController:(PSHNotificationsViewController*)vc shouldDismissView:(BOOL)dismiss{
+    
+    [self.notificationsView removeFromSuperview];
+    self.menuTapGestureRecognizer.enabled = YES;
+    self.menuGestureRecognizer.enabled = YES;
+    self.tapGestureRecognizer.enabled = YES;
+}
 
 @end

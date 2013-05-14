@@ -14,7 +14,7 @@
 #import "FeedItem.h"
 #import "ItemSource.h"
 #import "PSHFeedComment.h"
-#import "PSHNotification.h"
+#import "Notification.h"
 
 typedef void (^InitAccountSuccessBlock)();
 
@@ -170,21 +170,24 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void) removeAllCachedFeeds:(Success)successBlock {
     
-//    NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
-//    [feedItemsArray enumerateObjectsUsingBlock:^(FeedItem * feed, NSUInteger idx, BOOL *stop) {
-//        [feed deleteInContext:[NSManagedObjectContext defaultContext]];
-//        DDLogVerbose(@"deleteing feed...");
-//    }];
-    
     [FeedItem MR_truncateAllInContext:[NSManagedObjectContext defaultContext]];
     [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         //
         DDLogVerbose(@"removeAllCachedFeeds");
         successBlock();
     }];
-    
+}
+
+- (void) removeAllCachedNotifications:(Success)successBlock {
+    [Notification MR_truncateAllInContext:[NSManagedObjectContext defaultContext]];
+    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        //
+        DDLogVerbose(@"removeAllCachedNotifications");
+        successBlock();
+    }];
     
 }
+
 
 - (void) fetchFeed:(FetchFeedSuccess)fetchFeedSuccess {
     
@@ -460,11 +463,19 @@ typedef void (^InitAccountSuccessBlock)();
             NSArray * notificationsJSONArray = jsonDict[@"data"];
             [notificationsJSONArray enumerateObjectsUsingBlock:^(NSDictionary * notificationJSONDict, NSUInteger idx, BOOL *stop) {
                 
-                PSHNotification * notification = [[PSHNotification alloc] init];
+                Notification * notification = [Notification createInContext:[NSManagedObjectContext defaultContext]];
                 
-                id fromID = notificationJSONDict[@"from"][@"id"];
-                notification.fromGraphID = fromID;
+                // timestamps
+                NSString * createdTime = notificationJSONDict[@"created_time"];
+                NSString * updatedTime = notificationJSONDict[@"updated_time"];
+                
+
+                notification.fromGraphID = notificationJSONDict[@"from"][@"id"];
                 notification.title = notificationJSONDict[@"title"];
+                notification.applicationName = notificationJSONDict[@"application"][@"name"];
+                notification.link = notificationJSONDict[@"link"];
+                notification.createdTime = [self.dateFormatter dateFromString:createdTime];
+                notification.updatedTime = [self.dateFormatter dateFromString:updatedTime];
                 
                 [notificationResultsArray addObject:notification];
             }];
