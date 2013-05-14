@@ -45,13 +45,13 @@ Working Features
 * Post to your own timeline.
 * Fake launcher that opens pre-installed apps like Facebook Camera, Twitter, Instagram, Mail via URL schemes.
 * SSO to Facebook using iOS 6's SocialFramework.
+* Read Facebook Notifications
+
 
 Missing Features / Known Issues
 ---
-* Notifications
-* Chat Heads
+* Chat Heads and Messaging
 * Comments view not re-sized properly for 3.5 inch screen sizes. 
-* Intermittent crashes
 * Unlike isn't working anymore
 
 
