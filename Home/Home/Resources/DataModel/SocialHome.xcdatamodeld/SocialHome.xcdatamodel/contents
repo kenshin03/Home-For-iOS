@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ChatMessage" representedClassName="ChatMessage" syncable="YES">
+        <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="fromGraphID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageBody" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toGraphID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="FeedItem" representedClassName="FeedItem" syncable="YES">
         <attribute name="commentsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -33,5 +39,6 @@
         <element name="FeedItem" positionX="124" positionY="189" width="128" height="208"/>
         <element name="ItemSource" positionX="-47" positionY="231" width="128" height="120"/>
         <element name="Notification" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="ChatMessage" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

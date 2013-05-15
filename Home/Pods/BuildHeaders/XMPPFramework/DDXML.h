@@ -1,0 +1,1 @@
+../../XMPPFramework/Vendor/KissXML/DDXML.h

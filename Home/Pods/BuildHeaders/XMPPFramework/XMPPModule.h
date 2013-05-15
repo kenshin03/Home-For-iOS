@@ -1,0 +1,1 @@
+../../XMPPFramework/Core/XMPPModule.h

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Accounts/Accounts.h>
 #import "FeedItem.h"
+#import "ChatMessage.h"
 
 typedef void (^Success)();
 typedef void (^FetchFeedSuccess)(NSArray * resultsArray, NSError * error);
@@ -20,6 +22,10 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 @interface PSHFacebookDataService : NSObject
 
 + (PSHFacebookDataService*) sharedService;
+
+@property (nonatomic, strong, readonly) ACAccount * facebookAccount;
+
+
 
 - (void) fetchFeed:(FetchFeedSuccess)fetchFeedSuccess;
 
@@ -42,6 +48,11 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 - (void) removeAllCachedFeeds:(Success)successBlock;
 
 - (void) removeAllCachedNotifications:(Success)successBlock;
+
+
+- (void) addChatMessage:(NSString*)fromID toID:(NSString*)toID message:(NSString*)message success:(Success)successBlock;
+
+
 
 
 @end

@@ -1,0 +1,1 @@
+../../XMPPFramework/Categories/NSNumber+XMPP.h

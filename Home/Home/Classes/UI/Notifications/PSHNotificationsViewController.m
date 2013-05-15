@@ -155,7 +155,7 @@ static dispatch_once_t pullToDismissLock;
 #pragma mark - UITableViewDelegate delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y < -120.0f){
+    if (scrollView.contentOffset.y < -160.0f){
         dispatch_once(&pullToDismissLock, ^{
             
             CGRect destFrame = self.notificationsTableView.frame;

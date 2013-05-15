@@ -1,0 +1,1 @@
+../../XMPPFramework/Core/XMPPStream.h

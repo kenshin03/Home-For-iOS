@@ -233,12 +233,13 @@
 							<object class="IBUIImageView" id="125414758">
 								<reference key="NSNextResponder" ref="353803610"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{90, 90}</string>
+								<string key="NSFrame">{{-12, -12}, {105, 105}}</string>
 								<reference key="NSSuperview" ref="353803610"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="490507988"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -247,18 +248,14 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrame">{{120, 458}, {90, 90}}</string>
+						<string key="NSFrame">{{120, 459}, {80, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="125414758"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace">
-								<int key="NSID">2</int>
-							</object>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="173413245"/>
+						<bool key="IBUIAutoresizesSubviews">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUIView" id="31855915">
@@ -1141,7 +1138,6 @@
 														<string key="NSFrame">{{3, 59}, {57, 20}}</string>
 														<reference key="NSSuperview" ref="999185997"/>
 														<reference key="NSWindow"/>
-														<reference key="NSNextKeyView"/>
 														<string key="NSReuseIdentifierKey">_NS:9</string>
 														<bool key="IBUIOpaque">NO</bool>
 														<bool key="IBUIClipsSubviews">YES</bool>
@@ -1461,9 +1457,9 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="31855915"/>
 							<reference ref="58438530"/>
-							<reference ref="353803610"/>
 							<reference ref="595614184"/>
 							<reference ref="490507988"/>
+							<reference ref="353803610"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -2002,12 +1998,17 @@
 					<string key="className">PSHMenuViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="checkinButtonTapped:">id</string>
 						<string key="launchAppButtonTapped:">id</string>
 						<string key="photosButtonTapped:">id</string>
 						<string key="reloadButtonTapped:">id</string>
 						<string key="statusUpdateButtonTapped:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="checkinButtonTapped:">
+							<string key="name">checkinButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="launchAppButtonTapped:">
 							<string key="name">launchAppButtonTapped:</string>
 							<string key="candidateClassName">id</string>

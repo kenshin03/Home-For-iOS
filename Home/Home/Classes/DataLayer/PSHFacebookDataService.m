@@ -7,7 +7,6 @@
 //
 
 #import "PSHFacebookDataService.h"
-#import <Accounts/Accounts.h>
 #import <Social/Social.h>
 
 #import "PSHConstants.h"
@@ -76,7 +75,7 @@ typedef void (^InitAccountSuccessBlock)();
                                                     //it will always be the last object with SSO
                                                     self.facebookAccount = [accounts lastObject];
                                                     
-                                                    NSDictionary * facebookOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"publish_actions", @"publish_stream", @"manage_notifications"], ACFacebookAudienceKey:ACFacebookAudienceFriends};
+                                                    NSDictionary * facebookOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"publish_actions", @"publish_stream", @"manage_notifications", @"xmpp_login"], ACFacebookAudienceKey:ACFacebookAudienceFriends};
                                                     
                                                     //    ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
                                                     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:facebookOptions
@@ -89,6 +88,8 @@ typedef void (^InitAccountSuccessBlock)();
                                                                                                     DDLogVerbose(@"accounts: %@", accounts);
                                                                                                     //it will always be the last object with SSO
                                                                                                     self.facebookAccount = [accounts lastObject];
+                                                                                                    NSLog(@"self.facebookAccount: %@", self.facebookAccount);
+                                                                                                    
                                                                                                     success();
                                                                                                 } else {
                                                                                                     
@@ -583,6 +584,21 @@ typedef void (^InitAccountSuccessBlock)();
         }
     }];
     return isLikedByMe;
+}
+
+
+- (void) addChatMessage:(NSString*)fromID toID:(NSString*)toID message:(NSString*)message success:(Success)successBlock {
+    
+    ChatMessage * chatMessage = [ChatMessage createInContext:[NSManagedObjectContext defaultContext]];
+    chatMessage.fromGraphID = fromID;
+    chatMessage.toGraphID = toID;
+    chatMessage.messageBody = message;
+    chatMessage.createdDate = [NSDate date];
+    
+    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        successBlock();
+    }];
+    
 }
 
 @end

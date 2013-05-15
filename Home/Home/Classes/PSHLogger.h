@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DDLog.h"
 
-#define NSLog DDLogInfo
+//#define NSLog DDLogInfo
 
 
 

@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		706824E0DC954884A7CD5C23 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA567A19A021492194B15157 /* libPods.a */; };
+		8E3472361742F00A00447FC8 /* PSHFacebookXMPPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3472351742F00A00447FC8 /* PSHFacebookXMPPService.m */; };
+		8E347239174308E900447FC8 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E347238174308E900447FC8 /* ChatMessage.m */; };
+		8E34723E174361AF00447FC8 /* PSHMessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E34723D174361AF00447FC8 /* PSHMessagingViewController.m */; };
+		8E347240174362BA00447FC8 /* PSHMessagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E34723F174362BA00447FC8 /* PSHMessagingViewController.xib */; };
+		8E3472451743633900447FC8 /* PSHChatHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3472441743633900447FC8 /* PSHChatHead.xib */; };
+		8E347248174363B900447FC8 /* PSHChatHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E347247174363B900447FC8 /* PSHChatHead.m */; };
+		8E34724C174365C600447FC8 /* chat_head_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E34724A174365C600447FC8 /* chat_head_overlay.png */; };
+		8E34724D174365C600447FC8 /* chat_head_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E34724B174365C600447FC8 /* chat_head_overlay@2x.png */; };
+		8E3472501743665200447FC8 /* new_message_badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E34724E1743665200447FC8 /* new_message_badge.png */; };
+		8E3472511743665200447FC8 /* new_message_badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E34724F1743665200447FC8 /* new_message_badge@2x.png */; };
+		8E3472541743686A00447FC8 /* chat_head_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3472521743686A00447FC8 /* chat_head_background.png */; };
+		8E3472551743686A00447FC8 /* chat_head_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3472531743686A00447FC8 /* chat_head_background@2x.png */; };
 		8E3CB8141738689A00357671 /* comments_done_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3CB8121738689A00357671 /* comments_done_button.png */; };
 		8E3CB8151738689A00357671 /* comments_done_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3CB8131738689A00357671 /* comments_done_button@2x.png */; };
 		8E3CB8181738693500357671 /* divider_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3CB8161738693500357671 /* divider_line.png */; };
@@ -122,6 +134,22 @@
 
 /* Begin PBXFileReference section */
 		60376E42E2174B98869A4EEB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		8E3472341742F00A00447FC8 /* PSHFacebookXMPPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHFacebookXMPPService.h; sourceTree = "<group>"; };
+		8E3472351742F00A00447FC8 /* PSHFacebookXMPPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHFacebookXMPPService.m; sourceTree = "<group>"; };
+		8E347237174308E900447FC8 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		8E347238174308E900447FC8 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
+		8E34723C174361AF00447FC8 /* PSHMessagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMessagingViewController.h; path = Messaging/PSHMessagingViewController.h; sourceTree = "<group>"; };
+		8E34723D174361AF00447FC8 /* PSHMessagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMessagingViewController.m; path = Messaging/PSHMessagingViewController.m; sourceTree = "<group>"; };
+		8E34723F174362BA00447FC8 /* PSHMessagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHMessagingViewController.xib; path = Messaging/PSHMessagingViewController.xib; sourceTree = "<group>"; };
+		8E3472441743633900447FC8 /* PSHChatHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHChatHead.xib; path = Messaging/PSHChatHead.xib; sourceTree = "<group>"; };
+		8E347246174363B900447FC8 /* PSHChatHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHChatHead.h; path = Messaging/PSHChatHead.h; sourceTree = "<group>"; };
+		8E347247174363B900447FC8 /* PSHChatHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHChatHead.m; path = Messaging/PSHChatHead.m; sourceTree = "<group>"; };
+		8E34724A174365C600447FC8 /* chat_head_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_overlay.png; path = Messaging/chat_head_overlay.png; sourceTree = "<group>"; };
+		8E34724B174365C600447FC8 /* chat_head_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_overlay@2x.png"; path = "Messaging/chat_head_overlay@2x.png"; sourceTree = "<group>"; };
+		8E34724E1743665200447FC8 /* new_message_badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = new_message_badge.png; path = Messaging/new_message_badge.png; sourceTree = "<group>"; };
+		8E34724F1743665200447FC8 /* new_message_badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "new_message_badge@2x.png"; path = "Messaging/new_message_badge@2x.png"; sourceTree = "<group>"; };
+		8E3472521743686A00447FC8 /* chat_head_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_background.png; path = Messaging/chat_head_background.png; sourceTree = "<group>"; };
+		8E3472531743686A00447FC8 /* chat_head_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_background@2x.png"; path = "Messaging/chat_head_background@2x.png"; sourceTree = "<group>"; };
 		8E3CB8121738689A00357671 /* comments_done_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments_done_button.png; sourceTree = "<group>"; };
 		8E3CB8131738689A00357671 /* comments_done_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_done_button@2x.png"; sourceTree = "<group>"; };
 		8E3CB8161738693500357671 /* divider_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider_line.png; sourceTree = "<group>"; };
@@ -283,6 +311,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E34723A174358B100447FC8 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				8E34723C174361AF00447FC8 /* PSHMessagingViewController.h */,
+				8E34723D174361AF00447FC8 /* PSHMessagingViewController.m */,
+				8E347246174363B900447FC8 /* PSHChatHead.h */,
+				8E347247174363B900447FC8 /* PSHChatHead.m */,
+			);
+			name = Messaging;
+			sourceTree = "<group>";
+		};
+		8E34723B1743618E00447FC8 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				8E34723F174362BA00447FC8 /* PSHMessagingViewController.xib */,
+				8E3472441743633900447FC8 /* PSHChatHead.xib */,
+			);
+			name = Messaging;
+			sourceTree = "<group>";
+		};
+		8E347249174365BE00447FC8 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				8E3472521743686A00447FC8 /* chat_head_background.png */,
+				8E3472531743686A00447FC8 /* chat_head_background@2x.png */,
+				8E34724E1743665200447FC8 /* new_message_badge.png */,
+				8E34724F1743665200447FC8 /* new_message_badge@2x.png */,
+				8E34724A174365C600447FC8 /* chat_head_overlay.png */,
+				8E34724B174365C600447FC8 /* chat_head_overlay@2x.png */,
+			);
+			name = Messaging;
+			sourceTree = "<group>";
+		};
 		8E403AAA1723C89700B46570 = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +426,8 @@
 			children = (
 				8E403AD51723C96400B46570 /* PSHFacebookDataService.h */,
 				8E403AD61723C96400B46570 /* PSHFacebookDataService.m */,
+				8E3472341742F00A00447FC8 /* PSHFacebookXMPPService.h */,
+				8E3472351742F00A00447FC8 /* PSHFacebookXMPPService.m */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -372,6 +435,8 @@
 		8E403AD71723C96400B46570 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				8E347237174308E900447FC8 /* ChatMessage.h */,
+				8E347238174308E900447FC8 /* ChatMessage.m */,
 				8EF5BF7A174219A70055EF0B /* Notification.h */,
 				8EF5BF7B174219A70055EF0B /* Notification.m */,
 				8E8CA2571739B49400BEBE00 /* FeedItem.h */,
@@ -387,6 +452,7 @@
 		8E403AE01723C96400B46570 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8E34723A174358B100447FC8 /* Messaging */,
 				8E936B441740491700342415 /* Notifications */,
 				8E403AE11723C96400B46570 /* Comments */,
 				8E403AE61723C96400B46570 /* CoverFeed */,
@@ -456,6 +522,7 @@
 		8E403B091723C98100B46570 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E347249174365BE00447FC8 /* Messaging */,
 				8EF5BFD117421E8E0055EF0B /* Notifications */,
 				8ECDBCA3172A4DBF007778E7 /* Icon.png */,
 				8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */,
@@ -504,6 +571,7 @@
 		8E403B191723C98100B46570 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				8E34723B1743618E00447FC8 /* Messaging */,
 				8E936B4B1740D24D00342415 /* Notifications */,
 				8E403B1A1723C98100B46570 /* Comments */,
 				8E403B1D1723C98100B46570 /* CoverFeed */,
@@ -774,6 +842,14 @@
 				8EF5BFD517421E8E0055EF0B /* cell_gradient@2x.png in Resources */,
 				8EF5BFD8174230950055EF0B /* refresh_button.png in Resources */,
 				8EF5BFD9174230950055EF0B /* refresh_button@2x.png in Resources */,
+				8E347240174362BA00447FC8 /* PSHMessagingViewController.xib in Resources */,
+				8E3472451743633900447FC8 /* PSHChatHead.xib in Resources */,
+				8E34724C174365C600447FC8 /* chat_head_overlay.png in Resources */,
+				8E34724D174365C600447FC8 /* chat_head_overlay@2x.png in Resources */,
+				8E3472501743665200447FC8 /* new_message_badge.png in Resources */,
+				8E3472511743665200447FC8 /* new_message_badge@2x.png in Resources */,
+				8E3472541743686A00447FC8 /* chat_head_background.png in Resources */,
+				8E3472551743686A00447FC8 /* chat_head_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +913,10 @@
 				8E936B471740493700342415 /* PSHNotificationsViewController.m in Sources */,
 				8EF5BF76174210F30055EF0B /* PSHNotificationsTableViewCell.m in Sources */,
 				8EF5BF7C174219A70055EF0B /* Notification.m in Sources */,
+				8E3472361742F00A00447FC8 /* PSHFacebookXMPPService.m in Sources */,
+				8E347239174308E900447FC8 /* ChatMessage.m in Sources */,
+				8E34723E174361AF00447FC8 /* PSHMessagingViewController.m in Sources */,
+				8E347248174363B900447FC8 /* PSHChatHead.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

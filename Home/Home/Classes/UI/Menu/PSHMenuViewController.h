@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 static NSInteger const kPSHMenuViewControllerMenuButtonViewTag = 1111;
+static NSInteger const kPSHMenuViewControllerMenuButtonProfileImageViewTag = 2222;
 
 @protocol PSHMenuViewControllerDelegate;
 

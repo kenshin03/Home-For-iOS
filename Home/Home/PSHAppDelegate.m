@@ -13,8 +13,13 @@
 #import "DDASLLogger.h"
 #import "DDFileLogger.h"
 
-
 int ddLogLevel = LOG_LEVEL_VERBOSE;
+
+@interface PSHAppDelegate()
+
+
+@end
+
 
 @implementation PSHAppDelegate
 
@@ -25,7 +30,6 @@ int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     PSHHomeViewController * vc = [[PSHHomeViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:vc];
-    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -80,5 +84,9 @@ int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     DDLogVerbose(@"Logging is setup (\"%@\")", [fileLogger.logFileManager logsDirectory]);
 }
+
+#pragma mark - XMPP Service
+
+
 
 @end

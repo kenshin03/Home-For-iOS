@@ -1,0 +1,1 @@
+../../XMPPFramework/Extensions/CoreDataStorage/XMPPCoreDataStorageProtected.h

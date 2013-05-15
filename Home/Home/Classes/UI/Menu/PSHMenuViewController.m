@@ -10,6 +10,8 @@
 #import "PSHFacebookDataService.h"
 #import "PSHMenuGestureRecognizer.h"
 #import "PSHNotificationsViewController.h"
+#import "PSHMessagingViewController.h"
+#import "PSHFacebookXMPPService.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <QuartzCore/QuartzCore.h>
@@ -138,6 +140,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     [self initAppLauncher];
     [self initAudioServices];
     
+    
     self.menuExpanded = NO;
 }
 
@@ -164,7 +167,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     
     if (self.view.frame.size.height == 480){
         // expanded
-        self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f-88.0f, 90.0f, 90.0f);
+        self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f-88.0f, 80.0f, 80.0f);
         self.expandedMessengerButtonFrame = CGRectMake(10.0f, 429.0f-88.0f, 72.0f, 110.0f);
         self.expandedLauncherButtonFrame = CGRectMake(124.0f, 306.0f-88.0f, 72.0f, 110.0f);
         self.expandedNotificationsButtonFrame = CGRectMake(240.0f, 429.0f-88.0f, 72.0f, 110.0f);
@@ -175,7 +178,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     }else{
         
         // expanded
-        self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f, 90.0f, 90.0f);
+        self.expandedMenuButtonFrame = CGRectMake(120.0f, 458.0f, 80.0f, 80.0f);
         self.expandedMessengerButtonFrame = CGRectMake(10.0f, 429.0f, 72.0f, 110.0f);
         self.expandedLauncherButtonFrame = CGRectMake(124.0f, 306.0f, 72.0f, 110.0f);
         self.expandedNotificationsButtonFrame = CGRectMake(240.0f, 429.0f, 72.0f, 110.0f);
@@ -186,7 +189,12 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     
     
     self.menuButtonView.tag = kPSHMenuViewControllerMenuButtonViewTag;
-    self.menuButtonView.backgroundColor = [UIColor clearColor];
+    self.menuButtonView.backgroundColor = [UIColor grayColor];
+    self.menuButtonView.clipsToBounds = YES;
+    self.menuButtonView.autoresizesSubviews = YES;
+    [self.menuButtonView.layer setCornerRadius:40.0f];
+    [self.menuButtonView.layer setMasksToBounds:YES];
+    
 
     FetchProfileSuccess fetchProfileSuccess =^(NSString * graphID, NSString * avartarImageURL, NSError * error){
         self.ownGraphID = graphID;
@@ -205,13 +213,9 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 UIImageView * profileImageView = [[UIImageView alloc] initWithImage:profileImage];
-                profileImageView.contentMode = UIViewContentModeScaleToFill;
-                profileImageView.frame = CGRectMake(12.0f, 12.0f, 65.0f, 65.0f);
-                profileImageView.clipsToBounds = NO;
-                
-                [profileImageView.layer setCornerRadius:30.0f];
-                [profileImageView.layer setMasksToBounds:YES];
-                
+                profileImageView.contentMode = UIViewContentModeScaleAspectFill;
+                profileImageView.tag = kPSHMenuViewControllerMenuButtonProfileImageViewTag;
+                profileImageView.frame = CGRectMake(-10.0f, -10.0f, 100.0f, 100.0f);
                 [self.menuButtonView insertSubview:profileImageView belowSubview:self.menuButtonImageView];
                 
                 [tempImageView removeFromSuperview];
@@ -289,20 +293,20 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
             if (CGRectContainsRect(menuButtonViewFrame, launcherButtonImageViewFrame)){
                 
                 // intersects launcher
-                [self animateShowLauncher];
                 [self playOpenMenuItemSound];
+                [self animateShowLauncher];
 
             } else if (CGRectContainsRect(menuButtonViewFrame, messengerButtonImageViewFrame)){
                 
                 // intersects messenger
-                [self animateShowMessenger];
                 [self playOpenMenuItemSound];
+                [self animateShowMessenger];
                 
             } else if (CGRectContainsRect(menuButtonViewFrame, notificationsButtonImageViewFrame)){
                 
                 // intersects notification
-                [self animateShowNotifications];
                 [self playOpenMenuItemSound];
+                [self animateShowNotifications];
                 
             }else{
                 actionsTriggered = NO;
@@ -336,6 +340,11 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 }
 
 - (void) animateShowLauncher {
+    
+    
+//    PSHFacebookXMPPService * xmppService = [PSHFacebookXMPPService sharedService];
+//    NSLog(@"xmppService: %@", xmppService);
+    
     [self.view bringSubviewToFront:self.launcherMenuView];
     
     CGRect origLauncherMenuRect = self.launcherMenuView.frame;
@@ -376,8 +385,17 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
 
 - (void) animateShowMessenger {
     DDLogVerbose(@"animateShowMessenger");
+    
+//    PSHFacebookXMPPService * xmppService = [PSHFacebookXMPPService sharedService];
+//    NSLog(@"xmppService: %@", xmppService);
     NSURL *url = [NSURL URLWithString:@"fb-messenger://compose"];
     [[UIApplication sharedApplication] openURL:url];
+    
+    
+//    PSHMessagingViewController * messagingViewController = [[PSHMessagingViewController alloc] init];
+//    [self addChildViewController:messagingViewController];
+//    [messagingViewController didMoveToParentViewController:self];
+//    [self.view addSubview:messagingViewController.view];
 }
 
 

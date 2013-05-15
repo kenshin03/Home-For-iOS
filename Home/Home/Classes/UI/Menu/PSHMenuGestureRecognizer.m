@@ -13,6 +13,8 @@
 @interface PSHMenuGestureRecognizer()
 
 @property (nonatomic, strong) UIView * menuViewBeingMoved;
+@property (nonatomic) CGRect originalRect;
+@property (nonatomic) CGRect originalProfileImageRect;
 
 @end
 
@@ -24,9 +26,32 @@
     CGPoint touchPoint = [touch locationInView:self.view];
     
     UIView * menuView = [self.view viewWithTag:kPSHMenuViewControllerMenuButtonViewTag];
+    UIView * menuProfileImageView = [self.view viewWithTag:kPSHMenuViewControllerMenuButtonProfileImageViewTag];
     if (CGRectContainsPoint(menuView.frame, touchPoint)){
         [self setState:UIGestureRecognizerStateBegan];
         self.menuViewBeingMoved = menuView;
+        self.originalRect = self.menuViewBeingMoved.frame;
+        self.originalProfileImageRect = menuProfileImageView.frame;
+        
+        CGRect destRect = self.menuViewBeingMoved.frame;
+        destRect.origin.x += -5.0f;
+        destRect.origin.y += -5.0f;
+        destRect.size.height = destRect.size.height * 1.1;
+        destRect.size.width = destRect.size.width * 1.1;
+        
+        CGRect profileImageDestRect = menuProfileImageView.frame;
+        profileImageDestRect.origin.x += 5.0f;
+        profileImageDestRect.origin.y += 5.0f;
+        
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            self.menuViewBeingMoved.frame = destRect;
+            menuProfileImageView.frame = profileImageDestRect;
+            
+        } completion:^(BOOL finished) {
+            //
+        }];
+        
         
     }else{
         [self setState:UIGestureRecognizerStateFailed];
@@ -53,11 +78,24 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self setState:UIGestureRecognizerStateEnded];
-    
+    UIView * menuProfileImageView = [self.view viewWithTag:kPSHMenuViewControllerMenuButtonProfileImageViewTag];
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.menuViewBeingMoved.frame = self.originalRect;
+        menuProfileImageView.frame = self.originalProfileImageRect;
+    } completion:^(BOOL finished) {
+        //
+    }];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [self setState:UIGestureRecognizerStateEnded];
+    UIView * menuProfileImageView = [self.view viewWithTag:kPSHMenuViewControllerMenuButtonProfileImageViewTag];
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.menuViewBeingMoved.frame = self.originalRect;
+        menuProfileImageView.frame = self.originalProfileImageRect;
+    } completion:^(BOOL finished) {
+        //
+    }];
     
 }
 
