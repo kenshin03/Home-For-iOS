@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+static NSInteger const kPSHMessagingViewControllerChatHeadTag = 1111;
+
+
 @interface PSHMessagingViewController : UIViewController
+
 
 @end

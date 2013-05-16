@@ -173,12 +173,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "390295527.66055"
+         timestampString = "390356355.419044"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
          landmarkName = "-initChatHeads"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
+         timestampString = "390356355.419044"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-initChatHeads"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/Messaging/PSHMessagingGestureRecognizer.m"
+         timestampString = "390378318.786717"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-touchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

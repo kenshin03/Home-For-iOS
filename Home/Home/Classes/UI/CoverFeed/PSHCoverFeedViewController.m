@@ -10,6 +10,7 @@
 #import "PSHFacebookDataService.h"
 #import "PSHCoverFeedPageViewController.h"
 #import "PSHMenuViewController.h"
+#import "PSHMessagingViewController.h"
 #import "FeedItem.h"
 #import "ItemSource.h"
 
@@ -265,6 +266,16 @@
 
 
 #pragma mark - PSHMenuViewControllerDelegate methods
+
+- (void)menuViewController:(PSHMenuViewController*)vc messagesButtonTapped:(BOOL)tapped {
+    [self animateHideMenu];
+    
+    PSHMessagingViewController * messagingViewController = [[PSHMessagingViewController alloc] init];
+    [self addChildViewController:messagingViewController];
+    [messagingViewController didMoveToParentViewController:self];
+    [self.view addSubview:messagingViewController.view];
+    
+}
 
 - (void)menuViewController:(PSHMenuViewController*)vc viewSwipedToLeft:(BOOL)tapped {
      [self animateHideMenu];

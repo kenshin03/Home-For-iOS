@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *badgeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *badgeLabel;
 
+-(void)expandChatHead;
+-(void)restoreChatHead;
+
 @end

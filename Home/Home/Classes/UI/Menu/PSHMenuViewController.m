@@ -10,7 +10,7 @@
 #import "PSHFacebookDataService.h"
 #import "PSHMenuGestureRecognizer.h"
 #import "PSHNotificationsViewController.h"
-#import "PSHMessagingViewController.h"
+
 #import "PSHFacebookXMPPService.h"
 
 #import <AudioToolbox/AudioToolbox.h>
@@ -391,11 +391,9 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     NSURL *url = [NSURL URLWithString:@"fb-messenger://compose"];
     [[UIApplication sharedApplication] openURL:url];
     
-    
-//    PSHMessagingViewController * messagingViewController = [[PSHMessagingViewController alloc] init];
-//    [self addChildViewController:messagingViewController];
-//    [messagingViewController didMoveToParentViewController:self];
-//    [self.view addSubview:messagingViewController.view];
+//    if ([self.delegate respondsToSelector:@selector(menuViewController:messagesButtonTapped:)]){
+//        [self.delegate menuViewController:self messagesButtonTapped:YES];
+//    }
 }
 
 

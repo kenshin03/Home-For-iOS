@@ -25,6 +25,7 @@ static NSInteger const kPSHMenuViewControllerMenuButtonProfileImageViewTag = 222
 
 @protocol PSHMenuViewControllerDelegate <NSObject>
 
+- (void)menuViewController:(PSHMenuViewController*)vc messagesButtonTapped:(BOOL)tapped;
 - (void)menuViewController:(PSHMenuViewController*)vc menuViewTapped:(BOOL)tapped;
 - (void)menuViewController:(PSHMenuViewController*)vc reloadButtonTapped:(BOOL)tapped;
 

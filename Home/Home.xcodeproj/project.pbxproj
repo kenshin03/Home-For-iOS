@@ -78,6 +78,7 @@
 		8E7C60DC1725CE71004EAD40 /* menu_notifications.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60DA1725CE71004EAD40 /* menu_notifications.png */; };
 		8E7C60DD1725CE71004EAD40 /* menu_notifications@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60DB1725CE71004EAD40 /* menu_notifications@2x.png */; };
 		8E7C60E01725DA38004EAD40 /* PSHMenuGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */; };
+		8E8C79121744509700924BE5 /* PSHMessagingGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C79111744509700924BE5 /* PSHMessagingGestureRecognizer.m */; };
 		8E8CA2551739B34D00BEBE00 /* coverfeed-comments-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8CA2531739B34D00BEBE00 /* coverfeed-comments-button.png */; };
 		8E8CA2561739B34D00BEBE00 /* coverfeed-comments-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8CA2541739B34D00BEBE00 /* coverfeed-comments-button@2x.png */; };
 		8E8CA2591739B49400BEBE00 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CA2581739B49400BEBE00 /* FeedItem.m */; };
@@ -227,6 +228,8 @@
 		8E7C60DE1725DA38004EAD40 /* PSHMenuGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMenuGestureRecognizer.h; path = Menu/PSHMenuGestureRecognizer.h; sourceTree = "<group>"; };
 		8E7C60DF1725DA38004EAD40 /* PSHMenuGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMenuGestureRecognizer.m; path = Menu/PSHMenuGestureRecognizer.m; sourceTree = "<group>"; };
 		8E7C60EF17270702004EAD40 /* Home.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.entitlements; sourceTree = "<group>"; };
+		8E8C79101744509700924BE5 /* PSHMessagingGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMessagingGestureRecognizer.h; path = Messaging/PSHMessagingGestureRecognizer.h; sourceTree = "<group>"; };
+		8E8C79111744509700924BE5 /* PSHMessagingGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMessagingGestureRecognizer.m; path = Messaging/PSHMessagingGestureRecognizer.m; sourceTree = "<group>"; };
 		8E8CA2531739B34D00BEBE00 /* coverfeed-comments-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-comments-button.png"; sourceTree = "<group>"; };
 		8E8CA2541739B34D00BEBE00 /* coverfeed-comments-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-comments-button@2x.png"; sourceTree = "<group>"; };
 		8E8CA2571739B49400BEBE00 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
@@ -318,6 +321,8 @@
 				8E34723D174361AF00447FC8 /* PSHMessagingViewController.m */,
 				8E347246174363B900447FC8 /* PSHChatHead.h */,
 				8E347247174363B900447FC8 /* PSHChatHead.m */,
+				8E8C79101744509700924BE5 /* PSHMessagingGestureRecognizer.h */,
+				8E8C79111744509700924BE5 /* PSHMessagingGestureRecognizer.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 				8E347239174308E900447FC8 /* ChatMessage.m in Sources */,
 				8E34723E174361AF00447FC8 /* PSHMessagingViewController.m in Sources */,
 				8E347248174363B900447FC8 /* PSHChatHead.m in Sources */,
+				8E8C79121744509700924BE5 /* PSHMessagingGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
