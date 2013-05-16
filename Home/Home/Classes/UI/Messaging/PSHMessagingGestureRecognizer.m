@@ -35,6 +35,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch * touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self.view];
+    [self setState:UIGestureRecognizerStateBegan];
     
     PSHChatHead * chatHeadView = (PSHChatHead*)[self.view viewWithTag:kPSHMessagingViewControllerChatHeadTag];
     CGRect viewFrame = self.view.frame;

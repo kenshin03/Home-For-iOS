@@ -121,6 +121,12 @@
 		8ECDBCA5172A4DC0007778E7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA3172A4DBF007778E7 /* Icon.png */; };
 		8ECDBCA6172A4DC0007778E7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */; };
 		8ECDBCAD172A6AD6007778E7 /* QTouchposeApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */; };
+		8EE8EF8117457CAB009F5109 /* chat_head_close_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF7D17457CAB009F5109 /* chat_head_close_background.png */; };
+		8EE8EF8217457CAB009F5109 /* chat_head_close_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF7E17457CAB009F5109 /* chat_head_close_background@2x.png */; };
+		8EE8EF8317457CAB009F5109 /* chat_head_close_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF7F17457CAB009F5109 /* chat_head_close_x.png */; };
+		8EE8EF8417457CAB009F5109 /* chat_head_close_x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF8017457CAB009F5109 /* chat_head_close_x@2x.png */; };
+		8EE8EF8617457CE8009F5109 /* PSHChatHeadDismissButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */; };
+		8EE8EF8917457F34009F5109 /* PSHChatHeadDismissButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8EF8817457F34009F5109 /* PSHChatHeadDismissButton.m */; };
 		8EF0B6E1173F59FC006E8D91 /* menu_item_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */; };
 		8EF0B6E3173F5A07006E8D91 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */; };
 		8EF5BF73174210C60055EF0B /* PSHNotificationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF5BF72174210C60055EF0B /* PSHNotificationsTableViewCell.xib */; };
@@ -275,6 +281,13 @@
 		8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		8ECDBCAB172A6AD6007778E7 /* QTouchposeApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTouchposeApplication.h; sourceTree = "<group>"; };
 		8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTouchposeApplication.m; sourceTree = "<group>"; };
+		8EE8EF7D17457CAB009F5109 /* chat_head_close_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_close_background.png; path = Messaging/chat_head_close_background.png; sourceTree = "<group>"; };
+		8EE8EF7E17457CAB009F5109 /* chat_head_close_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_close_background@2x.png"; path = "Messaging/chat_head_close_background@2x.png"; sourceTree = "<group>"; };
+		8EE8EF7F17457CAB009F5109 /* chat_head_close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_close_x.png; path = Messaging/chat_head_close_x.png; sourceTree = "<group>"; };
+		8EE8EF8017457CAB009F5109 /* chat_head_close_x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_close_x@2x.png"; path = "Messaging/chat_head_close_x@2x.png"; sourceTree = "<group>"; };
+		8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHChatHeadDismissButton.xib; path = Messaging/PSHChatHeadDismissButton.xib; sourceTree = "<group>"; };
+		8EE8EF8717457F34009F5109 /* PSHChatHeadDismissButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHChatHeadDismissButton.h; path = Messaging/PSHChatHeadDismissButton.h; sourceTree = "<group>"; };
+		8EE8EF8817457F34009F5109 /* PSHChatHeadDismissButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHChatHeadDismissButton.m; path = Messaging/PSHChatHeadDismissButton.m; sourceTree = "<group>"; };
 		8EF0B6DF173F5665006E8D91 /* PSHLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHLogger.h; path = Classes/PSHLogger.h; sourceTree = "<group>"; };
 		8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menu_item_open.wav; sourceTree = "<group>"; };
 		8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -323,6 +336,8 @@
 				8E347247174363B900447FC8 /* PSHChatHead.m */,
 				8E8C79101744509700924BE5 /* PSHMessagingGestureRecognizer.h */,
 				8E8C79111744509700924BE5 /* PSHMessagingGestureRecognizer.m */,
+				8EE8EF8717457F34009F5109 /* PSHChatHeadDismissButton.h */,
+				8EE8EF8817457F34009F5109 /* PSHChatHeadDismissButton.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -332,6 +347,7 @@
 			children = (
 				8E34723F174362BA00447FC8 /* PSHMessagingViewController.xib */,
 				8E3472441743633900447FC8 /* PSHChatHead.xib */,
+				8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -339,6 +355,10 @@
 		8E347249174365BE00447FC8 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
+				8EE8EF7D17457CAB009F5109 /* chat_head_close_background.png */,
+				8EE8EF7E17457CAB009F5109 /* chat_head_close_background@2x.png */,
+				8EE8EF7F17457CAB009F5109 /* chat_head_close_x.png */,
+				8EE8EF8017457CAB009F5109 /* chat_head_close_x@2x.png */,
 				8E3472521743686A00447FC8 /* chat_head_background.png */,
 				8E3472531743686A00447FC8 /* chat_head_background@2x.png */,
 				8E34724E1743665200447FC8 /* new_message_badge.png */,
@@ -855,6 +875,11 @@
 				8E3472511743665200447FC8 /* new_message_badge@2x.png in Resources */,
 				8E3472541743686A00447FC8 /* chat_head_background.png in Resources */,
 				8E3472551743686A00447FC8 /* chat_head_background@2x.png in Resources */,
+				8EE8EF8117457CAB009F5109 /* chat_head_close_background.png in Resources */,
+				8EE8EF8217457CAB009F5109 /* chat_head_close_background@2x.png in Resources */,
+				8EE8EF8317457CAB009F5109 /* chat_head_close_x.png in Resources */,
+				8EE8EF8417457CAB009F5109 /* chat_head_close_x@2x.png in Resources */,
+				8EE8EF8617457CE8009F5109 /* PSHChatHeadDismissButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +948,7 @@
 				8E34723E174361AF00447FC8 /* PSHMessagingViewController.m in Sources */,
 				8E347248174363B900447FC8 /* PSHChatHead.m in Sources */,
 				8E8C79121744509700924BE5 /* PSHMessagingGestureRecognizer.m in Sources */,
+				8EE8EF8917457F34009F5109 /* PSHChatHeadDismissButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

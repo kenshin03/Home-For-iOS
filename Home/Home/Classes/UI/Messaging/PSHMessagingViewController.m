@@ -10,11 +10,16 @@
 #import "PSHMessagingGestureRecognizer.h"
 #import "PSHFacebookDataService.h"
 #import "PSHFacebookXMPPService.h"
+#import "PSHChatHeadDismissButton.h"
 #import "PSHChatHead.h"
 #import "ChatMessage.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface PSHMessagingViewController ()
+@interface PSHMessagingViewController ()<UIGestureRecognizerDelegate>
+
+@property (nonatomic) BOOL isDismissButtonShown;
+@property (nonatomic, weak) PSHChatHeadDismissButton * dismissButton;
+@property (nonatomic) CGRect dismissButtonBackgroundImageOriginalRect;
 
 @end
 
@@ -33,10 +38,18 @@
 {
     [super viewDidLoad];
     [self initChatHeads];
+    [self initDismissButton];
+    self.isDismissButtonShown = NO;
     
     PSHMessagingGestureRecognizer * recognizer = [[PSHMessagingGestureRecognizer alloc] init];
+    recognizer.delegate = self;
+    [recognizer addTarget:self action:@selector(menuGestureRecognizerAction:)];
     [self.view addGestureRecognizer:recognizer];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self removeObserver:self forKeyPath:@"frame.origin.x"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +59,15 @@
 }
 
 #pragma mark - UI elements
+
+- (void) initDismissButton {
+    PSHChatHeadDismissButton * dismissButton = [[PSHChatHeadDismissButton alloc] init];
+    dismissButton.frame = CGRectMake(100.0f, self.view.frame.size.height, dismissButton.frame.size.width, dismissButton.frame.size.height);
+    [self.view addSubview:dismissButton];
+    
+    self.dismissButton = dismissButton;
+    self.dismissButtonBackgroundImageOriginalRect = dismissButton.backgroundImageView.frame;
+}
 
 - (void) initChatHeads {
     
@@ -60,6 +82,7 @@
         chatHead.badgeLabel.hidden = YES;
         chatHead.badgeImageView.hidden = YES;
         chatHead.tag = kPSHMessagingViewControllerChatHeadTag;
+        [chatHead addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
         
         NSString * fromGraphID = firstMessage.fromGraphID;
         
@@ -110,11 +133,110 @@
                 });
             }];
         });
+    }
+}
+
+#pragma mark - UIGestureRecognizer
+
+- (void) menuGestureRecognizerAction:(PSHMessagingGestureRecognizer*)recognizer {
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan){
+        
+        if (!self.isDismissButtonShown){
+            [self animateShowDismissButton];
+        }
+        
+    } else if (recognizer.state == UIGestureRecognizerStateChanged){
+        
+        if (!self.isDismissButtonShown){
+            [self animateShowDismissButton];
+        }
         
         
+    }else if (recognizer.state == UIGestureRecognizerStateEnded){
+        
+        if (self.isDismissButtonShown){
+            [self animateHideDismissButton];
+        }
+        
+    } else if (recognizer.state == UIGestureRecognizerStateFailed){
+        
+        if (self.isDismissButtonShown){
+            [self animateHideDismissButton];
+        }
         
     }
+}
+
+#pragma mark - Dismiss Button handling
+
+- (void) animateShowDismissButton {
     
+    self.isDismissButtonShown = YES;
+    CGRect destFrame = self.dismissButton.frame;
+    destFrame.origin.y = self.view.frame.size.height - self.dismissButton.frame.size.height*1.2;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.dismissButton.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        //
+    }];
+    
+}
+
+- (void) animateHideDismissButton {
+    
+    CGRect destFrame = self.dismissButton.frame;
+    destFrame.origin.y = self.view.frame.size.height;
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.dismissButton.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        //
+        self.isDismissButtonShown = NO;
+    }];
+    
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    CGRect newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
+    
+    float diffXFromDismissButton = abs(newFrame.origin.x - self.dismissButton.frame.origin.x);
+    float diffYFromDismissButton = abs(newFrame.origin.y - self.dismissButton.frame.origin.y);
+    float diffTotal = diffXFromDismissButton + diffYFromDismissButton;
+    
+    // distance from dismiss button small than 300px, start taking notice
+    float invertDiff = 300 - diffTotal;
+    double proximity = (0) + (invertDiff-0.0f)*(10-(0))/(30.0f-0.0f);
+    
+    if ((proximity > 0.0f) && (proximity < 30.0f)){
+        
+        double widthHeightGrowth = (0) + (proximity-0.0f)*(35-(0))/(30.0f-0.0f);
+//        NSLog(@"widthHeightGrowth: %f", widthHeightGrowth);
+        
+        double posAdjustment = (0) + (proximity-0.0f)*(17-(0))/(30.0f-0.0f);
+//        NSLog(@"posAdjustment: %f", posAdjustment);
+        
+        CGRect dismissDestFrame = self.dismissButton.backgroundImageView.frame;
+        dismissDestFrame.origin.x = self.dismissButtonBackgroundImageOriginalRect.origin.x - posAdjustment;
+        dismissDestFrame.origin.y = self.dismissButtonBackgroundImageOriginalRect.origin.y - posAdjustment;
+        dismissDestFrame.size.width = self.dismissButtonBackgroundImageOriginalRect.size.width + widthHeightGrowth;
+        dismissDestFrame.size.height = self.dismissButtonBackgroundImageOriginalRect.size.height + widthHeightGrowth;
+        
+        NSLog(@"dismissDestFrame: %@", NSStringFromCGRect(dismissDestFrame));
+        self.dismissButton.backgroundImageView.frame = dismissDestFrame;
+    }else if (proximity < 0.0f){
+        self.dismissButton.backgroundImageView.frame = self.dismissButtonBackgroundImageOriginalRect;
+    }
+    
+
 }
 
 

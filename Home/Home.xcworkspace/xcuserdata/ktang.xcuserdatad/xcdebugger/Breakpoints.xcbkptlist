@@ -173,24 +173,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "390356355.419044"
+         timestampString = "390440861.485297"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "-initChatHeads"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "390356355.419044"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-initChatHeads"
          landmarkType = "5">
       </FileBreakpoint>
@@ -199,12 +186,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingGestureRecognizer.m"
-         timestampString = "390378318.786717"
+         timestampString = "390435837.687546"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "-touchesBegan:withEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
+         timestampString = "390440861.485297"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
+         landmarkName = "-menuGestureRecognizerAction:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
