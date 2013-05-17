@@ -10,8 +10,18 @@
 
 static NSInteger const kPSHMessagingViewControllerChatHeadTag = 1111;
 
+@protocol PSHMessagingViewControllerDelegate;
+
 
 @interface PSHMessagingViewController : UIViewController
 
+@property (nonatomic, weak) id<PSHMessagingViewControllerDelegate> delegate;
+
+@end
+
+
+@protocol PSHMessagingViewControllerDelegate <NSObject>
+
+- (void)messagingViewController:(PSHMessagingViewController*)vc messagingDissmissed:(BOOL)dismissed;
 
 @end

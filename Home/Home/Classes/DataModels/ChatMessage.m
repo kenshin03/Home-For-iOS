@@ -2,7 +2,7 @@
 //  ChatMessage.m
 //  Home
 //
-//  Created by Kenny Tang on 5/14/13.
+//  Created by Kenny Tang on 5/16/13.
 //  Copyright (c) 2013 com.corgitoergosum.net. All rights reserved.
 //
 
@@ -11,9 +11,10 @@
 
 @implementation ChatMessage
 
-@dynamic fromGraphID;
-@dynamic toGraphID;
-@dynamic messageBody;
 @dynamic createdDate;
+@dynamic fromGraphID;
+@dynamic messageBody;
+@dynamic toGraphID;
+@dynamic hideFromView;
 
 @end

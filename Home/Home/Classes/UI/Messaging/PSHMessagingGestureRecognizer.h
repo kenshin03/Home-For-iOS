@@ -10,4 +10,6 @@
 
 @interface PSHMessagingGestureRecognizer : UIGestureRecognizer
 
+- (void)snapChatHeadInPlace;
+
 @end

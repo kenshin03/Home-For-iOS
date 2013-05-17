@@ -10,7 +10,7 @@
 #import "PSHFacebookDataService.h"
 #import "PSHMenuGestureRecognizer.h"
 #import "PSHNotificationsViewController.h"
-
+#import "PSHMessagingViewController.h"
 #import "PSHFacebookXMPPService.h"
 
 #import <AudioToolbox/AudioToolbox.h>
@@ -388,12 +388,12 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     
 //    PSHFacebookXMPPService * xmppService = [PSHFacebookXMPPService sharedService];
 //    NSLog(@"xmppService: %@", xmppService);
-    NSURL *url = [NSURL URLWithString:@"fb-messenger://compose"];
-    [[UIApplication sharedApplication] openURL:url];
+//    NSURL *url = [NSURL URLWithString:@"fb-messenger://compose"];
+//    [[UIApplication sharedApplication] openURL:url];
     
-//    if ([self.delegate respondsToSelector:@selector(menuViewController:messagesButtonTapped:)]){
-//        [self.delegate menuViewController:self messagesButtonTapped:YES];
-//    }
+    if ([self.delegate respondsToSelector:@selector(menuViewController:messagesButtonTapped:)]){
+        [self.delegate menuViewController:self messagesButtonTapped:YES];
+    }
 }
 
 
@@ -643,5 +643,6 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
     self.menuGestureRecognizer.enabled = YES;
     self.tapGestureRecognizer.enabled = YES;
 }
+
 
 @end

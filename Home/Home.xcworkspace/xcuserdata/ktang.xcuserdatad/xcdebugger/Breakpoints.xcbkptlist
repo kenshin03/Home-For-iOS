@@ -173,11 +173,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "390440861.485297"
+         timestampString = "390460043.030519"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-initChatHeads"
          landmarkType = "5">
       </FileBreakpoint>
@@ -199,12 +199,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "390440861.485297"
+         timestampString = "390460043.030519"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
-         landmarkName = "-menuGestureRecognizerAction:"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "-initChatHeads"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/CoverFeed/PSHCoverFeedViewController.m"
+         timestampString = "390459423.674342"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "281"
+         endingLineNumber = "281"
+         landmarkName = "-menuViewController:messagesButtonTapped:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/CoverFeed/PSHCoverFeedViewController.m"
+         timestampString = "390459866.985348"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
+         landmarkName = "-messagingViewController:messagingDissmissed:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
+         timestampString = "390460043.030519"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "272"
+         endingLineNumber = "272"
+         landmarkName = "-removeChatFromMessagingView"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -14,7 +14,7 @@
 #import "FeedItem.h"
 #import "ItemSource.h"
 
-@interface PSHCoverFeedViewController ()<UIPageViewControllerDataSource, PSHMenuViewControllerDelegate, PSHCoverFeedPageViewControllerDelegate>
+@interface PSHCoverFeedViewController ()<UIPageViewControllerDataSource, PSHMenuViewControllerDelegate, PSHCoverFeedPageViewControllerDelegate, PSHMessagingViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * feedItemsArray;
 @property (nonatomic, strong) UIPageViewController * feedsPageViewController;
@@ -23,6 +23,7 @@
 @property (nonatomic, strong) PSHCoverFeedPageViewController * currentPagePageViewController;
 @property (nonatomic, strong) PSHMenuViewController * menuViewController;
 @property (nonatomic, strong) UIView * menuView;
+@property (nonatomic, strong) UIView * messagingView;
 
 
 @property (nonatomic, strong) PSHFacebookDataService * facebookDataService;
@@ -271,7 +272,11 @@
     [self animateHideMenu];
     
     PSHMessagingViewController * messagingViewController = [[PSHMessagingViewController alloc] init];
+    messagingViewController.delegate = self;
     [self addChildViewController:messagingViewController];
+    
+    self.messagingView = messagingViewController.view;
+    
     [messagingViewController didMoveToParentViewController:self];
     [self.view addSubview:messagingViewController.view];
     
@@ -354,5 +359,13 @@
     }];
     
 }
+
+#pragma mark - PSHMessagingViewControllerDelegate methods
+
+- (void)messagingViewController:(PSHMessagingViewController*)vc messagingDissmissed:(BOOL)dismissed {
+    [self animateShowMenu];
+    [self.messagingView removeFromSuperview];
+}
+
 
 @end

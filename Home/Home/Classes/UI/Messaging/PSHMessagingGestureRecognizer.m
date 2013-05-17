@@ -75,7 +75,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self setState:UIGestureRecognizerStateEnded];
-    [self snapChatHeadInPlace];
+    
 //    [self.viewBeingMoved restoreChatHead];
     
 }
@@ -139,8 +139,9 @@
     }else{
         
     }
-    
 }
+
+
 
 
 @end

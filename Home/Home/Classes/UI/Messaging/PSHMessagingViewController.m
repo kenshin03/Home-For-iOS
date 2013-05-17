@@ -20,7 +20,8 @@
 @property (nonatomic) BOOL isDismissButtonShown;
 @property (nonatomic, weak) PSHChatHeadDismissButton * dismissButton;
 @property (nonatomic) CGRect dismissButtonBackgroundImageOriginalRect;
-
+@property (nonatomic, strong) PSHMessagingGestureRecognizer * recognizer;
+@property (nonatomic, strong) PSHChatHead * chatHead;
 @end
 
 @implementation PSHMessagingViewController
@@ -41,15 +42,16 @@
     [self initDismissButton];
     self.isDismissButtonShown = NO;
     
-    PSHMessagingGestureRecognizer * recognizer = [[PSHMessagingGestureRecognizer alloc] init];
-    recognizer.delegate = self;
-    [recognizer addTarget:self action:@selector(menuGestureRecognizerAction:)];
-    [self.view addGestureRecognizer:recognizer];
+    self.recognizer = [[PSHMessagingGestureRecognizer alloc] init];
+    self.recognizer.delegate = self;
+    [self.recognizer addTarget:self action:@selector(menuGestureRecognizerAction:)];
+    [self.view addGestureRecognizer:self.recognizer];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self removeObserver:self forKeyPath:@"frame.origin.x"];
+    
+//    [self removeObserver:self forKeyPath:@"frame.origin.x"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +73,13 @@
 
 - (void) initChatHeads {
     
-    NSArray * chatsArray = [ChatMessage findAllSortedBy:@"createdDate" ascending:NO];
+    NSSortDescriptor * createdDateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdDate" ascending:YES];
+    
+    NSPredicate * nonHiddenFilter = [NSPredicate predicateWithFormat:@"hideFromView = %@", @(0)];
+    NSFetchRequest * chatsRequest = [ChatMessage requestAllWithPredicate:nonHiddenFilter];
+    chatsRequest.sortDescriptors = @[createdDateSortDescriptor];
+    
+    NSArray * chatsArray = [ChatMessage executeFetchRequest:chatsRequest];
     if ([chatsArray count] > 0){
         
         // get latest message
@@ -83,6 +91,7 @@
         chatHead.badgeImageView.hidden = YES;
         chatHead.tag = kPSHMessagingViewControllerChatHeadTag;
         [chatHead addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+        self.chatHead = chatHead;
         
         NSString * fromGraphID = firstMessage.fromGraphID;
         
@@ -140,6 +149,8 @@
 
 - (void) menuGestureRecognizerAction:(PSHMessagingGestureRecognizer*)recognizer {
     
+//    CGRect chatHeadFrame = [self.view convertRect:self.chatHead.frame fromView:self.chatHead.superview];
+    
     if (recognizer.state == UIGestureRecognizerStateBegan){
         
         if (!self.isDismissButtonShown){
@@ -152,9 +163,14 @@
             [self animateShowDismissButton];
         }
         
-        
     }else if (recognizer.state == UIGestureRecognizerStateEnded){
         
+        if (CGRectContainsRect(self.dismissButton.frame, self.chatHead.frame)){
+            [self removeChatFromMessagingView];
+        }else{
+            [recognizer snapChatHeadInPlace];
+        }
+
         if (self.isDismissButtonShown){
             [self animateHideDismissButton];
         }
@@ -230,14 +246,34 @@
         dismissDestFrame.size.width = self.dismissButtonBackgroundImageOriginalRect.size.width + widthHeightGrowth;
         dismissDestFrame.size.height = self.dismissButtonBackgroundImageOriginalRect.size.height + widthHeightGrowth;
         
-        NSLog(@"dismissDestFrame: %@", NSStringFromCGRect(dismissDestFrame));
         self.dismissButton.backgroundImageView.frame = dismissDestFrame;
+        
+        
     }else if (proximity < 0.0f){
         self.dismissButton.backgroundImageView.frame = self.dismissButtonBackgroundImageOriginalRect;
     }
-    
-
 }
 
+
+- (void) removeChatFromMessagingView {
+    // hide chathead
+    CGRect destFrame = self.chatHead.frame;
+    destFrame.origin.y = destFrame.origin.y + 100.0f;
+    
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        self.chatHead.alpha = 0.0f;
+        self.chatHead.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        [self.chatHead removeFromSuperview];
+        
+        // reload this page
+        if ([self.delegate respondsToSelector:@selector(messagingViewController:messagingDissmissed:)]){
+            [self.delegate messagingViewController:self messagingDissmissed:YES];
+        }
+    }];
+    
+}
 
 @end
