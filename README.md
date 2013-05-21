@@ -14,7 +14,7 @@ Development Notes:
 * [Building Home (1) – Data Layer](http://corgitoergosum.net/2013/04/30/building-facebook-home-for-ios-1-data-layer/ "Building Home (1) – Data Layer")
 * [Building Home (2) – Cover Feed](http://corgitoergosum.net/2013/05/01/building-facebook-home-for-ios-2-cover-feed/ "Building Home (2) – Cover Feed")
 * [Building Home (3) – Menu and App Launcher](http://corgitoergosum.net/2013/05/09/building-facebook-home-for-ios-3-menu-and-app-launcher/ "Building Home (3) – Menu and App Launcher")
-
+* [Building Home (4) - Notifications](http://corgitoergosum.net/2013/05/17/building-facebook-home-for-ios-4-notifications/ "Building Home (4) - Notifications")
 
 Videos
 ---
