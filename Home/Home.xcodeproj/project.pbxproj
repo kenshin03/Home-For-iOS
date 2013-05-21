@@ -96,6 +96,7 @@
 		8E8CA277173A172300BEBE00 /* menu_apps_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8CA271173A172100BEBE00 /* menu_apps_icon@2x.png */; };
 		8E936B471740493700342415 /* PSHNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E936B461740493700342415 /* PSHNotificationsViewController.m */; };
 		8E936B4D1740D26800342415 /* PSHNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E936B4C1740D26800342415 /* PSHNotificationsViewController.xib */; };
+		8E94C3D4174C173800B7FA80 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E94C3D3174C173800B7FA80 /* AsyncImageView.m */; };
 		8EB47D4E172E3A3300BF3476 /* coverfeed-liked_by_me_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */; };
 		8EB47D4F172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */; };
 		8ECDBC7C1729C39E007778E7 /* menu_facebook_app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBC6F1729C39E007778E7 /* menu_facebook_app@2x.png */; };
@@ -255,6 +256,8 @@
 		8E936B451740493700342415 /* PSHNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHNotificationsViewController.h; path = Notifications/PSHNotificationsViewController.h; sourceTree = "<group>"; };
 		8E936B461740493700342415 /* PSHNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHNotificationsViewController.m; path = Notifications/PSHNotificationsViewController.m; sourceTree = "<group>"; };
 		8E936B4C1740D26800342415 /* PSHNotificationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHNotificationsViewController.xib; path = Notifications/PSHNotificationsViewController.xib; sourceTree = "<group>"; };
+		8E94C3D2174C173800B7FA80 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		8E94C3D3174C173800B7FA80 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-liked_by_me_button.png"; sourceTree = "<group>"; };
 		8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-liked_by_me_button@2x.png"; sourceTree = "<group>"; };
 		8ECDBC6F1729C39E007778E7 /* menu_facebook_app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_facebook_app@2x.png"; sourceTree = "<group>"; };
@@ -513,6 +516,7 @@
 		8E403AFA1723C97800B46570 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				8E94C3D1174C173800B7FA80 /* AsyncImageView */,
 				8ECDBCAB172A6AD6007778E7 /* QTouchposeApplication.h */,
 				8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */,
 				8E403AFB1723C97800B46570 /* LEColorPicker.h */,
@@ -722,6 +726,15 @@
 				8EF5BF72174210C60055EF0B /* PSHNotificationsTableViewCell.xib */,
 			);
 			name = Notifications;
+			sourceTree = "<group>";
+		};
+		8E94C3D1174C173800B7FA80 /* AsyncImageView */ = {
+			isa = PBXGroup;
+			children = (
+				8E94C3D2174C173800B7FA80 /* AsyncImageView.h */,
+				8E94C3D3174C173800B7FA80 /* AsyncImageView.m */,
+			);
+			path = AsyncImageView;
 			sourceTree = "<group>";
 		};
 		8EF5BFD117421E8E0055EF0B /* Notifications */ = {
@@ -949,6 +962,7 @@
 				8E8C79121744509700924BE5 /* PSHMessagingGestureRecognizer.m in Sources */,
 				8EE8EF8917457F34009F5109 /* PSHChatHeadDismissButton.m in Sources */,
 				8E47E62B1745AAAA0069BF5C /* ChatMessage.m in Sources */,
+				8E94C3D4174C173800B7FA80 /* AsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

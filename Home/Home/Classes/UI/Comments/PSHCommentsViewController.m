@@ -11,6 +11,7 @@
 #import "PSHCommentsTableViewCell.h"
 #import "FeedItem.h"
 #import "PSHFeedComment.h"
+#import "AsyncImageView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PSHCommentsViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -105,6 +106,8 @@ static dispatch_once_t pullToDismissLock;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     PSHCommentsTableViewCell * cell = (PSHCommentsTableViewCell*)[self.commentsTableView dequeueReusableCellWithIdentifier:@"kPSHCommentsTableViewCell"];
+    
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:cell.commentorImageView];
     cell.commentorImageView.image = nil;
     
     PSHFeedComment * comment = self.commentsArray[indexPath.row];
@@ -117,13 +120,16 @@ static dispatch_once_t pullToDismissLock;
         cell.likesLabel.hidden = YES;
     }
     NSString * commentorGraphID = comment.commentorGraphID;
-    UIImageView * commentorImageView = cell.commentorImageView;
+//    UIImageView * commentorImageView = cell.commentorImageView;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
         [dataService fetchSourceCoverImageURLFor:commentorGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL) {
             
+            cell.commentorImageView.imageURL = [NSURL URLWithString:avartarImageURL];
+            
+            /*
             UIImage * commentorImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
             cell.commentorImageURL = avartarImageURL;
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -131,6 +137,7 @@ static dispatch_once_t pullToDismissLock;
                     commentorImageView.image = commentorImage;
                 }
             });
+             */
         }];
     });
     cell.commentsLabel.text = comment.comment;

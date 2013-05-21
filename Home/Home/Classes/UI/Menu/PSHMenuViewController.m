@@ -284,8 +284,7 @@ static NSInteger const kPSHMenuViewControllerLaunchTwitterButton = 1120;
         
         
         
-        CGRect menuButtonViewFrame = self.menuButtonView.frame;
-        menuButtonViewFrame = [self.view convertRect:self.menuButtonView.frame fromView:self.menuButtonView.superview];
+        CGRect menuButtonViewFrame = [self.view convertRect:self.menuButtonView.frame fromView:self.menuButtonView.superview];
         
         if (self.menuExpanded){
             

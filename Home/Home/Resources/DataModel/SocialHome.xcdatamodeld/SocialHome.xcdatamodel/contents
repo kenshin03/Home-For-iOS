@@ -40,6 +40,6 @@
         <element name="ChatMessage" positionX="160" positionY="192" width="128" height="120"/>
         <element name="FeedItem" positionX="124" positionY="189" width="128" height="208"/>
         <element name="ItemSource" positionX="-47" positionY="231" width="128" height="120"/>
-        <element name="Notification" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Notification" positionX="-74" positionY="18" width="128" height="150"/>
     </elements>
 </model>
