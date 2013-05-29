@@ -13,6 +13,7 @@
 #import "PSHChatHeadDismissButton.h"
 #import "PSHChatHead.h"
 #import "ChatMessage.h"
+#import "PSHChatsButtonView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PSHMessagingViewController ()<UIGestureRecognizerDelegate>
@@ -22,6 +23,7 @@
 @property (nonatomic) CGRect dismissButtonBackgroundImageOriginalRect;
 @property (nonatomic, strong) PSHMessagingGestureRecognizer * recognizer;
 @property (nonatomic, strong) PSHChatHead * chatHead;
+@property (nonatomic, strong) PSHChatsButtonView * inboxButtonView;
 @end
 
 @implementation PSHMessagingViewController
@@ -38,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initChatsButton];
     [self initChatHeads];
     [self initDismissButton];
     self.isDismissButtonShown = NO;
@@ -46,6 +49,8 @@
     self.recognizer.delegate = self;
     [self.recognizer addTarget:self action:@selector(menuGestureRecognizerAction:)];
     [self.view addGestureRecognizer:self.recognizer];
+  // chathead rec
+//    [self.recognizer requireGestureRecognizerToFail:self.menuTapGestureRecognizer];
     
 }
 
@@ -70,6 +75,37 @@
     self.dismissButton = dismissButton;
     self.dismissButtonBackgroundImageOriginalRect = dismissButton.backgroundImageView.frame;
 }
+
+- (void) initChatsButton {
+    PSHChatsButtonView * inboxButtonView = [[PSHChatsButtonView alloc] init];
+    CGRect chatsFrame = inboxButtonView.frame;
+    
+    self.inboxButtonView = inboxButtonView;
+    
+    if (self.chatHead){
+        chatsFrame.origin.x = self.view.frame.size.width - self.chatHead.frame.size.width - chatsFrame.size.width;
+        
+    }else{
+        chatsFrame.origin.x = self.view.frame.size.width - chatsFrame.size.width;
+    }
+    
+    CGRect startFrame = inboxButtonView.frame;
+    startFrame.origin.x = 20.0f;
+    startFrame.origin.y = self.view.frame.size.height - inboxButtonView.frame.size.height;
+    inboxButtonView.frame = startFrame;
+    [self.view addSubview:inboxButtonView];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        inboxButtonView.frame = chatsFrame;
+        
+    } completion:^(BOOL finished) {
+        //
+    }];
+    
+}
+
+
 
 - (void) initChatHeads {
     
