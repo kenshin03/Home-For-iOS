@@ -61,7 +61,7 @@ typedef void (^InitAccountSuccessBlock)();
     
     // separate request for read and writes
     ACAccountType * facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSDictionary * readOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"email", @"read_stream", @"user_photos", @"user_activities", @"friends_activities"], ACFacebookAudienceKey:ACFacebookAudienceEveryone};
+    NSDictionary * readOptions = @{ACFacebookAppIdKey:kPSHFacebookAppID, ACFacebookPermissionsKey: @[@"email", @"read_stream", @"read_mailbox", @"user_photos", @"user_activities", @"friends_activities"], ACFacebookAudienceKey:ACFacebookAudienceEveryone};
     [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:readOptions
                                             completion: ^(BOOL granted, NSError *e) {
                                                 
@@ -494,6 +494,40 @@ typedef void (^InitAccountSuccessBlock)();
     
 }
 
+
+- (void) fetchInboxChats:(FetchInboxChatsSuccess)fetchInboxSuccess {
+    
+    InitAccountSuccessBlock successBlock = ^{
+        NSURL *url = [NSURL URLWithString:@"https://graph.facebook.com/me/inbox"];
+        SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:url parameters:@{@"filter":@"toplevel"}];
+        DDLogVerbose(@"request.URL: %@", request.URL);
+        request.account = self.facebookAccount;
+        
+        NSMutableArray * inboxResultsArray = [@[] mutableCopy];
+        
+        [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            DDLogVerbose(@"responseString: %@", responseString);
+            NSError* responseError;
+            NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
+            
+            
+            
+            
+        }];
+        
+        fetchInboxSuccess(inboxResultsArray, nil);
+        
+    };
+    
+    if (self.facebookAccount == nil){
+        [self initAccount:successBlock];
+    }else{
+        successBlock();
+    }
+    
+    
+}
 
 - (void) fetchComments:(NSString*)graphID success:(FetchCommentsSuccess)fetchCommentsSuccess {
 

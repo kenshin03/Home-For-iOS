@@ -19,6 +19,9 @@ typedef void (^FetchProfileSuccess)(NSString * graphID, NSString * avartarImageU
 typedef void (^FetchCommentsSuccess)(NSArray * resultsArray, NSError * error);
 typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSString * avartarImageURL);
 
+typedef void (^FetchInboxChatsSuccess)(NSArray * resultsArray, NSError * error);
+
+
 @interface PSHFacebookDataService : NSObject
 
 + (PSHFacebookDataService*) sharedService;
@@ -38,8 +41,10 @@ typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSSt
 
 - (void) fetchNotifications:(FetchNotificationsSuccess)fetchNotificationsSuccess;
 
-
 - (void) fetchComments:(NSString*)graphID success:(FetchCommentsSuccess)fetchCommentsSuccess;
+
+
+- (void) fetchInboxChats:(FetchInboxChatsSuccess)fetchInboxSuccess;
 
 - (void) postComment:(NSString*) message forItem:(NSString*)itemGraphID success:(Success)successBlock;
 

@@ -132,6 +132,8 @@
 		8EEC447B1755C92D00A36CFA /* chat_head_inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC44791755C92D00A36CFA /* chat_head_inbox.png */; };
 		8EEC447C1755C92D00A36CFA /* chat_head_inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC447A1755C92D00A36CFA /* chat_head_inbox@2x.png */; };
 		8EEC447F1755C9AC00A36CFA /* PSHChatsButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC447E1755C9AC00A36CFA /* PSHChatsButtonView.m */; };
+		8EEC44821755D30F00A36CFA /* PSHInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC44811755D30E00A36CFA /* PSHInboxViewController.m */; };
+		8EEC44841755D34A00A36CFA /* PSHInboxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC44831755D34A00A36CFA /* PSHInboxViewController.xib */; };
 		8EF0B6E1173F59FC006E8D91 /* menu_item_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */; };
 		8EF0B6E3173F5A07006E8D91 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */; };
 		8EF5BF73174210C60055EF0B /* PSHNotificationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF5BF72174210C60055EF0B /* PSHNotificationsTableViewCell.xib */; };
@@ -300,6 +302,9 @@
 		8EEC447A1755C92D00A36CFA /* chat_head_inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_inbox@2x.png"; path = "Messaging/chat_head_inbox@2x.png"; sourceTree = "<group>"; };
 		8EEC447D1755C9AC00A36CFA /* PSHChatsButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHChatsButtonView.h; path = Messaging/PSHChatsButtonView.h; sourceTree = "<group>"; };
 		8EEC447E1755C9AC00A36CFA /* PSHChatsButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHChatsButtonView.m; path = Messaging/PSHChatsButtonView.m; sourceTree = "<group>"; };
+		8EEC44801755D30E00A36CFA /* PSHInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHInboxViewController.h; path = Messaging/PSHInboxViewController.h; sourceTree = "<group>"; };
+		8EEC44811755D30E00A36CFA /* PSHInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHInboxViewController.m; path = Messaging/PSHInboxViewController.m; sourceTree = "<group>"; };
+		8EEC44831755D34A00A36CFA /* PSHInboxViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHInboxViewController.xib; path = Messaging/PSHInboxViewController.xib; sourceTree = "<group>"; };
 		8EF0B6DF173F5665006E8D91 /* PSHLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHLogger.h; path = Classes/PSHLogger.h; sourceTree = "<group>"; };
 		8EF0B6E0173F59FC006E8D91 /* menu_item_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menu_item_open.wav; sourceTree = "<group>"; };
 		8EF0B6E2173F5A07006E8D91 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -352,6 +357,8 @@
 				8EE8EF8817457F34009F5109 /* PSHChatHeadDismissButton.m */,
 				8EEC447D1755C9AC00A36CFA /* PSHChatsButtonView.h */,
 				8EEC447E1755C9AC00A36CFA /* PSHChatsButtonView.m */,
+				8EEC44801755D30E00A36CFA /* PSHInboxViewController.h */,
+				8EEC44811755D30E00A36CFA /* PSHInboxViewController.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -363,6 +370,7 @@
 				8E3472441743633900447FC8 /* PSHChatHead.xib */,
 				8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */,
 				8EEC44771755C7D500A36CFA /* PSHChatsButtonView.xib */,
+				8EEC44831755D34A00A36CFA /* PSHInboxViewController.xib */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -910,6 +918,7 @@
 				8EEC44781755C7D500A36CFA /* PSHChatsButtonView.xib in Resources */,
 				8EEC447B1755C92D00A36CFA /* chat_head_inbox.png in Resources */,
 				8EEC447C1755C92D00A36CFA /* chat_head_inbox@2x.png in Resources */,
+				8EEC44841755D34A00A36CFA /* PSHInboxViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,6 +990,7 @@
 				8E47E62B1745AAAA0069BF5C /* ChatMessage.m in Sources */,
 				8E94C3D4174C173800B7FA80 /* AsyncImageView.m in Sources */,
 				8EEC447F1755C9AC00A36CFA /* PSHChatsButtonView.m in Sources */,
+				8EEC44821755D30F00A36CFA /* PSHInboxViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
