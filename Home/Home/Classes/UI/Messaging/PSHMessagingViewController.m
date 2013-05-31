@@ -14,9 +14,11 @@
 #import "PSHChatHead.h"
 #import "ChatMessage.h"
 #import "PSHChatsButtonView.h"
+#import "PSHInboxViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AudioToolbox/AudioToolbox.h>
 
-@interface PSHMessagingViewController ()<UIGestureRecognizerDelegate>
+@interface PSHMessagingViewController ()<UIGestureRecognizerDelegate, PSHChatsButtonViewDelegate>
 
 @property (nonatomic) BOOL isDismissButtonShown;
 @property (nonatomic, weak) PSHChatHeadDismissButton * dismissButton;
@@ -24,6 +26,11 @@
 @property (nonatomic, strong) PSHMessagingGestureRecognizer * recognizer;
 @property (nonatomic, strong) PSHChatHead * chatHead;
 @property (nonatomic, strong) PSHChatsButtonView * inboxButtonView;
+@property (nonatomic, strong) PSHInboxViewController * inboxViewController;
+@property (nonatomic) BOOL isInboxViewControllerHidden;
+// sound
+@property (nonatomic) SystemSoundID openMenuItemSoundID;
+
 @end
 
 @implementation PSHMessagingViewController
@@ -43,7 +50,9 @@
     [self initChatsButton];
     [self initChatHeads];
     [self initDismissButton];
+    [self initAudioServices];
     self.isDismissButtonShown = NO;
+    self.isInboxViewControllerHidden = YES;
     
     self.recognizer = [[PSHMessagingGestureRecognizer alloc] init];
     self.recognizer.delegate = self;
@@ -65,7 +74,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+	AudioServicesDisposeSystemSoundID (_openMenuItemSoundID);
+    
+}
+
 #pragma mark - UI elements
+
+- (void)initAudioServices {
+    
+	NSString * openMenuSoundResPath = [[NSBundle mainBundle] pathForResource:@"menu_item_open" ofType:@"wav"];
+    
+	NSURL * openMenuItemSoundURLRef = [NSURL fileURLWithPath:openMenuSoundResPath isDirectory:NO];
+	AudioServicesCreateSystemSoundID ((__bridge CFURLRef)openMenuItemSoundURLRef, &_openMenuItemSoundID);
+}
+
+- (void)playOpenMenuItemSound {
+    AudioServicesPlaySystemSound(self.openMenuItemSoundID);
+}
+
+
 
 - (void) initDismissButton {
     PSHChatHeadDismissButton * dismissButton = [[PSHChatHeadDismissButton alloc] init];
@@ -78,9 +107,12 @@
 
 - (void) initChatsButton {
     PSHChatsButtonView * inboxButtonView = [[PSHChatsButtonView alloc] init];
+    inboxButtonView.tag = kPSHMessagingViewControllerInboxButtonTag;
     CGRect chatsFrame = inboxButtonView.frame;
     
+    inboxButtonView.delegate = self;
     self.inboxButtonView = inboxButtonView;
+    
     
     if (self.chatHead){
         chatsFrame.origin.x = self.view.frame.size.width - self.chatHead.frame.size.width - chatsFrame.size.width;
@@ -100,7 +132,20 @@
         inboxButtonView.frame = chatsFrame;
         
     } completion:^(BOOL finished) {
-        //
+        
+        self.inboxViewController = [[PSHInboxViewController alloc] init];
+        [self addChildViewController:self.inboxViewController];
+        CGRect destFrame = self.inboxViewController.view.frame;
+        destFrame.origin.y = 100.0f;
+        self.inboxViewController.view.frame = destFrame;
+        [self.view addSubview:self.inboxViewController.view];
+        [self.view sendSubviewToBack:self.inboxViewController.view];
+        [self.inboxViewController didMoveToParentViewController:self];
+        self.isInboxViewControllerHidden = NO;
+        
+        [self.inboxButtonView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+        
+        
     }];
     
 }
@@ -134,7 +179,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
-            [dataService fetchSourceCoverImageURLFor:fromGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL) {
+            [dataService fetchSourceCoverImageURLFor:fromGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
                 
                 UIImage * fromImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -185,8 +230,6 @@
 
 - (void) menuGestureRecognizerAction:(PSHMessagingGestureRecognizer*)recognizer {
     
-//    CGRect chatHeadFrame = [self.view convertRect:self.chatHead.frame fromView:self.chatHead.superview];
-    
     if (recognizer.state == UIGestureRecognizerStateBegan){
         
         if (!self.isDismissButtonShown){
@@ -202,7 +245,13 @@
     }else if (recognizer.state == UIGestureRecognizerStateEnded){
         
         if (CGRectContainsRect(self.dismissButton.frame, self.chatHead.frame)){
+            [self playOpenMenuItemSound];
             [self removeChatFromMessagingView];
+            
+        }else if (CGRectContainsRect(self.dismissButton.frame, self.inboxButtonView.frame)){
+            [self playOpenMenuItemSound];
+                [self removeInboxFromMessagingView];
+            
         }else{
             [recognizer snapChatHeadInPlace];
         }
@@ -271,10 +320,7 @@
     if ((proximity > 0.0f) && (proximity < 30.0f)){
         
         double widthHeightGrowth = (0) + (proximity-0.0f)*(35-(0))/(30.0f-0.0f);
-//        NSLog(@"widthHeightGrowth: %f", widthHeightGrowth);
-        
         double posAdjustment = (0) + (proximity-0.0f)*(17-(0))/(30.0f-0.0f);
-//        NSLog(@"posAdjustment: %f", posAdjustment);
         
         CGRect dismissDestFrame = self.dismissButton.backgroundImageView.frame;
         dismissDestFrame.origin.x = self.dismissButtonBackgroundImageOriginalRect.origin.x - posAdjustment;
@@ -288,6 +334,30 @@
     }else if (proximity < 0.0f){
         self.dismissButton.backgroundImageView.frame = self.dismissButtonBackgroundImageOriginalRect;
     }
+}
+
+- (void) removeInboxFromMessagingView {
+    
+    CGRect destFrame = self.inboxButtonView.frame;
+    destFrame.origin.y = destFrame.origin.y + 100.0f;
+    
+    [self.inboxViewController animateHideInboxView];
+    
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        self.inboxButtonView.alpha = 0.0f;
+        self.inboxButtonView.frame = destFrame;
+        
+    } completion:^(BOOL finished) {
+        [self.inboxButtonView removeFromSuperview];
+        
+        // reload this page
+        if ([self.delegate respondsToSelector:@selector(messagingViewController:messagingDissmissed:)]){
+            [self.delegate messagingViewController:self messagingDissmissed:YES];
+        }
+    }];
+    
+    
 }
 
 
@@ -311,5 +381,20 @@
     }];
     
 }
+
+#pragma mark - chat head button delegate methods
+
+-(void)chatsButton:(PSHChatsButtonView*)buttonView buttonTapped:(BOOL)tapped {
+    
+    if (!self.isInboxViewControllerHidden){
+        [self.inboxViewController animateHideInboxView];
+        
+    }else{
+        [self.inboxViewController animateShowInboxView];
+        
+    }
+    
+}
+
 
 @end

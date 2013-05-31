@@ -102,7 +102,7 @@ static dispatch_once_t pullToDismissLock;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
-        [dataService fetchSourceCoverImageURLFor:sourceGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL) {
+        [dataService fetchSourceCoverImageURLFor:sourceGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
             
             UIImage * sourceAppImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
                 dispatch_async(dispatch_get_main_queue(), ^{

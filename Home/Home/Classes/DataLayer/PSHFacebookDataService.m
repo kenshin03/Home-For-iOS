@@ -322,7 +322,7 @@ typedef void (^InitAccountSuccessBlock)();
                     // get image from source graphID
                     
                     
-                    FetchSourceCoverImageSuccessBlock sucessBlock = ^(NSString * coverImageURL, NSString * avartarImageURL){
+                    FetchSourceCoverImageSuccessBlock sucessBlock = ^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name){
                         feedItem.imageURL = coverImageURL;
                         feedItem.source.imageURL = avartarImageURL;
                         
@@ -369,13 +369,14 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void)fetchSourceCoverImageURLFor:(NSString*)fromGraphID success:(FetchSourceCoverImageSuccessBlock) successBlock{
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@?fields=cover,picture", fromGraphID]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@?fields=cover,picture,name", fromGraphID]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSString * coverImageURLString = nil;
         NSString * avartarImageURLString = nil;
+        NSString * nameString = nil;
         
         if ([JSON valueForKeyPath:@"cover.source"]){
             coverImageURLString = [JSON valueForKeyPath:@"cover.source"];
@@ -383,8 +384,10 @@ typedef void (^InitAccountSuccessBlock)();
         if ([JSON valueForKeyPath:@"picture.data.url"]){
             avartarImageURLString = [JSON valueForKeyPath:@"picture.data.url"];
         }
-        
-        successBlock(coverImageURLString, avartarImageURLString);
+        if ([JSON valueForKeyPath:@"name"]){
+            nameString = [JSON valueForKeyPath:@"name"];
+        }
+        successBlock(coverImageURLString, avartarImageURLString, nameString);
         
     } failure:nil];
     [operation start];
@@ -507,16 +510,31 @@ typedef void (^InitAccountSuccessBlock)();
         
         [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-            DDLogVerbose(@"responseString: %@", responseString);
+            NSLog(@"responseString: %@", responseString);
             NSError* responseError;
             NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
+            NSArray * dataArray = jsonDict[@"data"];
             
-            
-            
-            
+            [dataArray enumerateObjectsUsingBlock:^(NSDictionary * inboxDict, NSUInteger idx, BOOL *stop) {
+                
+                ChatMessage * chatMessage = [ChatMessage createInContext:[NSManagedObjectContext defaultContext]];
+                
+                NSString * updatedDate = inboxDict[@"updated_time"];
+                chatMessage.createdDate = [self.dateFormatter dateFromString:updatedDate];
+                
+                NSDictionary * fromDict = [inboxDict[@"to"][@"data"] lastObject];
+                chatMessage.fromGraphID = fromDict[@"id"];
+                
+                NSDictionary * lastMessageDict = [inboxDict[@"comments"][@"data"] lastObject];
+                chatMessage.messageBody = lastMessageDict[@"message"];
+                
+                NSDictionary * toDict = [inboxDict[@"to"][@"data"] firstObject];
+                chatMessage.toGraphID = toDict[@"id"];
+
+                [inboxResultsArray addObject:chatMessage];
+            }];
+            fetchInboxSuccess(inboxResultsArray, nil);
         }];
-        
-        fetchInboxSuccess(inboxResultsArray, nil);
         
     };
     

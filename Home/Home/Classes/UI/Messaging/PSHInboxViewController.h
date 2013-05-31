@@ -10,4 +10,7 @@
 
 @interface PSHInboxViewController : UIViewController
 
+- (void) animateShowInboxView;
+- (void) animateHideInboxView;
+
 @end

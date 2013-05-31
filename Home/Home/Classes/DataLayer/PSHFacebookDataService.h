@@ -17,7 +17,7 @@ typedef void (^FetchNotificationsSuccess)(NSArray * resultsArray, NSError * erro
 
 typedef void (^FetchProfileSuccess)(NSString * graphID, NSString * avartarImageURL, NSError * error);
 typedef void (^FetchCommentsSuccess)(NSArray * resultsArray, NSError * error);
-typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSString * avartarImageURL);
+typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSString * avartarImageURL, NSString * name);
 
 typedef void (^FetchInboxChatsSuccess)(NSArray * resultsArray, NSError * error);
 

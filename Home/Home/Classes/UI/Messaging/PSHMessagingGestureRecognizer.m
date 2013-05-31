@@ -9,12 +9,13 @@
 #import "PSHMessagingGestureRecognizer.h"
 #import "PSHMessagingViewController.h"
 #import "PSHChatHead.h"
+#import "PSHChatsButtonView.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 
 @interface PSHMessagingGestureRecognizer()
 
-@property (nonatomic, strong) PSHChatHead * viewBeingMoved;
+@property (nonatomic, weak) UIView * viewBeingMoved;
 @property (nonatomic) CGRect originalRect;
 
 @property (nonatomic) CGRect topScreenLeftHalf;
@@ -38,6 +39,8 @@
     [self setState:UIGestureRecognizerStateBegan];
     
     PSHChatHead * chatHeadView = (PSHChatHead*)[self.view viewWithTag:kPSHMessagingViewControllerChatHeadTag];
+    PSHChatsButtonView * chatButtonView = (PSHChatsButtonView*) [self.view viewWithTag:kPSHMessagingViewControllerInboxButtonTag];
+    
     CGRect viewFrame = self.view.frame;
     self.topScreenLeftHalf = CGRectMake(viewFrame.origin.x, viewFrame.origin.y, viewFrame.size.width/2, viewFrame.size.height/2);
     self.topScreenRightHalf = CGRectMake(viewFrame.size.width/2, viewFrame.origin.y, viewFrame.size.width/2, viewFrame.size.height/2);
@@ -49,6 +52,11 @@
         [self setState:UIGestureRecognizerStateBegan];
         self.viewBeingMoved = chatHeadView;
         self.originalRect = self.viewBeingMoved.frame;
+        
+    }else if (CGRectContainsPoint(chatButtonView.frame, touchPoint)){
+            [self setState:UIGestureRecognizerStateBegan];
+            self.viewBeingMoved = chatButtonView;
+            self.originalRect = self.viewBeingMoved.frame;
         
     }else{
         [self setState:UIGestureRecognizerStateFailed];
@@ -76,15 +84,12 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self setState:UIGestureRecognizerStateEnded];
     
-//    [self.viewBeingMoved restoreChatHead];
-    
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     NSLog(@"touchesCancelled");
     [self setState:UIGestureRecognizerStateEnded];
     [self snapChatHeadInPlace];
-//    [self.viewBeingMoved restoreChatHead];
     
 }
 

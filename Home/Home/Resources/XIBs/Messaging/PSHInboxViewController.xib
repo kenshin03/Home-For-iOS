@@ -37,15 +37,14 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUITableView" id="75506125">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 85}, {320, 463}}</string>
+						<int key="NSvFlags">-2147483366</int>
+						<string key="NSFrameSize">{320, 463}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC44NTA2MTcwNTAyIDAuODQ1ODY0OTk5NiAwLjg1NTM2OTEwMDgAA</bytes>
 						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics" id="42184833">
@@ -57,12 +56,12 @@
 						<int key="IBUISeparatorStyle">1</int>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 						<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
-						<float key="IBUIRowHeight">44</float>
+						<float key="IBUIRowHeight">70</float>
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 548}</string>
+				<string key="NSFrameSize">{320, 463}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="75506125"/>

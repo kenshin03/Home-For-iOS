@@ -42,6 +42,12 @@
     return self;
 }
 
+-(void)chatsButton:(PSHChatsButtonView*)buttonView buttonTapped:(BOOL)tapped {
+    if ([self.delegate respondsToSelector:@selector(chatsButton:buttonTapped:)]){
+        [self.delegate chatsButton:self buttonTapped:YES];
+    }
+}
+
 
 -(void)expandChatHead {
     
@@ -58,6 +64,7 @@
         
     } completion:^(BOOL finished) {
         [self restoreChatHead];
+        [self chatsButton:self buttonTapped:YES];
     }];
 }
 

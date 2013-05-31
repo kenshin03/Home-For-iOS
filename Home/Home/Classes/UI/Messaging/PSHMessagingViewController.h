@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 static NSInteger const kPSHMessagingViewControllerChatHeadTag = 1111;
+static NSInteger const kPSHMessagingViewControllerInboxButtonTag = 2222;
 
 @protocol PSHMessagingViewControllerDelegate;
 

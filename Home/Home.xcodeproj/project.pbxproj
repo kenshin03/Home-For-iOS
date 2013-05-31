@@ -122,6 +122,8 @@
 		8ECDBCA5172A4DC0007778E7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA3172A4DBF007778E7 /* Icon.png */; };
 		8ECDBCA6172A4DC0007778E7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */; };
 		8ECDBCAD172A6AD6007778E7 /* QTouchposeApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */; };
+		8EE44F631758153400C72297 /* PSHInboxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE44F621758153400C72297 /* PSHInboxTableViewCell.m */; };
+		8EE44F651758169500C72297 /* PSHInboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE44F641758169500C72297 /* PSHInboxTableViewCell.xib */; };
 		8EE8EF8117457CAB009F5109 /* chat_head_close_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF7D17457CAB009F5109 /* chat_head_close_background.png */; };
 		8EE8EF8217457CAB009F5109 /* chat_head_close_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF7E17457CAB009F5109 /* chat_head_close_background@2x.png */; };
 		8EE8EF8317457CAB009F5109 /* chat_head_close_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF7F17457CAB009F5109 /* chat_head_close_x.png */; };
@@ -290,6 +292,9 @@
 		8ECDBCA4172A4DBF007778E7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		8ECDBCAB172A6AD6007778E7 /* QTouchposeApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTouchposeApplication.h; sourceTree = "<group>"; };
 		8ECDBCAC172A6AD6007778E7 /* QTouchposeApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTouchposeApplication.m; sourceTree = "<group>"; };
+		8EE44F611758153300C72297 /* PSHInboxTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHInboxTableViewCell.h; path = Messaging/PSHInboxTableViewCell.h; sourceTree = "<group>"; };
+		8EE44F621758153400C72297 /* PSHInboxTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHInboxTableViewCell.m; path = Messaging/PSHInboxTableViewCell.m; sourceTree = "<group>"; };
+		8EE44F641758169500C72297 /* PSHInboxTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHInboxTableViewCell.xib; path = Messaging/PSHInboxTableViewCell.xib; sourceTree = "<group>"; };
 		8EE8EF7D17457CAB009F5109 /* chat_head_close_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_close_background.png; path = Messaging/chat_head_close_background.png; sourceTree = "<group>"; };
 		8EE8EF7E17457CAB009F5109 /* chat_head_close_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_close_background@2x.png"; path = "Messaging/chat_head_close_background@2x.png"; sourceTree = "<group>"; };
 		8EE8EF7F17457CAB009F5109 /* chat_head_close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_close_x.png; path = Messaging/chat_head_close_x.png; sourceTree = "<group>"; };
@@ -359,6 +364,8 @@
 				8EEC447E1755C9AC00A36CFA /* PSHChatsButtonView.m */,
 				8EEC44801755D30E00A36CFA /* PSHInboxViewController.h */,
 				8EEC44811755D30E00A36CFA /* PSHInboxViewController.m */,
+				8EE44F611758153300C72297 /* PSHInboxTableViewCell.h */,
+				8EE44F621758153400C72297 /* PSHInboxTableViewCell.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -371,6 +378,7 @@
 				8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */,
 				8EEC44771755C7D500A36CFA /* PSHChatsButtonView.xib */,
 				8EEC44831755D34A00A36CFA /* PSHInboxViewController.xib */,
+				8EE44F641758169500C72297 /* PSHInboxTableViewCell.xib */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -919,6 +927,7 @@
 				8EEC447B1755C92D00A36CFA /* chat_head_inbox.png in Resources */,
 				8EEC447C1755C92D00A36CFA /* chat_head_inbox@2x.png in Resources */,
 				8EEC44841755D34A00A36CFA /* PSHInboxViewController.xib in Resources */,
+				8EE44F651758169500C72297 /* PSHInboxTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +1000,7 @@
 				8E94C3D4174C173800B7FA80 /* AsyncImageView.m in Sources */,
 				8EEC447F1755C9AC00A36CFA /* PSHChatsButtonView.m in Sources */,
 				8EEC44821755D30F00A36CFA /* PSHInboxViewController.m in Sources */,
+				8EE44F631758153400C72297 /* PSHInboxTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

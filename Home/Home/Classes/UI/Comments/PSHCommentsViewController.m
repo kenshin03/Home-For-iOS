@@ -120,14 +120,14 @@ static dispatch_once_t pullToDismissLock;
         cell.likesLabel.hidden = YES;
     }
     NSString * commentorGraphID = comment.commentorGraphID;
-//    UIImageView * commentorImageView = cell.commentorImageView;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
-        [dataService fetchSourceCoverImageURLFor:commentorGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL) {
+        [dataService fetchSourceCoverImageURLFor:commentorGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
             
             cell.commentorImageView.imageURL = [NSURL URLWithString:avartarImageURL];
+            
             
             /*
             UIImage * commentorImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avartarImageURL]]];
