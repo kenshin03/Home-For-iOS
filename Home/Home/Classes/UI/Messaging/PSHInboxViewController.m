@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray * inboxArray;
 @property (nonatomic, weak) IBOutlet UITableView * inboxTableView;
 @property (nonatomic, strong) NSDateFormatter * dateFormatter;
+@property (nonatomic, strong) UIRefreshControl * refreshControl;
 
 @end
 
@@ -55,6 +56,11 @@
     [self.inboxTableView registerNib:[UINib nibWithNibName:@"PSHInboxTableViewCell" bundle:nil] forCellReuseIdentifier:@"kPSHInboxTableViewCell"];
     self.inboxTableView.delegate = self;
     
+    UIRefreshControl * refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl = refreshControl;
+    [self.refreshControl addTarget:self action:@selector(fetchInboxMessages) forControlEvents:UIControlEventValueChanged];
+    [self.inboxTableView addSubview:self.refreshControl];
+    
 }
 
 
@@ -66,9 +72,12 @@
             [self.inboxArray removeAllObjects];
             [self.inboxArray addObjectsFromArray:resultsArray];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.inboxTableView.hidden = NO;
-                [self animateShowInboxView];
+                if (self.inboxTableView.hidden){
+                    self.inboxTableView.hidden = NO;
+                    [self animateShowInboxView];
+                }
                 [self.inboxTableView reloadData];
+                [self.refreshControl endRefreshing];
             });
         }];
 }
