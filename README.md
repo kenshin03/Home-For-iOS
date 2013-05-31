@@ -3,9 +3,12 @@ Home for iOS
 
 ![Screenshot](cover_image.jpg)
 
+Last updated: May 31
 
-This is an attempt to replicate essential elements of the Facebook Home experience in iOS as an app. The aim is to re-create features like Cover Feed with nothing but simple UIKit 
-controls and the Facebook Graph API.
+
+This is an attempt to replicate essential elements of the Facebook Home experience in iOS, as an *app*. The aim is to re-create features like Cover Feed with basic UIKit 
+controls and the Facebook Graph API. 
+
 
 Development Notes:
 
@@ -41,23 +44,30 @@ Working Features
 ---
 * Coverfeed. Supports posts of type photo (added_photos/mobile_status_update/shared_story) and status (picture/mobile_status_update/wall_post).
 * Double tap to like a post from Coverfeed.
-* View comments and add comments to a post. (iPhone5 only)
+* View comments and add comments to a post.
 * Post to your own timeline.
 * Fake launcher that opens pre-installed apps like Facebook Camera, Twitter, Instagram, Mail via URL schemes.
 * SSO to Facebook using iOS 6's SocialFramework.
 * Read Facebook Notifications
 
 
-Missing Features / Known Issues
+In-progress
 ---
-* Chat Heads and Messaging
-* Comments view not re-sized properly for 3.5 inch screen sizes. 
-* Unlike isn't working anymore
+* Messaging 
+   * View Controller to list contacts to write message to
+   * Message compose view with textfield and send button
+   * Code to send message to graph ID via XMPP
+   * Code to listen to XMPP notification and message compose view / animate in chathead.
+* UX
+   * Coverfeed - Timer based auto-scroll to next view
+   * Coverfeed - Auto-refresh of timeline contents after x minutes
+* Authentication
+   * Auto-retry failed authentication after detecting a change in settings.
 
 
 Contribution
 ---
-Feel free to fork and implement any features or fix any issues as you see fit. Or submit an issue with an feature requests or bug reports.
+Feel free to fork and work on any features or fix any issues as you see fit. Or submit an issue with feature requests or bug reports.
 
 
 License
