@@ -1,4 +1,5 @@
 ALWAYS_SEARCH_USER_PATHS = YES
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = ${PODS_HEADERS_SEARCH_PATHS} $(SDKROOT)/usr/include/libxml2 $(SDKROOT)/usr/include/libresolv
 LIBRARY_SEARCH_PATHS = $(PODS_ROOT)/XMPPFramework/Vendor/libidn
 OTHER_LDFLAGS = -ObjC -lidn -lresolv -lxml2 -framework CFNetwork -framework CoreData -framework MobileCoreServices -framework Security -framework SystemConfiguration

@@ -67,9 +67,6 @@
 #define XMPP_LOGGING_ENABLED 1
 #endif
 
-#define XMPP_LOGGING_ENABLED 1
-
-
 // Define logging context for every log message coming from the XMPP framework.
 // The logging context can be extracted from the DDLogMessage from within the logging framework.
 // This gives loggers, formatters, and filters the ability to optionally process them differently.

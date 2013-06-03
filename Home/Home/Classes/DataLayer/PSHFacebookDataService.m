@@ -205,10 +205,11 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void) _fetchFeed:(FetchFeedSuccess)fetchFeedSuccess{
     
+//    NSURL * feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/home?fields=id,type,status_type,story,created_time,updated_time,from,message,likes,story,caption,name,picture,comments.summary(true)"];
     NSURL * feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/home"];
     
     
-    NSDictionary * params = @{@"limit":@"100"};
+    NSDictionary * params = @{@"limit":@"100", @"fields":@"id,type,status_type,story,created_time,updated_time,from,message,likes,story,caption,name,picture,comments.summary(true)"};
     SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:params];
     DDLogVerbose(@"request.URL: %@", request.URL);
     request.account = self.facebookAccount;
@@ -263,7 +264,9 @@ typedef void (^InitAccountSuccessBlock)();
                 likedByMe = [self checkIfPostIsLikedByMe:dataDict[@"likes"]];
             }
             if (dataDict[@"comments"][@"data"]){
-                commentsCount = [NSNumber numberWithInt:[dataDict[@"comments"][@"count"] integerValue]];
+                
+                NSDictionary * commentsSummaryDict = dataDict[@"comments"][@"summary"];
+                commentsCount = [NSNumber numberWithInt:[commentsSummaryDict[@"total_count"] integerValue]];
                 NSArray * commentatorsArray = dataDict[@"comments"][@"data"];
                 if ([commentatorsArray count] > 1){
                     NSString * commentatorNames = [NSString stringWithFormat:@"%@, %@", commentatorsArray[0][@"from"][@"name"], commentatorsArray[1][@"from"][@"name"]];
