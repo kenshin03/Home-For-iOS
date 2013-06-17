@@ -212,11 +212,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "391678087.622252"
+         timestampString = "392165316.200633"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "376"
-         endingLineNumber = "376"
+         startingLineNumber = "377"
+         endingLineNumber = "377"
          landmarkName = "-removeChatFromMessagingView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -290,24 +290,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "391718011.724844"
+         timestampString = "392164995.866827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "391717934.470431"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -381,11 +368,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "391717934.470431"
+         timestampString = "392164995.866827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-fetchInboxMessages"
          landmarkType = "5">
       </FileBreakpoint>
@@ -407,24 +394,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "391718011.724844"
+         timestampString = "392165248.914038"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
-         landmarkName = "-tableView:numberOfRowsInSection:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "391718011.724844"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-numberOfSectionsInTableView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -433,11 +407,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "391718011.724844"
+         timestampString = "392164995.866827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-fetchInboxMessages"
          landmarkType = "5">
       </FileBreakpoint>
@@ -459,11 +433,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "391678087.622252"
+         timestampString = "392165316.200633"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "389"
-         endingLineNumber = "389"
+         startingLineNumber = "390"
+         endingLineNumber = "390"
          landmarkName = "-chatsButton:buttonTapped:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -472,11 +446,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "391678039.746986"
+         timestampString = "392165316.200633"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "233"
-         endingLineNumber = "233"
+         startingLineNumber = "234"
+         endingLineNumber = "234"
          landmarkName = "-menuGestureRecognizerAction:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -485,11 +459,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "391678087.622252"
+         timestampString = "392165316.200633"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "341"
-         endingLineNumber = "341"
+         startingLineNumber = "342"
+         endingLineNumber = "342"
          landmarkName = "-removeInboxFromMessagingView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -498,11 +472,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHMessagingViewController.m"
-         timestampString = "391678087.622252"
+         timestampString = "392165316.200633"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "252"
-         endingLineNumber = "252"
+         startingLineNumber = "253"
+         endingLineNumber = "253"
          landmarkName = "-menuGestureRecognizerAction:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -546,7 +520,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/CoverFeed/PSHCoverFeedViewController.m"
@@ -598,7 +572,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Home/Classes/DataLayer/PSHFacebookDataService.m"
@@ -621,6 +595,32 @@
          startingLineNumber = "269"
          endingLineNumber = "269"
          landmarkName = "-parseHomeDataJSON:fetchFeedSuccess:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
+         timestampString = "392166330.747939"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
+         landmarkName = "-inboxHeaderTableViewCell:didTapOnWritePostButton:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/UI/Messaging/PSHInboxHeaderTableViewCell.m"
+         timestampString = "392165197.710978"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
+         landmarkName = "-messageButtonTapped:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -6,7 +6,6 @@ instrumentscli*.trace
 *.pbxuser
 *.mode2v3
 *.mode1v3
-*.xcworkspace
 xcuserdata
 profile
 *~

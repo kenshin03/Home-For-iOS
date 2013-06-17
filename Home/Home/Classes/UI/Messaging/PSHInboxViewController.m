@@ -8,12 +8,14 @@
 
 #import "PSHInboxViewController.h"
 #import "PSHFacebookDataService.h"
+#import "PSHComposeMessageViewController.h"
 #import "PSHInboxTableViewCell.h"
+#import "PSHInboxHeaderTableViewCell.h"
 #import "AsyncImageView.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface PSHInboxViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface PSHInboxViewController ()<UITableViewDelegate, UITableViewDataSource, PSHInboxHeaderTableViewCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray * inboxArray;
 @property (nonatomic, weak) IBOutlet UITableView * inboxTableView;
@@ -54,6 +56,8 @@
 
 - (void) initInboxTableView {
     [self.inboxTableView registerNib:[UINib nibWithNibName:@"PSHInboxTableViewCell" bundle:nil] forCellReuseIdentifier:@"kPSHInboxTableViewCell"];
+    [self.inboxTableView registerNib:[UINib nibWithNibName:@"PSHInboxHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"kPSHInboxHeaderTableViewCell"];
+    
     self.inboxTableView.delegate = self;
     
     UIRefreshControl * refreshControl = [[UIRefreshControl alloc] init];
@@ -150,27 +154,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    PSHInboxTableViewCell * cell = (PSHInboxTableViewCell*)[self.inboxTableView dequeueReusableCellWithIdentifier:@"kPSHInboxTableViewCell"];
-    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:cell.chatImageView];
-    cell.chatImageView.image = nil;
-    cell.namesLabel.text = @"";
-    
-
-    cell.contentView.backgroundColor = [UIColor whiteColor];
-    
-    ChatMessage * chatMessage = self.inboxArray[indexPath.row];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    if (indexPath.row == 0){
         
-        PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
-        [dataService fetchSourceCoverImageURLFor:chatMessage.fromGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
-            cell.namesLabel.text = name;
-            cell.chatImageView.imageURL = [NSURL URLWithString:avartarImageURL];
-        }];
-    });
-    
-    cell.dateLabel.text = [self.dateFormatter stringFromDate:chatMessage.createdDate];
-    cell.messageLabel.text = chatMessage.messageBody;
-    return cell;
+        PSHInboxHeaderTableViewCell * headerCell = (PSHInboxHeaderTableViewCell*)[self.inboxTableView dequeueReusableCellWithIdentifier:@"kPSHInboxHeaderTableViewCell"];
+        headerCell.backgroundColor = [UIColor clearColor];
+        headerCell.delegate = self;
+        return headerCell;
+        
+    }else{
+        
+        PSHInboxTableViewCell * cell = (PSHInboxTableViewCell*)[self.inboxTableView dequeueReusableCellWithIdentifier:@"kPSHInboxTableViewCell"];
+        [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:cell.chatImageView];
+        cell.chatImageView.image = nil;
+        cell.namesLabel.text = @"";
+        
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        
+        ChatMessage * chatMessage = self.inboxArray[indexPath.row];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
+            [dataService fetchSourceCoverImageURLFor:chatMessage.fromGraphID success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
+                cell.namesLabel.text = name;
+                cell.chatImageView.imageURL = [NSURL URLWithString:avartarImageURL];
+            }];
+        });
+        
+        cell.dateLabel.text = [self.dateFormatter stringFromDate:chatMessage.createdDate];
+        cell.messageLabel.text = chatMessage.messageBody;
+        return cell;
+    }
 }
 
 
@@ -179,7 +192,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.inboxArray count];
+    return [self.inboxArray count]+1; // add 1 for header
+}
+
+#pragma mark - PSHInboxHeaderTableViewCellDelegate methods
+
+- (void)inboxHeaderTableViewCell:(PSHInboxHeaderTableViewCell*)cell didTapOnWritePostButton:(BOOL)tapped {
+    PSHComposeMessageViewController * composeMessageViewController = [[PSHComposeMessageViewController alloc] init];
+    
+    UINavigationController *navcont = [[UINavigationController alloc] initWithRootViewController:composeMessageViewController];
+    [self presentViewController:navcont animated:YES completion:^{
+        // 
+    }];
 }
 
 @end

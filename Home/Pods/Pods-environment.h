@@ -1,0 +1,92 @@
+
+// To check if a library is compiled with CocoaPods you
+// can use the `COCOAPODS` macro definition which is
+// defined in the xcconfigs so it is available in
+// headers also when they are imported in the client
+// project.
+
+
+// AFNetworking
+#define COCOAPODS_POD_AVAILABLE_AFNetworking
+#define COCOAPODS_VERSION_MAJOR_AFNetworking 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking 2
+#define COCOAPODS_VERSION_PATCH_AFNetworking 1
+
+// CocoaAsyncSocket
+#define COCOAPODS_POD_AVAILABLE_CocoaAsyncSocket
+#define COCOAPODS_VERSION_MAJOR_CocoaAsyncSocket 7
+#define COCOAPODS_VERSION_MINOR_CocoaAsyncSocket 3
+#define COCOAPODS_VERSION_PATCH_CocoaAsyncSocket 1
+
+// CocoaLumberjack
+#define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
+#define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 1
+#define COCOAPODS_VERSION_MINOR_CocoaLumberjack 6
+#define COCOAPODS_VERSION_PATCH_CocoaLumberjack 2
+
+// MagicalRecord
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord 1
+#define COCOAPODS_VERSION_PATCH_MagicalRecord 0
+
+// XMPPFramework
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework 1
+
+// XMPPFramework/Authentication
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_Authentication
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_Authentication 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_Authentication 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_Authentication 1
+
+// XMPPFramework/BandwidthMonitor
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_BandwidthMonitor
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_BandwidthMonitor 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_BandwidthMonitor 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_BandwidthMonitor 1
+
+// XMPPFramework/Categories
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_Categories
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_Categories 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_Categories 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_Categories 1
+
+// XMPPFramework/Core
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_Core
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_Core 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_Core 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_Core 1
+
+// XMPPFramework/CoreDataStorage
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_CoreDataStorage
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_CoreDataStorage 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_CoreDataStorage 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_CoreDataStorage 1
+
+// XMPPFramework/KissXML
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_KissXML
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_KissXML 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_KissXML 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_KissXML 1
+
+// XMPPFramework/ProcessOne
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_ProcessOne
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_ProcessOne 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_ProcessOne 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_ProcessOne 1
+
+// XMPPFramework/Reconnect
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_Reconnect
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_Reconnect 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_Reconnect 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_Reconnect 1
+
+// XMPPFramework/Utilities
+#define COCOAPODS_POD_AVAILABLE_XMPPFramework_Utilities
+#define COCOAPODS_VERSION_MAJOR_XMPPFramework_Utilities 3
+#define COCOAPODS_VERSION_MINOR_XMPPFramework_Utilities 6
+#define COCOAPODS_VERSION_PATCH_XMPPFramework_Utilities 1
+

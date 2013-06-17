@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		706824E0DC954884A7CD5C23 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA567A19A021492194B15157 /* libPods.a */; };
+		8E09680D175FEC5F00DBB66C /* PSHComposeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E09680C175FEC5F00DBB66C /* PSHComposeMessageViewController.m */; };
+		8E09680F175FEC8000DBB66C /* PSHComposeMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E09680E175FEC8000DBB66C /* PSHComposeMessageViewController.xib */; };
 		8E3472361742F00A00447FC8 /* PSHFacebookXMPPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3472351742F00A00447FC8 /* PSHFacebookXMPPService.m */; };
 		8E34723E174361AF00447FC8 /* PSHMessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E34723D174361AF00447FC8 /* PSHMessagingViewController.m */; };
 		8E347240174362BA00447FC8 /* PSHMessagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E34723F174362BA00447FC8 /* PSHMessagingViewController.xib */; };
@@ -146,10 +148,17 @@
 		8EF5BFD8174230950055EF0B /* refresh_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF5BFD6174230950055EF0B /* refresh_button.png */; };
 		8EF5BFD9174230950055EF0B /* refresh_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF5BFD7174230950055EF0B /* refresh_button@2x.png */; };
 		8EF8F9A61730446400531D07 /* PSHFeedComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F9A51730446400531D07 /* PSHFeedComment.m */; };
+		8EFE9D41175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EFE9D40175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib */; };
+		8EFE9D44175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE9D43175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.m */; };
+		8EFE9D47175FE46000CB6580 /* inbox_table_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFE9D45175FE46000CB6580 /* inbox_table_header.png */; };
+		8EFE9D48175FE46000CB6580 /* inbox_table_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFE9D46175FE46000CB6580 /* inbox_table_header@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		60376E42E2174B98869A4EEB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		8E09680B175FEC5F00DBB66C /* PSHComposeMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHComposeMessageViewController.h; path = Messaging/PSHComposeMessageViewController.h; sourceTree = "<group>"; };
+		8E09680C175FEC5F00DBB66C /* PSHComposeMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHComposeMessageViewController.m; path = Messaging/PSHComposeMessageViewController.m; sourceTree = "<group>"; };
+		8E09680E175FEC8000DBB66C /* PSHComposeMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHComposeMessageViewController.xib; path = Messaging/PSHComposeMessageViewController.xib; sourceTree = "<group>"; };
 		8E3472341742F00A00447FC8 /* PSHFacebookXMPPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHFacebookXMPPService.h; sourceTree = "<group>"; };
 		8E3472351742F00A00447FC8 /* PSHFacebookXMPPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHFacebookXMPPService.m; sourceTree = "<group>"; };
 		8E34723C174361AF00447FC8 /* PSHMessagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMessagingViewController.h; path = Messaging/PSHMessagingViewController.h; sourceTree = "<group>"; };
@@ -324,6 +333,11 @@
 		8EF5BFD7174230950055EF0B /* refresh_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_button@2x.png"; sourceTree = "<group>"; };
 		8EF8F9A41730446400531D07 /* PSHFeedComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHFeedComment.h; sourceTree = "<group>"; };
 		8EF8F9A51730446400531D07 /* PSHFeedComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHFeedComment.m; sourceTree = "<group>"; };
+		8EFE9D40175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHInboxHeaderTableViewCell.xib; path = Messaging/PSHInboxHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		8EFE9D42175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHInboxHeaderTableViewCell.h; path = Messaging/PSHInboxHeaderTableViewCell.h; sourceTree = "<group>"; };
+		8EFE9D43175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHInboxHeaderTableViewCell.m; path = Messaging/PSHInboxHeaderTableViewCell.m; sourceTree = "<group>"; };
+		8EFE9D45175FE46000CB6580 /* inbox_table_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inbox_table_header.png; path = Messaging/inbox_table_header.png; sourceTree = "<group>"; };
+		8EFE9D46175FE46000CB6580 /* inbox_table_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "inbox_table_header@2x.png"; path = "Messaging/inbox_table_header@2x.png"; sourceTree = "<group>"; };
 		DA567A19A021492194B15157 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -352,6 +366,8 @@
 		8E34723A174358B100447FC8 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
+				8EFE9D42175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.h */,
+				8EFE9D43175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.m */,
 				8E34723C174361AF00447FC8 /* PSHMessagingViewController.h */,
 				8E34723D174361AF00447FC8 /* PSHMessagingViewController.m */,
 				8E347246174363B900447FC8 /* PSHChatHead.h */,
@@ -366,6 +382,8 @@
 				8EEC44811755D30E00A36CFA /* PSHInboxViewController.m */,
 				8EE44F611758153300C72297 /* PSHInboxTableViewCell.h */,
 				8EE44F621758153400C72297 /* PSHInboxTableViewCell.m */,
+				8E09680B175FEC5F00DBB66C /* PSHComposeMessageViewController.h */,
+				8E09680C175FEC5F00DBB66C /* PSHComposeMessageViewController.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -379,6 +397,8 @@
 				8EEC44771755C7D500A36CFA /* PSHChatsButtonView.xib */,
 				8EEC44831755D34A00A36CFA /* PSHInboxViewController.xib */,
 				8EE44F641758169500C72297 /* PSHInboxTableViewCell.xib */,
+				8EFE9D40175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib */,
+				8E09680E175FEC8000DBB66C /* PSHComposeMessageViewController.xib */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -386,6 +406,8 @@
 		8E347249174365BE00447FC8 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
+				8EFE9D45175FE46000CB6580 /* inbox_table_header.png */,
+				8EFE9D46175FE46000CB6580 /* inbox_table_header@2x.png */,
 				8EEC44791755C92D00A36CFA /* chat_head_inbox.png */,
 				8EEC447A1755C92D00A36CFA /* chat_head_inbox@2x.png */,
 				8EE8EF7D17457CAB009F5109 /* chat_head_close_background.png */,
@@ -928,6 +950,10 @@
 				8EEC447C1755C92D00A36CFA /* chat_head_inbox@2x.png in Resources */,
 				8EEC44841755D34A00A36CFA /* PSHInboxViewController.xib in Resources */,
 				8EE44F651758169500C72297 /* PSHInboxTableViewCell.xib in Resources */,
+				8EFE9D41175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib in Resources */,
+				8EFE9D47175FE46000CB6580 /* inbox_table_header.png in Resources */,
+				8EFE9D48175FE46000CB6580 /* inbox_table_header@2x.png in Resources */,
+				8E09680F175FEC8000DBB66C /* PSHComposeMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1027,8 @@
 				8EEC447F1755C9AC00A36CFA /* PSHChatsButtonView.m in Sources */,
 				8EEC44821755D30F00A36CFA /* PSHInboxViewController.m in Sources */,
 				8EE44F631758153400C72297 /* PSHInboxTableViewCell.m in Sources */,
+				8EFE9D44175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.m in Sources */,
+				8E09680D175FEC5F00DBB66C /* PSHComposeMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

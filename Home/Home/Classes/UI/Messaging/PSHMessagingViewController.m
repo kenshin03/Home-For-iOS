@@ -15,6 +15,7 @@
 #import "ChatMessage.h"
 #import "PSHChatsButtonView.h"
 #import "PSHInboxViewController.h"
+#import "PSHComposeMessageViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -136,7 +137,7 @@
         self.inboxViewController = [[PSHInboxViewController alloc] init];
         [self addChildViewController:self.inboxViewController];
         CGRect destFrame = self.inboxViewController.view.frame;
-        destFrame.origin.y = 100.0f;
+        destFrame.origin.y = 70.0f;
         self.inboxViewController.view.frame = destFrame;
         [self.view addSubview:self.inboxViewController.view];
         [self.view sendSubviewToBack:self.inboxViewController.view];
