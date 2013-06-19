@@ -601,19 +601,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Home/Classes/UI/Messaging/PSHInboxViewController.m"
-         timestampString = "392166330.747939"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "203"
-         endingLineNumber = "203"
-         landmarkName = "-inboxHeaderTableViewCell:didTapOnWritePostButton:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Home/Classes/UI/Messaging/PSHInboxHeaderTableViewCell.m"
          timestampString = "392165197.710978"
          startingColumnNumber = "9223372036854775807"
@@ -621,6 +608,45 @@
          startingLineNumber = "32"
          endingLineNumber = "32"
          landmarkName = "-messageButtonTapped:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/DataLayer/PSHFacebookDataService.m"
+         timestampString = "393319370.357298"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "689"
+         endingLineNumber = "689"
+         landmarkName = "-searchFriendsWithName:success:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/DataLayer/PSHFacebookDataService.m"
+         timestampString = "393319370.357298"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "680"
+         endingLineNumber = "680"
+         landmarkName = "-searchFriendsWithName:success:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Home/Classes/DataLayer/PSHFacebookDataService.m"
+         timestampString = "393319370.357298"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "674"
+         endingLineNumber = "674"
+         landmarkName = "-searchFriendsWithName:success:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

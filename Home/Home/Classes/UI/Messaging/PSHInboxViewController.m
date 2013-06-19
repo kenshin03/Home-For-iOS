@@ -200,8 +200,7 @@
 - (void)inboxHeaderTableViewCell:(PSHInboxHeaderTableViewCell*)cell didTapOnWritePostButton:(BOOL)tapped {
     PSHComposeMessageViewController * composeMessageViewController = [[PSHComposeMessageViewController alloc] init];
     
-    UINavigationController *navcont = [[UINavigationController alloc] initWithRootViewController:composeMessageViewController];
-    [self presentViewController:navcont animated:YES completion:^{
+    [self presentViewController:composeMessageViewController animated:YES completion:^{
         // 
     }];
 }

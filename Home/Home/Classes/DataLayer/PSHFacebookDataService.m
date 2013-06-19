@@ -656,4 +656,46 @@ typedef void (^InitAccountSuccessBlock)();
     
 }
 
+- (void) searchFriendsWithName:(NSString*)nameString success:(SearchFriendsSuccess)searchSuccessBlock {
+    
+    InitAccountSuccessBlock successBlock = ^{
+        
+        NSString * fqlString = @"select uid, name, sex from user where uid in (SELECT uid2 FROM friend WHERE uid1 = me()) and (strpos(lower(name),'%@')>=0 OR strpos(name,'%@')>=0)";
+        fqlString = [NSString stringWithFormat:fqlString, nameString, nameString];
+        
+        NSDictionary * params = @{@"q": fqlString};
+        
+        
+        NSString * urlString = @"https://graph.facebook.com/fql";
+        
+        NSURL *url = [NSURL URLWithString:urlString];
+        SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:url parameters:params];
+        DDLogVerbose(@"request.URL: %@", request.URL);
+        request.account = self.facebookAccount;
+        
+        NSMutableArray * commentsResultsArray = [@[] mutableCopy];
+        [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"responseString: %@", responseString);
+            NSError* responseError;
+            NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
+            /*
+            NSArray * commentsJSONArray = jsonDict[@"data"];
+            [commentsJSONArray enumerateObjectsUsingBlock:^(NSDictionary * commentsJSONDict, NSUInteger idx, BOOL *stop) {
+                PSHFeedComment * comment = [[PSHFeedComment alloc] init];
+                [commentsResultsArray addObject:comment];
+            }];
+             */
+            searchSuccessBlock(commentsResultsArray, nil);
+        }];
+    };
+    
+    if (self.facebookAccount == nil){
+        [self initAccount:successBlock];
+    }else{
+        successBlock();
+    }
+}
+
+
 @end

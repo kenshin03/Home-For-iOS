@@ -20,6 +20,7 @@ typedef void (^FetchCommentsSuccess)(NSArray * resultsArray, NSError * error);
 typedef void (^FetchSourceCoverImageSuccessBlock)(NSString * coverImageURL, NSString * avartarImageURL, NSString * name);
 
 typedef void (^FetchInboxChatsSuccess)(NSArray * resultsArray, NSError * error);
+typedef void (^SearchFriendsSuccess)(NSArray * searchResultsArray, NSError * error);
 
 
 @interface PSHFacebookDataService : NSObject
@@ -58,6 +59,7 @@ typedef void (^FetchInboxChatsSuccess)(NSArray * resultsArray, NSError * error);
 - (void) addChatMessage:(NSString*)fromID toID:(NSString*)toID message:(NSString*)message success:(Success)successBlock;
 
 
+- (void) searchFriendsWithName:(NSString*)nameString success:(SearchFriendsSuccess)successBlock;
 
 
 @end
