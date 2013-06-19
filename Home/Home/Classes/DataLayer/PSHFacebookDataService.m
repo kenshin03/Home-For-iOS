@@ -14,6 +14,7 @@
 #import "ItemSource.h"
 #import "PSHFeedComment.h"
 #import "Notification.h"
+#import "PSHUser.h"
 
 typedef void (^InitAccountSuccessBlock)();
 
@@ -673,20 +674,21 @@ typedef void (^InitAccountSuccessBlock)();
         DDLogVerbose(@"request.URL: %@", request.URL);
         request.account = self.facebookAccount;
         
-        NSMutableArray * commentsResultsArray = [@[] mutableCopy];
+        NSMutableArray * searchedUsersArray = [@[] mutableCopy];
         [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
             NSLog(@"responseString: %@", responseString);
             NSError* responseError;
             NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
-            /*
-            NSArray * commentsJSONArray = jsonDict[@"data"];
-            [commentsJSONArray enumerateObjectsUsingBlock:^(NSDictionary * commentsJSONDict, NSUInteger idx, BOOL *stop) {
-                PSHFeedComment * comment = [[PSHFeedComment alloc] init];
-                [commentsResultsArray addObject:comment];
+            NSArray * dataJSONArray = jsonDict[@"data"];
+            [dataJSONArray enumerateObjectsUsingBlock:^(NSDictionary * userDict, NSUInteger idx, BOOL *stop) {
+                PSHUser * facebookUser = [[PSHUser alloc] init];
+                facebookUser.uid = userDict[@"uid"];
+                facebookUser.name = userDict[@"name"];
+                facebookUser.sex = userDict[@"sex"];
+                [searchedUsersArray addObject:facebookUser];
             }];
-             */
-            searchSuccessBlock(commentsResultsArray, nil);
+            searchSuccessBlock(searchedUsersArray, nil);
         }];
     };
     

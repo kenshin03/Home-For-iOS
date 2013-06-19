@@ -15,12 +15,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface PSHInboxViewController ()<UITableViewDelegate, UITableViewDataSource, PSHInboxHeaderTableViewCellDelegate>
+@interface PSHInboxViewController ()<UITableViewDelegate, UITableViewDataSource, PSHInboxHeaderTableViewCellDelegate, PSHComposeMessageViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * inboxArray;
 @property (nonatomic, weak) IBOutlet UITableView * inboxTableView;
 @property (nonatomic, strong) NSDateFormatter * dateFormatter;
 @property (nonatomic, strong) UIRefreshControl * refreshControl;
+@property (nonatomic, strong) PSHComposeMessageViewController * composeMessageViewController;
 
 @end
 
@@ -199,9 +200,19 @@
 
 - (void)inboxHeaderTableViewCell:(PSHInboxHeaderTableViewCell*)cell didTapOnWritePostButton:(BOOL)tapped {
     PSHComposeMessageViewController * composeMessageViewController = [[PSHComposeMessageViewController alloc] init];
+    composeMessageViewController.delegate = self;
+    self.composeMessageViewController = composeMessageViewController;
     
     [self presentViewController:composeMessageViewController animated:YES completion:^{
         // 
+    }];
+}
+
+#pragma mark - PSHComposeMessageViewControllerDelegate methods
+
+- (void)composeMessageViewController:(PSHComposeMessageViewController *)vc dismissComposeMessage:(BOOL)dismiss {
+    [self dismissViewControllerAnimated:YES completion:^{
+        //
     }];
 }
 

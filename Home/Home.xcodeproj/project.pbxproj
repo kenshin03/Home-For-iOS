@@ -132,6 +132,9 @@
 		8EE8EF8417457CAB009F5109 /* chat_head_close_x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF8017457CAB009F5109 /* chat_head_close_x@2x.png */; };
 		8EE8EF8617457CE8009F5109 /* PSHChatHeadDismissButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */; };
 		8EE8EF8917457F34009F5109 /* PSHChatHeadDismissButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8EF8817457F34009F5109 /* PSHChatHeadDismissButton.m */; };
+		8EEB1DC917726C3800F9382D /* PSHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB1DC817726C3800F9382D /* PSHUser.m */; };
+		8EEB1DCB17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEB1DCA17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib */; };
+		8EEB1DCE17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB1DCD17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m */; };
 		8EEC44781755C7D500A36CFA /* PSHChatsButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC44771755C7D500A36CFA /* PSHChatsButtonView.xib */; };
 		8EEC447B1755C92D00A36CFA /* chat_head_inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC44791755C92D00A36CFA /* chat_head_inbox.png */; };
 		8EEC447C1755C92D00A36CFA /* chat_head_inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC447A1755C92D00A36CFA /* chat_head_inbox@2x.png */; };
@@ -311,6 +314,11 @@
 		8EE8EF8517457CE8009F5109 /* PSHChatHeadDismissButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHChatHeadDismissButton.xib; path = Messaging/PSHChatHeadDismissButton.xib; sourceTree = "<group>"; };
 		8EE8EF8717457F34009F5109 /* PSHChatHeadDismissButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHChatHeadDismissButton.h; path = Messaging/PSHChatHeadDismissButton.h; sourceTree = "<group>"; };
 		8EE8EF8817457F34009F5109 /* PSHChatHeadDismissButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHChatHeadDismissButton.m; path = Messaging/PSHChatHeadDismissButton.m; sourceTree = "<group>"; };
+		8EEB1DC717726C3800F9382D /* PSHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHUser.h; sourceTree = "<group>"; };
+		8EEB1DC817726C3800F9382D /* PSHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSHUser.m; sourceTree = "<group>"; };
+		8EEB1DCA17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHComposeMessageRecipientsTableViewCell.xib; path = Messaging/PSHComposeMessageRecipientsTableViewCell.xib; sourceTree = "<group>"; };
+		8EEB1DCC17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHComposeMessageRecipientsTableViewCell.h; path = Messaging/PSHComposeMessageRecipientsTableViewCell.h; sourceTree = "<group>"; };
+		8EEB1DCD17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHComposeMessageRecipientsTableViewCell.m; path = Messaging/PSHComposeMessageRecipientsTableViewCell.m; sourceTree = "<group>"; };
 		8EEC44771755C7D500A36CFA /* PSHChatsButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHChatsButtonView.xib; path = Messaging/PSHChatsButtonView.xib; sourceTree = "<group>"; };
 		8EEC44791755C92D00A36CFA /* chat_head_inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_head_inbox.png; path = Messaging/chat_head_inbox.png; sourceTree = "<group>"; };
 		8EEC447A1755C92D00A36CFA /* chat_head_inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_head_inbox@2x.png"; path = "Messaging/chat_head_inbox@2x.png"; sourceTree = "<group>"; };
@@ -384,6 +392,8 @@
 				8EE44F621758153400C72297 /* PSHInboxTableViewCell.m */,
 				8E09680B175FEC5F00DBB66C /* PSHComposeMessageViewController.h */,
 				8E09680C175FEC5F00DBB66C /* PSHComposeMessageViewController.m */,
+				8EEB1DCC17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.h */,
+				8EEB1DCD17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -399,6 +409,7 @@
 				8EE44F641758169500C72297 /* PSHInboxTableViewCell.xib */,
 				8EFE9D40175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib */,
 				8E09680E175FEC8000DBB66C /* PSHComposeMessageViewController.xib */,
+				8EEB1DCA17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -525,6 +536,8 @@
 				8EF8F9A51730446400531D07 /* PSHFeedComment.m */,
 				8E403B441723CAD700B46570 /* ItemSource.h */,
 				8E403B451723CAD700B46570 /* ItemSource.m */,
+				8EEB1DC717726C3800F9382D /* PSHUser.h */,
+				8EEB1DC817726C3800F9382D /* PSHUser.m */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -954,6 +967,7 @@
 				8EFE9D47175FE46000CB6580 /* inbox_table_header.png in Resources */,
 				8EFE9D48175FE46000CB6580 /* inbox_table_header@2x.png in Resources */,
 				8E09680F175FEC8000DBB66C /* PSHComposeMessageViewController.xib in Resources */,
+				8EEB1DCB17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1029,6 +1043,8 @@
 				8EE44F631758153400C72297 /* PSHInboxTableViewCell.m in Sources */,
 				8EFE9D44175FE1EA00CB6580 /* PSHInboxHeaderTableViewCell.m in Sources */,
 				8E09680D175FEC5F00DBB66C /* PSHComposeMessageViewController.m in Sources */,
+				8EEB1DC917726C3800F9382D /* PSHUser.m in Sources */,
+				8EEB1DCE17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

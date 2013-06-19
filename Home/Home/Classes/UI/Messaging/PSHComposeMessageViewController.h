@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PSHComposeMessageViewControllerDelegate;
+
+
 @interface PSHComposeMessageViewController : UIViewController
+
+@property (nonatomic, weak) id<PSHComposeMessageViewControllerDelegate> delegate;
+
+@end
+
+
+
+@protocol PSHComposeMessageViewControllerDelegate <NSObject>
+
+- (void)composeMessageViewController:(PSHComposeMessageViewController*)vc dismissComposeMessage:(BOOL)dismiss;
 
 @end
