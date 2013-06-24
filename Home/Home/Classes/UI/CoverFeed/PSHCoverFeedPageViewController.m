@@ -138,11 +138,20 @@
 - (void)initViews {
     
     self.likesCountString = [NSString stringWithFormat:@"%i likes", self.likesCount];
+    
     self.commentsCountString = [NSString stringWithFormat:@"%i comments", self.commentsCount];
     
     self.likesCountLabel.text = self.likesCountString;
+    self.likesCountLabel.textColor = [UIColor whiteColor];
+    self.likesCountLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f];
+    
     self.commentsCountLabel.text = self.commentsCountString;
+    self.commentsCountLabel.textColor = [UIColor whiteColor];
+    self.commentsCountLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f];
+    
     self.latestCommentatorsLabel.text = self.lastestCommentatorsString;
+    self.latestCommentatorsLabel.textColor = [UIColor whiteColor];
+    self.latestCommentatorsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:11.0f];
     
     if (self.likesCount == 0){
         self.likesCountLabel.hidden = YES;
@@ -158,14 +167,18 @@
         self.statusUpdateView.hidden = YES;
         
         self.photosCommentsMessageLabel.text = self.messageLabelString;
+        self.photosCommentsMessageLabel.textColor = [UIColor whiteColor];
         self.photosCommentsUpdateInfoLabel.text = self.infoLabelString;
+        self.photosCommentsUpdateInfoLabel.textColor = [UIColor whiteColor];
         
     }else if ([self.feedType isEqualToString:@"status"]){
         self.photosCommentsView.hidden = YES;
         self.backgroundOverlayImageView.hidden = NO;
         self.statusUpdateView.hidden = NO;
         self.statusUpdateMessageLabel.text = self.messageLabelString;
+        self.statusUpdateMessageLabel.textColor = [UIColor whiteColor];
         self.statusUpdateUpdateInfoLabel.text = self.infoLabelString;
+        self.statusUpdateUpdateInfoLabel.textColor = [UIColor whiteColor];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage * sourceImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sourceAvartarImageURL]]];
@@ -176,6 +189,7 @@
             });
         });
         self.sourceNameLabel.text = self.sourceName;
+        self.sourceNameLabel.textColor = [UIColor whiteColor];
     }
     
     if (self.likedByMe){
