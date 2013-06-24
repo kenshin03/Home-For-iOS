@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) PSHFacebookDataService * facebookDataService;
 @property (nonatomic, strong) NSMutableArray * matchingRecipientsArray;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivityIndicatorView;
 
 @end
 
@@ -68,14 +69,24 @@
 - (IBAction)textFieldValueChanged:(UITextField *)textField  {
     NSString * editedText = textField.text;
     NSLog(@"editedText: %@", editedText);
+    self.loadingActivityIndicatorView.hidden = NO;
+    [self.loadingActivityIndicatorView startAnimating];
     [self.facebookDataService searchFriendsWithName:editedText success:^(NSArray *searchResultsArray, NSError *error) {
         // reload table
         [self.matchingRecipientsArray removeAllObjects];
         [self.matchingRecipientsArray addObjectsFromArray:searchResultsArray];
         self.recipientsTableView.hidden = NO;
         [self.recipientsTableView reloadData];
+        self.loadingActivityIndicatorView.hidden = YES;
     }];
 }
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 
 #pragma mark - UITableViewDataSource methods
 
