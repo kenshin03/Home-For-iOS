@@ -47,6 +47,10 @@ typedef void (^SearchFriendsSuccess)(NSArray * searchResultsArray, NSError * err
 
 - (void) fetchInboxChats:(FetchInboxChatsSuccess)fetchInboxSuccess;
 
+- (void) fetchMessageThread:(NSString*)threadID success:(FetchFeedSuccess)fetchThreadSuccess;
+
+
+
 - (void) postComment:(NSString*) message forItem:(NSString*)itemGraphID success:(Success)successBlock;
 
 - (void) fetchSourceCoverImageURLFor:(NSString*)fromGraphID success:(FetchSourceCoverImageSuccessBlock) successBlock;

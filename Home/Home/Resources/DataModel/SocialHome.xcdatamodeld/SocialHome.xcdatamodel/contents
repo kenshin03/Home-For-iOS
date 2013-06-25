@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ChatMessage" representedClassName="ChatMessage" syncable="YES">
         <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fromGraphID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hideFromView" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="messageBody" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="threadID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="toGraphID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="FeedItem" representedClassName="FeedItem" syncable="YES">
@@ -37,7 +38,7 @@
         <attribute name="updatedTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ChatMessage" positionX="160" positionY="126" width="128" height="120"/>
+        <element name="ChatMessage" positionX="160" positionY="126" width="128" height="135"/>
         <element name="FeedItem" positionX="124" positionY="-171" width="128" height="208"/>
         <element name="ItemSource" positionX="-47" positionY="231" width="128" height="120"/>
         <element name="Notification" positionX="-74" positionY="18" width="128" height="150"/>

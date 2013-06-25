@@ -9,8 +9,10 @@
 #import "PSHComposeMessageViewController.h"
 #import "PSHFacebookDataService.h"
 #import "PSHComposeMessageRecipientsTableViewCell.h"
+#import "PSHConversationTableViewCell.h"
 #import "PSHUser.h"
 #import "AsyncImageView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PSHComposeMessageViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -21,6 +23,11 @@
 @property (nonatomic, strong) PSHFacebookDataService * facebookDataService;
 @property (nonatomic, strong) NSMutableArray * matchingRecipientsArray;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivityIndicatorView;
+@property (weak, nonatomic) IBOutlet UILabel *selectedRecipientLabel;
+
+@property (nonatomic, strong) NSMutableArray * conversationsArray;
+@property (weak, nonatomic) IBOutlet UITableView *conversationsTableView;
+
 
 @end
 
@@ -42,14 +49,21 @@
     self.recipientsTextField.text = @"";
     [self.recipientsTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     self.recipientsTableView.hidden = YES;
+    self.conversationsTableView.hidden = YES;
     self.matchingRecipientsArray = [@[] mutableCopy];
+    self.conversationsArray = [@[] mutableCopy];
     
     self.facebookDataService = [PSHFacebookDataService sharedService];
     
     [self.recipientsTableView registerNib:[UINib nibWithNibName:@"PSHComposeMessageRecipientsTableViewCell" bundle:nil] forCellReuseIdentifier:@"kPSHComposeMessageRecipientsTableViewCell"];
     
-    self.recipientsTableView.delegate = self;
+    [self.conversationsTableView registerNib:[UINib nibWithNibName:@"PSHConversationTableViewCell" bundle:nil] forCellReuseIdentifier:@"kPSHConversationTableViewCell"];
     
+    
+    
+    self.recipientsTableView.delegate = self;
+    self.loadingActivityIndicatorView.hidden = YES;
+    self.selectedRecipientLabel.hidden = YES;
 
 
 }
@@ -58,6 +72,39 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) loadConversationWithSelectedRecipient:(PSHUser *) user {
+    self.loadingActivityIndicatorView.hidden = NO;
+    
+    __block NSString * threadID = nil;
+    // find thread id from /inbox
+    [self.facebookDataService fetchInboxChats:^(NSArray *resultsArray, NSError *error) {
+        
+        [resultsArray enumerateObjectsUsingBlock:^(ChatMessage * chatMessage, NSUInteger idx, BOOL *stop) {
+            NSString * fromGraphID = chatMessage.fromGraphID;
+            NSString * toGraphID = chatMessage.toGraphID;
+            if ([user.uid isEqualToString:fromGraphID] || [user.uid isEqualToString:toGraphID]){
+                threadID = chatMessage.threadID;
+                
+                // call graph api with thread
+                if (threadID != nil){
+                    [self.facebookDataService fetchMessageThread:threadID success:^(NSArray *resultsArray, NSError *error) {
+                        [self.conversationsArray removeAllObjects];
+                        [self.conversationsArray addObjectsFromArray:resultsArray];
+                        [self showSelectedConversationTable];
+                    }];
+                }
+                *stop = YES;
+            }
+        }];
+    }];
+}
+
+
+- (void) showSelectedConversationTable {
+    self.conversationsTableView.hidden = NO;
+    [self.conversationsTableView reloadData];
 }
 
 
@@ -85,6 +132,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (tableView == self.recipientsTableView){
+        [self.recipientsTextField resignFirstResponder];
+        self.recipientsTextField.hidden = YES;
+        
+        self.selectedRecipientLabel.hidden = NO;
+        PSHUser * user = self.matchingRecipientsArray[indexPath.row];
+        self.selectedRecipientLabel.text = user.name;
+        self.selectedRecipientLabel.layer.cornerRadius = 10;
+        self.selectedRecipientLabel.layer.masksToBounds = YES;
+        
+        PSHComposeMessageRecipientsTableViewCell * cell = (PSHComposeMessageRecipientsTableViewCell*)[self.recipientsTableView cellForRowAtIndexPath:indexPath];
+        cell.selected = NO;
+        
+        self.recipientsTableView.hidden = YES;
+        
+        [self loadConversationWithSelectedRecipient:user];
+        
+    }else if (tableView == self.conversationsTableView){
+        // don't do anything?
+        
+    }
+    
 }
 
 
@@ -92,26 +161,40 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (tableView == self.recipientsTableView){
     
-    PSHComposeMessageRecipientsTableViewCell * cell = (PSHComposeMessageRecipientsTableViewCell*)[self.recipientsTableView dequeueReusableCellWithIdentifier:@"kPSHComposeMessageRecipientsTableViewCell"];
-    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:cell.userImageView];
-    
-    cell.userImageView.image = nil;
-    cell.namesLabel.text = @"";
-    cell.contentView.backgroundColor = [UIColor whiteColor];
-    
-    PSHUser * user = self.matchingRecipientsArray[indexPath.row];
-    cell.namesLabel.text = user.name;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PSHComposeMessageRecipientsTableViewCell * cell = (PSHComposeMessageRecipientsTableViewCell*)[self.recipientsTableView dequeueReusableCellWithIdentifier:@"kPSHComposeMessageRecipientsTableViewCell"];
+        [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:cell.userImageView];
         
-        PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
-        [dataService fetchSourceCoverImageURLFor:user.uid success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
-            cell.userImageView.imageURL = [NSURL URLWithString:avartarImageURL];
-        }];
-    });
+        cell.userImageView.image = nil;
+        cell.namesLabel.text = @"";
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        
+        PSHUser * user = self.matchingRecipientsArray[indexPath.row];
+        cell.namesLabel.text = user.name;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            PSHFacebookDataService * dataService = [PSHFacebookDataService sharedService];
+            [dataService fetchSourceCoverImageURLFor:user.uid success:^(NSString * coverImageURL, NSString * avartarImageURL, NSString* name) {
+                cell.userImageView.imageURL = [NSURL URLWithString:avartarImageURL];
+            }];
+        });
+        return cell;
+        
+    }else if (tableView == self.conversationsTableView){
+        
+        ChatMessage * chatMessage = self.conversationsArray[indexPath.row];
+        
+        //
+        PSHConversationTableViewCell * cell = (PSHConversationTableViewCell*)[self.conversationsTableView dequeueReusableCellWithIdentifier:@"kPSHConversationTableViewCell"];
+        cell.messageLabel.text = chatMessage.messageBody;
+        cell.isFromSelf = YES;
+        return cell;
+    }else{
+        return nil;
+    }
     
-    return cell;
 }
 
 
@@ -120,7 +203,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.matchingRecipientsArray count];
+    
+    if (tableView == self.recipientsTableView){
+        return [self.matchingRecipientsArray count];
+        
+    }else if (tableView == self.conversationsTableView){
+        return [self.conversationsArray count];
+        
+    }else{
+        return 0;
+    }
+    
 }
 
 

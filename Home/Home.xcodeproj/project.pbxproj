@@ -99,6 +99,12 @@
 		8E936B471740493700342415 /* PSHNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E936B461740493700342415 /* PSHNotificationsViewController.m */; };
 		8E936B4D1740D26800342415 /* PSHNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E936B4C1740D26800342415 /* PSHNotificationsViewController.xib */; };
 		8E94C3D4174C173800B7FA80 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E94C3D3174C173800B7FA80 /* AsyncImageView.m */; };
+		8EAD4DBB17791359002E481E /* PSHConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EAD4DBA17791359002E481E /* PSHConversationTableViewCell.xib */; };
+		8EAD4DBE177913A5002E481E /* PSHConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAD4DBD177913A5002E481E /* PSHConversationTableViewCell.m */; };
+		8EAD4DC3177918DA002E481E /* conversation_bubble_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EAD4DBF177918DA002E481E /* conversation_bubble_blue.png */; };
+		8EAD4DC4177918DA002E481E /* conversation_bubble_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EAD4DC0177918DA002E481E /* conversation_bubble_blue@2x.png */; };
+		8EAD4DC5177918DA002E481E /* conversation_bubble_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EAD4DC1177918DA002E481E /* conversation_bubble_white.png */; };
+		8EAD4DC6177918DA002E481E /* conversation_bubble_white.png@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EAD4DC2177918DA002E481E /* conversation_bubble_white.png@2x.png */; };
 		8EB47D4E172E3A3300BF3476 /* coverfeed-liked_by_me_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */; };
 		8EB47D4F172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */; };
 		8ECDBC7C1729C39E007778E7 /* menu_facebook_app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECDBC6F1729C39E007778E7 /* menu_facebook_app@2x.png */; };
@@ -278,6 +284,15 @@
 		8E936B4C1740D26800342415 /* PSHNotificationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHNotificationsViewController.xib; path = Notifications/PSHNotificationsViewController.xib; sourceTree = "<group>"; };
 		8E94C3D2174C173800B7FA80 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		8E94C3D3174C173800B7FA80 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		8EAD4DB717790930002E481E /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatMessage.h; path = Home/Classes/DataModels/ChatMessage.h; sourceTree = SOURCE_ROOT; };
+		8EAD4DB817790930002E481E /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatMessage.m; path = Home/Classes/DataModels/ChatMessage.m; sourceTree = SOURCE_ROOT; };
+		8EAD4DBA17791359002E481E /* PSHConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHConversationTableViewCell.xib; path = Messaging/PSHConversationTableViewCell.xib; sourceTree = "<group>"; };
+		8EAD4DBC177913A5002E481E /* PSHConversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHConversationTableViewCell.h; path = Messaging/PSHConversationTableViewCell.h; sourceTree = "<group>"; };
+		8EAD4DBD177913A5002E481E /* PSHConversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHConversationTableViewCell.m; path = Messaging/PSHConversationTableViewCell.m; sourceTree = "<group>"; };
+		8EAD4DBF177918DA002E481E /* conversation_bubble_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = conversation_bubble_blue.png; path = Messaging/conversation_bubble_blue.png; sourceTree = "<group>"; };
+		8EAD4DC0177918DA002E481E /* conversation_bubble_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "conversation_bubble_blue@2x.png"; path = "Messaging/conversation_bubble_blue@2x.png"; sourceTree = "<group>"; };
+		8EAD4DC1177918DA002E481E /* conversation_bubble_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = conversation_bubble_white.png; path = Messaging/conversation_bubble_white.png; sourceTree = "<group>"; };
+		8EAD4DC2177918DA002E481E /* conversation_bubble_white.png@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "conversation_bubble_white.png@2x.png"; path = "Messaging/conversation_bubble_white.png@2x.png"; sourceTree = "<group>"; };
 		8EB47D4C172E3A3300BF3476 /* coverfeed-liked_by_me_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-liked_by_me_button.png"; sourceTree = "<group>"; };
 		8EB47D4D172E3A3300BF3476 /* coverfeed-liked_by_me_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverfeed-liked_by_me_button@2x.png"; sourceTree = "<group>"; };
 		8ECDBC6F1729C39E007778E7 /* menu_facebook_app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_facebook_app@2x.png"; sourceTree = "<group>"; };
@@ -394,6 +409,8 @@
 				8E09680C175FEC5F00DBB66C /* PSHComposeMessageViewController.m */,
 				8EEB1DCC17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.h */,
 				8EEB1DCD17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m */,
+				8EAD4DBC177913A5002E481E /* PSHConversationTableViewCell.h */,
+				8EAD4DBD177913A5002E481E /* PSHConversationTableViewCell.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -410,6 +427,7 @@
 				8EFE9D40175FE1A300CB6580 /* PSHInboxHeaderTableViewCell.xib */,
 				8E09680E175FEC8000DBB66C /* PSHComposeMessageViewController.xib */,
 				8EEB1DCA17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib */,
+				8EAD4DBA17791359002E481E /* PSHConversationTableViewCell.xib */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -417,6 +435,10 @@
 		8E347249174365BE00447FC8 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
+				8EAD4DBF177918DA002E481E /* conversation_bubble_blue.png */,
+				8EAD4DC0177918DA002E481E /* conversation_bubble_blue@2x.png */,
+				8EAD4DC1177918DA002E481E /* conversation_bubble_white.png */,
+				8EAD4DC2177918DA002E481E /* conversation_bubble_white.png@2x.png */,
 				8EFE9D45175FE46000CB6580 /* inbox_table_header.png */,
 				8EFE9D46175FE46000CB6580 /* inbox_table_header@2x.png */,
 				8EEC44791755C92D00A36CFA /* chat_head_inbox.png */,
@@ -609,6 +631,8 @@
 			isa = PBXGroup;
 			children = (
 				8E403B061723C98100B46570 /* SocialHome.xcdatamodeld */,
+				8EAD4DB717790930002E481E /* ChatMessage.h */,
+				8EAD4DB817790930002E481E /* ChatMessage.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -968,6 +992,11 @@
 				8EFE9D48175FE46000CB6580 /* inbox_table_header@2x.png in Resources */,
 				8E09680F175FEC8000DBB66C /* PSHComposeMessageViewController.xib in Resources */,
 				8EEB1DCB17726E1300F9382D /* PSHComposeMessageRecipientsTableViewCell.xib in Resources */,
+				8EAD4DBB17791359002E481E /* PSHConversationTableViewCell.xib in Resources */,
+				8EAD4DC3177918DA002E481E /* conversation_bubble_blue.png in Resources */,
+				8EAD4DC4177918DA002E481E /* conversation_bubble_blue@2x.png in Resources */,
+				8EAD4DC5177918DA002E481E /* conversation_bubble_white.png in Resources */,
+				8EAD4DC6177918DA002E481E /* conversation_bubble_white.png@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,6 +1074,7 @@
 				8E09680D175FEC5F00DBB66C /* PSHComposeMessageViewController.m in Sources */,
 				8EEB1DC917726C3800F9382D /* PSHUser.m in Sources */,
 				8EEB1DCE17726E7400F9382D /* PSHComposeMessageRecipientsTableViewCell.m in Sources */,
+				8EAD4DBE177913A5002E481E /* PSHConversationTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

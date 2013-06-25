@@ -2,7 +2,7 @@
 //  ChatMessage.h
 //  Home
 //
-//  Created by Kenny Tang on 5/16/13.
+//  Created by Kenny Tang on 6/24/13.
 //  Copyright (c) 2013 com.corgitoergosum.net. All rights reserved.
 //
 
@@ -14,8 +14,9 @@
 
 @property (nonatomic, retain) NSDate * createdDate;
 @property (nonatomic, retain) NSString * fromGraphID;
+@property (nonatomic, retain) NSNumber * hideFromView;
 @property (nonatomic, retain) NSString * messageBody;
 @property (nonatomic, retain) NSString * toGraphID;
-@property (nonatomic, retain) NSNumber * hideFromView;
+@property (nonatomic, retain) NSString * threadID;
 
 @end

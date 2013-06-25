@@ -502,6 +502,56 @@ typedef void (^InitAccountSuccessBlock)();
 }
 
 
+
+- (void) fetchMessageThread:(NSString*)threadID success:(FetchFeedSuccess)fetchThreadSuccess {
+    
+    InitAccountSuccessBlock successBlock = ^{
+        NSString * urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@", threadID];
+        NSURL *url = [NSURL URLWithString:urlString];
+        SLRequest * request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:url parameters:nil];
+        DDLogVerbose(@"request.URL: %@", request.URL);
+        request.account = self.facebookAccount;
+        
+        NSMutableArray * inboxResultsArray = [@[] mutableCopy];
+        
+        [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"responseString: %@", responseString);
+            NSError* responseError;
+            NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&responseError];
+            NSArray * dataArray = jsonDict[@"comments"][@"data"];
+            
+            [dataArray enumerateObjectsUsingBlock:^(NSDictionary * commentsDict, NSUInteger idx, BOOL *stop) {
+                
+                ChatMessage * chatMessage = [ChatMessage createInContext:[NSManagedObjectContext defaultContext]];
+                
+                NSString * updatedDate = commentsDict[@"created_time"];
+                chatMessage.createdDate = [self.dateFormatter dateFromString:updatedDate];
+                
+                NSDictionary * fromDict = commentsDict[@"from"];
+                chatMessage.fromGraphID = fromDict[@"id"];
+                
+                chatMessage.messageBody = commentsDict[@"message"];
+                
+                chatMessage.threadID = commentsDict[@"id"];
+                [inboxResultsArray addObject:chatMessage];
+            }];
+            fetchThreadSuccess(inboxResultsArray, nil);
+        }];
+    };
+    
+    if (self.facebookAccount == nil){
+        [self initAccount:successBlock];
+    }else{
+        successBlock();
+    }
+    
+    
+    
+}
+
+
+
 - (void) fetchInboxChats:(FetchInboxChatsSuccess)fetchInboxSuccess {
     
     InitAccountSuccessBlock successBlock = ^{
@@ -534,6 +584,7 @@ typedef void (^InitAccountSuccessBlock)();
                 
                 NSDictionary * toDict = [inboxDict[@"to"][@"data"] firstObject];
                 chatMessage.toGraphID = toDict[@"id"];
+                chatMessage.threadID = inboxDict[@"id"];
 
                 [inboxResultsArray addObject:chatMessage];
             }];
@@ -683,7 +734,7 @@ typedef void (^InitAccountSuccessBlock)();
             NSArray * dataJSONArray = jsonDict[@"data"];
             [dataJSONArray enumerateObjectsUsingBlock:^(NSDictionary * userDict, NSUInteger idx, BOOL *stop) {
                 PSHUser * facebookUser = [[PSHUser alloc] init];
-                facebookUser.uid = userDict[@"uid"];
+                facebookUser.uid = [NSString stringWithFormat:@"%i", [userDict[@"uid"] integerValue]];
                 facebookUser.name = userDict[@"name"];
                 facebookUser.sex = userDict[@"sex"];
                 [searchedUsersArray addObject:facebookUser];
