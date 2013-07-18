@@ -1,1 +1,0 @@
-../../XMPPFramework/Categories/NSXMLElement+XMPP.h

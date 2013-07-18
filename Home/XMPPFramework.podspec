@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
   s.name = 'XMPPFramework'
   s.version = '3.6.1'
+  s.platform = :ios, '6.0'
   s.license = 'BSD'
-  s.summary = 'An XMPP Framework in Objective-C for the Mac / iOS development community.'
+  s.summary = 'An XMPP Framework in Objective-C for the Mac  iOS development community.'
   s.homepage = 'https://github.com/robbiehanson/XMPPFramework'
   s.author = { 'Robbie Hanson' => 'robbiehanson@deusty.com' }
   s.source = { :git => 'https://github.com/robbiehanson/XMPPFramework.git', :tag => '3.6.1' }
@@ -14,9 +15,9 @@ Pod::Spec.new do |s|
                   this framework performs well regardless of whether it\'s being run on an old iPhone, or
                   on a 12-core Mac Pro. (And it won\'t block the main thread... at all).'
   s.requires_arc = true
-
+  s.frameworks = 'CoreLocation'
   s.subspec 'Core' do |core|
-    core.source_files = FileList['Core/**/*.{h,m}','Vendor/libidn/*.h'].exclude('**/XMPPFramework.h')
+    core.source_files = 'Categories/*.{h,m}', 'Core/*.{h,m}', 'Extensions/**/*.{h,m}', 'Utilities/*.{h,m}', 'Vendor/libidn/*.{h,m,a}', '**/XMPPFramework.h'
     core.resource = "Vendor/libidn/libidn.a"
     core.libraries = 'xml2','resolv','idn'
     core.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2 $(SDKROOT)/usr/include/libresolv',

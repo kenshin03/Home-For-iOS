@@ -9,7 +9,7 @@
 #import "PSHFacebookXMPPService.h"
 #import "PSHLogger.h"
 #import "PSHFacebookDataService.h"
-#import "XMPP.h"
+//#import "XMPP.h"
 #import <Accounts/Accounts.h>
 
 // the code in here references a lot of the work from
@@ -18,8 +18,8 @@
 
 @interface PSHFacebookXMPPService()
 
-@property (nonatomic, strong) XMPPStream * xmppStream;
-@property (nonatomic, strong) ACAccount * facebookAccount;
+//@property (nonatomic, strong) XMPPStream * xmppStream;
+//@property (nonatomic, strong) ACAccount * facebookAccount;
 
 @end
 
@@ -38,22 +38,22 @@
 - (id)init {
     self = [super init];
     if (self){
-        self.xmppStream = [[XMPPStream alloc] initWithFacebookAppId:kPSHFacebookAppID];
-        [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-        
-        self.facebookAccount = [[PSHFacebookDataService sharedService] facebookAccount];
-        NSAssert(self.facebookAccount!=nil, @"Need authenticated Faceboook ACAcount object to proceed.");
-        if (self.facebookAccount){
-            NSError *error = nil;
-            [self.xmppStream connect:&error];
-        }
+//        self.xmppStream = [[XMPPStream alloc] initWithFacebookAppId:kPSHFacebookAppID];
+//        [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+//        
+//        self.facebookAccount = [[PSHFacebookDataService sharedService] facebookAccount];
+//        NSAssert(self.facebookAccount!=nil, @"Need authenticated Faceboook ACAcount object to proceed.");
+//        if (self.facebookAccount){
+//            NSError *error = nil;
+//            [self.xmppStream connect:&error];
+//        }
         
     }
     return self;
 }
 
 
-
+/*
 
 #pragma mark XMPPStream Delegate
 - (void)xmppStreamDidConnect:(XMPPStream *)sender
@@ -165,7 +165,7 @@
     
     
 }
-
+*/
 
 
 

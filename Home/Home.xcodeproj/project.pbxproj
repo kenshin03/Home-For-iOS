@@ -73,6 +73,7 @@
 		8E422B5F172B24570028DCDD /* menu_refresh_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E422B5D172B24570028DCDD /* menu_refresh_icon.png */; };
 		8E422B60172B24570028DCDD /* menu_refresh_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E422B5E172B24570028DCDD /* menu_refresh_icon@2x.png */; };
 		8E47E62B1745AAAA0069BF5C /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E47E62A1745AAAA0069BF5C /* ChatMessage.m */; };
+		8E4C69951798A03D0077A96E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4C69941798A03D0077A96E /* CoreLocation.framework */; };
 		8E7C60CC1725B5B8004EAD40 /* PSHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C60CB1725B5B8004EAD40 /* PSHMenuViewController.m */; };
 		8E7C60CF1725B5EC004EAD40 /* PSHMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60CE1725B5EC004EAD40 /* PSHMenuViewController.xib */; };
 		8E7C60D41725CA06004EAD40 /* menu_messenger_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C60D21725CA06004EAD40 /* menu_messenger_icon.png */; };
@@ -251,6 +252,7 @@
 		8E422B5E172B24570028DCDD /* menu_refresh_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_refresh_icon@2x.png"; sourceTree = "<group>"; };
 		8E47E6291745AAAA0069BF5C /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
 		8E47E62A1745AAAA0069BF5C /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
+		8E4C69941798A03D0077A96E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8E7C60CA1725B5B8004EAD40 /* PSHMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHMenuViewController.h; path = Menu/PSHMenuViewController.h; sourceTree = "<group>"; };
 		8E7C60CB1725B5B8004EAD40 /* PSHMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHMenuViewController.m; path = Menu/PSHMenuViewController.m; sourceTree = "<group>"; };
 		8E7C60CE1725B5EC004EAD40 /* PSHMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSHMenuViewController.xib; path = Menu/PSHMenuViewController.xib; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E4C69951798A03D0077A96E /* CoreLocation.framework in Frameworks */,
 				8EF0B6E3173F5A07006E8D91 /* AudioToolbox.framework in Frameworks */,
 				8E403B4A1723CD5700B46570 /* QuartzCore.framework in Frameworks */,
 				8E403B401723CA6700B46570 /* SystemConfiguration.framework in Frameworks */,
@@ -460,6 +463,7 @@
 		8E403AAA1723C89700B46570 = {
 			isa = PBXGroup;
 			children = (
+				8E4C69941798A03D0077A96E /* CoreLocation.framework */,
 				8E403ABC1723C89700B46570 /* Home */,
 				8E403AB51723C89700B46570 /* Frameworks */,
 				8E403AB41723C89700B46570 /* Products */,

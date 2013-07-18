@@ -1,1 +1,0 @@
-../../XMPPFramework/Core/XMPPPresence.h
