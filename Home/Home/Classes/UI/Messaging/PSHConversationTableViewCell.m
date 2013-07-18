@@ -33,11 +33,13 @@
         self.conversationBackgroundImageView.image = [[UIImage imageNamed:@"conversation_bubble_blue"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f) resizingMode:UIImageResizingModeStretch];
         
         CGRect backgroundImageViewRect = self.conversationBackgroundImageView.frame;
-        backgroundImageViewRect.origin.x = 40.0f;
+        backgroundImageViewRect.origin.x = 20.0f;
+        backgroundImageViewRect.size.width = backgroundImageViewRect.size.width - 20.0f;
         self.conversationBackgroundImageView.frame = backgroundImageViewRect;
         
         CGRect messageLabelRect = self.messageLabel.frame;
-        messageLabelRect.origin.x = 40.0f;
+//        messageLabelRect.origin.x = 20.0f;
+        self.messageLabel.textAlignment = NSTextAlignmentRight;
         self.messageLabel.frame = messageLabelRect;
         
     }else{
@@ -50,6 +52,7 @@
         
         CGRect messageLabelRect = self.messageLabel.frame;
         messageLabelRect.origin.x = 0.0f;
+        self.messageLabel.textAlignment = NSTextAlignmentLeft;
         self.messageLabel.frame = messageLabelRect;
         
     }

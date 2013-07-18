@@ -14,6 +14,7 @@
 @interface PSHComposeMessageViewController : UIViewController
 
 @property (nonatomic, weak) id<PSHComposeMessageViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString * ownGraphID;
 
 @end
 

@@ -45,6 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self findOwnFacebookID];
     
     self.recipientsTextField.text = @"";
     [self.recipientsTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -73,6 +74,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)findOwnFacebookID {
+    FetchProfileSuccess fetchProfileSuccess =^(NSString * graphID, NSString * avartarImageURL, NSError * error){
+        self.ownGraphID = graphID;
+    };
+    PSHFacebookDataService * facebookDataService = [PSHFacebookDataService sharedService];
+    [facebookDataService fetchOwnProfile:fetchProfileSuccess];
+    
+}
+
 
 - (void) loadConversationWithSelectedRecipient:(PSHUser *) user {
     self.loadingActivityIndicatorView.hidden = NO;
@@ -105,6 +116,9 @@
 - (void) showSelectedConversationTable {
     self.conversationsTableView.hidden = NO;
     [self.conversationsTableView reloadData];
+    
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[self.conversationsArray count]-1 inSection:0];
+    [self.conversationsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 
@@ -185,12 +199,23 @@
     }else if (tableView == self.conversationsTableView){
         
         ChatMessage * chatMessage = self.conversationsArray[indexPath.row];
-        
-        //
+
+        NSString * fromGraphID = chatMessage.fromGraphID;
         PSHConversationTableViewCell * cell = (PSHConversationTableViewCell*)[self.conversationsTableView dequeueReusableCellWithIdentifier:@"kPSHConversationTableViewCell"];
         cell.messageLabel.text = chatMessage.messageBody;
-        cell.isFromSelf = YES;
+
+        CGSize messageSize = [cell.messageLabel.text sizeWithFont:cell.messageLabel.font constrainedToSize:CGSizeMake(320, cell.messageLabel.frame.size.height)];
+        CGRect imageFrame = cell.conversationBackgroundImageView.frame;
+        imageFrame.size.width = messageSize.width + 20.0f;
+        cell.conversationBackgroundImageView.frame = imageFrame;
+        
+        if ([fromGraphID isEqualToString:self.ownGraphID]){
+            cell.isFromSelf = YES;
+        }else{
+            cell.isFromSelf = NO;
+        }
         return cell;
+        
     }else{
         return nil;
     }

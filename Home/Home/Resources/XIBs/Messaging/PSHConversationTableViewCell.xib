@@ -43,25 +43,25 @@
 							<object class="IBUIImageView" id="610709423">
 								<reference key="NSNextResponder" ref="1042669597"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{280, 60}</string>
+								<string key="NSFrameSize">{320, 79}</string>
 								<reference key="NSSuperview" ref="1042669597"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="113438587"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUIContentMode">8</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUILabel" id="113438587">
 								<reference key="NSNextResponder" ref="1042669597"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{280, 60}</string>
+								<string key="NSFrameSize">{292, 79}</string>
 								<reference key="NSSuperview" ref="1042669597"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
+								<int key="IBUIContentMode">8</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Label</string>
@@ -69,11 +69,12 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
+								<string key="IBUIShadowOffset">{0, 0}</string>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<int key="IBUINumberOfLines">3</int>
-								<int key="IBUITextAlignment">1</int>
+								<int key="IBUINumberOfLines">4</int>
+								<int key="IBUITextAlignment">2</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<string key="name">HelveticaNeue-Medium</string>
+									<string key="name">HelveticaNeue</string>
 									<string key="family">Helvetica Neue</string>
 									<int key="traits">0</int>
 									<double key="pointSize">14</double>
@@ -84,7 +85,7 @@
 									<int key="NSfFlags">16</int>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-								<double key="preferredMaxLayoutWidth">280</double>
+								<double key="preferredMaxLayoutWidth">292</double>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 79}</string>
@@ -92,7 +93,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="610709423"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="470763851">
+						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -108,7 +109,10 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1042669597"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<reference key="IBUIBackgroundColor" ref="470763851"/>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC45MDE5NjA3ODQzIDAuOTEzNzI1NDkwMiAwLjkzNzI1NDkwMgA</bytes>
+				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">2</int>
 				<reference key="IBUIContentView" ref="1042669597"/>
@@ -182,6 +186,11 @@
 				<string key="3.CustomClassName">PSHConversationTableViewCell</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<object class="NSMutableAttributedString" key="4.notes">
+					<object class="NSMutableString" key="NSString">
+						<characters key="NS.bytes"/>
+					</object>
+				</object>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
