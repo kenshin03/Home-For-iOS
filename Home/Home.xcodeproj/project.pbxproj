@@ -463,7 +463,6 @@
 		8E403AAA1723C89700B46570 = {
 			isa = PBXGroup;
 			children = (
-				8E4C69941798A03D0077A96E /* CoreLocation.framework */,
 				8E403ABC1723C89700B46570 /* Home */,
 				8E403AB51723C89700B46570 /* Frameworks */,
 				8E403AB41723C89700B46570 /* Products */,
@@ -492,6 +491,7 @@
 				8E403AB61723C89700B46570 /* UIKit.framework */,
 				8E403AB81723C89700B46570 /* Foundation.framework */,
 				8E403ABA1723C89700B46570 /* CoreGraphics.framework */,
+				8E4C69941798A03D0077A96E /* CoreLocation.framework */,
 				DA567A19A021492194B15157 /* libPods.a */,
 			);
 			name = Frameworks;

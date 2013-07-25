@@ -1,0 +1,3 @@
+PODS_XMPPFRAMEWORK_HEADER_SEARCH_PATHS = $(SDKROOT)/usr/include/libxml2 $(SDKROOT)/usr/include/libresolv
+PODS_XMPPFRAMEWORK_LIBRARY_SEARCH_PATHS = $(PODS_ROOT)/XMPPFramework/Vendor/libidn
+PODS_XMPPFRAMEWORK_OTHER_LDFLAGS = -lidn -lresolv -lxml2 -framework CoreData -framework SystemConfiguration

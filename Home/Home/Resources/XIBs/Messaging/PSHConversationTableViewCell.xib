@@ -42,20 +42,19 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="610709423">
 								<reference key="NSNextResponder" ref="1042669597"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{320, 79}</string>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrame">{{0, 10}, {320, 60}}</string>
 								<reference key="NSSuperview" ref="1042669597"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="113438587"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<int key="IBUIContentMode">8</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUILabel" id="113438587">
 								<reference key="NSNextResponder" ref="1042669597"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{292, 79}</string>
+								<string key="NSFrame">{{15, 13}, {292, 55}}</string>
 								<reference key="NSSuperview" ref="1042669597"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -71,17 +70,17 @@
 								</object>
 								<string key="IBUIShadowOffset">{0, 0}</string>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<int key="IBUINumberOfLines">4</int>
+								<int key="IBUINumberOfLines">3</int>
 								<int key="IBUITextAlignment">2</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">HelveticaNeue</string>
 									<string key="family">Helvetica Neue</string>
 									<int key="traits">0</int>
-									<double key="pointSize">14</double>
+									<double key="pointSize">12</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">HelveticaNeue-Medium</string>
-									<double key="NSSize">14</double>
+									<double key="NSSize">12</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
