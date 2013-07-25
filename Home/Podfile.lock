@@ -1,0 +1,16 @@
+PODS:
+  - AFNetworking (1.2.1)
+  - CocoaLumberjack (1.6.2)
+  - MagicalRecord (2.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 1.2.0)
+  - CocoaLumberjack (~> 1.6.2)
+  - MagicalRecord (~> 2.1.0)
+
+SPEC CHECKSUMS:
+  AFNetworking: a44069e3c9c89867544f6639482f155c7e5f9b41
+  CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
+  MagicalRecord: 64e7184c240087a45e9588a722eaf05b0ad837f7
+
+COCOAPODS: 0.22.3
