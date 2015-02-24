@@ -172,8 +172,8 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void) removeAllCachedFeeds:(Success)successBlock {
     
-    [FeedItem MR_truncateAllInContext:[NSManagedObjectContext defaultContext]];
-    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [FeedItem MR_truncateAllInContext:[NSManagedObjectContext MR_defaultContext]];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         //
         DDLogVerbose(@"removeAllCachedFeeds");
         successBlock();
@@ -181,8 +181,8 @@ typedef void (^InitAccountSuccessBlock)();
 }
 
 - (void) removeAllCachedNotifications:(Success)successBlock {
-    [Notification MR_truncateAllInContext:[NSManagedObjectContext defaultContext]];
-    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [Notification MR_truncateAllInContext:[NSManagedObjectContext MR_defaultContext]];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         //
         DDLogVerbose(@"removeAllCachedNotifications");
         successBlock();
@@ -233,8 +233,8 @@ typedef void (^InitAccountSuccessBlock)();
         NSString * statusType = dataDict[@"status_type"];
         NSString * story = dataDict[@"story"];
         
-        NSArray * foundItems = [FeedItem findByAttribute:@"graphID" withValue:graphID];
-        DDLogVerbose(@"found?:%i type:%@ subType:%@", [foundItems count], type, statusType);
+        NSArray * foundItems = [FeedItem MR_findByAttribute:@"graphID" withValue:graphID];
+        DDLogVerbose(@"found?:%lu type:%@ subType:%@", [foundItems count], type, statusType);
         if (([foundItems count] == 0) && [self isHandledFeedType:type subType:statusType]){
             
             // timestamps
@@ -246,7 +246,7 @@ typedef void (^InitAccountSuccessBlock)();
             NSString * fromGraphID = dataDict[@"from"][@"id"];
             NSString * fromCategory = dataDict[@"from"][@"category"];
             NSString * fromName = dataDict[@"from"][@"name"];
-            ItemSource * feedSource = [ItemSource createInContext:[NSManagedObjectContext defaultContext]];
+            ItemSource * feedSource = [ItemSource MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
             feedSource.category = fromCategory;
             feedSource.graphID = fromGraphID;
             feedSource.name = fromName;
@@ -273,7 +273,7 @@ typedef void (^InitAccountSuccessBlock)();
                     NSString * commentatorNames = [NSString stringWithFormat:@"%@, %@", commentatorsArray[0][@"from"][@"name"], commentatorsArray[1][@"from"][@"name"]];
                     
                     if ([commentsCount integerValue] > 2){
-                        latestCommentators = [NSString stringWithFormat:@"%@ and %i others", commentatorNames, [commentsCount integerValue]];
+                        latestCommentators = [NSString stringWithFormat:@"%@ and %li others", commentatorNames, (long)[commentsCount integerValue]];
                     }
                 }
             }
@@ -296,7 +296,7 @@ typedef void (^InitAccountSuccessBlock)();
              */
             
             // start populating feedItem
-            FeedItem * feedItem = [FeedItem createInContext:[NSManagedObjectContext defaultContext]];
+            FeedItem * feedItem = [FeedItem MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
             feedItem.graphID = graphID;
             feedItem.type = type;
             feedItem.message = message;
@@ -330,7 +330,7 @@ typedef void (^InitAccountSuccessBlock)();
                         feedItem.imageURL = coverImageURL;
                         feedItem.source.imageURL = avartarImageURL;
                         
-                        [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+                        [[NSManagedObjectContext MR_defaultContext] MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
                             //
                             DDLogVerbose(@"saving cover images");
                         }];
@@ -351,10 +351,10 @@ typedef void (^InitAccountSuccessBlock)();
         }
     }];
     
-    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [[NSManagedObjectContext MR_defaultContext] MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         //
         DDLogVerbose(@"saving all feed items");
-        NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+        NSArray * feedItemsArray = [FeedItem MR_findAllSortedBy:@"createdTime" ascending:NO];
         fetchFeedSuccess(feedItemsArray, nil);
         
     }];
@@ -471,7 +471,7 @@ typedef void (^InitAccountSuccessBlock)();
             NSArray * notificationsJSONArray = jsonDict[@"data"];
             [notificationsJSONArray enumerateObjectsUsingBlock:^(NSDictionary * notificationJSONDict, NSUInteger idx, BOOL *stop) {
                 
-                Notification * notification = [Notification createInContext:[NSManagedObjectContext defaultContext]];
+                Notification * notification = [Notification MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
                 
                 // timestamps
                 NSString * createdTime = notificationJSONDict[@"created_time"];
@@ -523,7 +523,7 @@ typedef void (^InitAccountSuccessBlock)();
             
             [dataArray enumerateObjectsUsingBlock:^(NSDictionary * commentsDict, NSUInteger idx, BOOL *stop) {
                 
-                ChatMessage * chatMessage = [ChatMessage createInContext:[NSManagedObjectContext defaultContext]];
+                ChatMessage * chatMessage = [ChatMessage MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
                 
                 NSString * updatedDate = commentsDict[@"created_time"];
                 chatMessage.createdDate = [self.dateFormatter dateFromString:updatedDate];
@@ -571,7 +571,7 @@ typedef void (^InitAccountSuccessBlock)();
             
             [dataArray enumerateObjectsUsingBlock:^(NSDictionary * inboxDict, NSUInteger idx, BOOL *stop) {
                 
-                ChatMessage * chatMessage = [ChatMessage createInContext:[NSManagedObjectContext defaultContext]];
+                ChatMessage * chatMessage = [ChatMessage MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
                 
                 NSString * updatedDate = inboxDict[@"updated_time"];
                 chatMessage.createdDate = [self.dateFormatter dateFromString:updatedDate];
@@ -696,13 +696,13 @@ typedef void (^InitAccountSuccessBlock)();
 
 - (void) addChatMessage:(NSString*)fromID toID:(NSString*)toID message:(NSString*)message success:(Success)successBlock {
     
-    ChatMessage * chatMessage = [ChatMessage createInContext:[NSManagedObjectContext defaultContext]];
+    ChatMessage * chatMessage = [ChatMessage MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
     chatMessage.fromGraphID = fromID;
     chatMessage.toGraphID = toID;
     chatMessage.messageBody = message;
     chatMessage.createdDate = [NSDate date];
     
-    [[NSManagedObjectContext MR_defaultContext] saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [[NSManagedObjectContext MR_defaultContext] MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
         successBlock();
     }];
     
@@ -734,7 +734,7 @@ typedef void (^InitAccountSuccessBlock)();
             NSArray * dataJSONArray = jsonDict[@"data"];
             [dataJSONArray enumerateObjectsUsingBlock:^(NSDictionary * userDict, NSUInteger idx, BOOL *stop) {
                 PSHUser * facebookUser = [[PSHUser alloc] init];
-                facebookUser.uid = [NSString stringWithFormat:@"%i", [userDict[@"uid"] integerValue]];
+                facebookUser.uid = [NSString stringWithFormat:@"%li", (long)[userDict[@"uid"] integerValue]];
                 facebookUser.name = userDict[@"name"];
                 facebookUser.sex = userDict[@"sex"];
                 [searchedUsersArray addObject:facebookUser];

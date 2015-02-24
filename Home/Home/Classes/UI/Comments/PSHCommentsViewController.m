@@ -115,7 +115,7 @@ static dispatch_once_t pullToDismissLock;
     cell.commentorNameLabel.text = comment.commentorName;
     if (comment.likesCount > 0){
         cell.likesLabel.hidden = NO;
-        cell.likesLabel.text = [NSString stringWithFormat:@"%i likes", comment.likesCount];
+        cell.likesLabel.text = [NSString stringWithFormat:@"%li likes", (long)comment.likesCount];
     }else{
         cell.likesLabel.hidden = YES;
     }

@@ -137,7 +137,7 @@
 
 - (void)initViews {
     
-    self.likesCountString = [NSString stringWithFormat:@"%i likes", self.likesCount];
+    self.likesCountString = [NSString stringWithFormat:@"%li likes", (long)self.likesCount];
     
     self.commentsCountString = [NSString stringWithFormat:@"%i comments", self.commentsCount];
     

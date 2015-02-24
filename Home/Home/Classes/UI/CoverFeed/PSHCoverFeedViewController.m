@@ -55,7 +55,7 @@
     [self.dateFormatter setDateFormat:@"MMMM d"];
     self.feedItemsArray = [@[] mutableCopy];
     
-    NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+    NSArray * feedItemsArray = [FeedItem MR_findAllSortedBy:@"createdTime" ascending:NO];
     if ([feedItemsArray count] > 0){
         [self.feedItemsArray removeAllObjects];
         [self.feedItemsArray addObjectsFromArray:feedItemsArray];
@@ -316,7 +316,7 @@
     [self.facebookDataService removeAllCachedFeeds:^{
         
         
-        NSArray * feedItemsArray = [FeedItem findAllSortedBy:@"createdTime" ascending:NO];
+        NSArray * feedItemsArray = [FeedItem MR_findAllSortedBy:@"createdTime" ascending:NO];
         if ([feedItemsArray count] > 0){
             [self.feedItemsArray removeAllObjects];
             [self.feedItemsArray addObjectsFromArray:feedItemsArray];

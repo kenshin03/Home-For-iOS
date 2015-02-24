@@ -158,10 +158,10 @@
     NSSortDescriptor * createdDateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdDate" ascending:YES];
     
     NSPredicate * nonHiddenFilter = [NSPredicate predicateWithFormat:@"hideFromView = %@", @(0)];
-    NSFetchRequest * chatsRequest = [ChatMessage requestAllWithPredicate:nonHiddenFilter];
+    NSFetchRequest * chatsRequest = [ChatMessage MR_requestAllWithPredicate:nonHiddenFilter];
     chatsRequest.sortDescriptors = @[createdDateSortDescriptor];
     
-    NSArray * chatsArray = [ChatMessage executeFetchRequest:chatsRequest];
+    NSArray * chatsArray = [ChatMessage MR_executeFetchRequest:chatsRequest];
     if ([chatsArray count] > 0){
         
         // get latest message

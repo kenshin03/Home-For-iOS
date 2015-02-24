@@ -62,7 +62,7 @@ static dispatch_once_t pullToDismissLock;
 
 - (void) fetchNotifications {
     
-    NSArray * notificationsArray = [Notification findAllSortedBy:@"createdTime" ascending:NO];
+    NSArray * notificationsArray = [Notification MR_findAllSortedBy:@"createdTime" ascending:NO];
     if ([notificationsArray count] > 0){
         [self.notificationsArray removeAllObjects];
         [self.notificationsArray addObjectsFromArray:notificationsArray];
