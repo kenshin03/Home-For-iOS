@@ -1,9 +1,9 @@
 Home for iOS
 ===============================
 
-![Screenshot](cover_image.jpg)
+*This project is no longer active and doesn't look good after iOS 7 came out. No new features will be added but some of the logic should still run if you're interested in knowing about them.*
 
-Last updated: May 31
+![Screenshot](cover_image.jpg)
 
 
 This is an attempt to replicate essential elements of the Facebook Home experience in iOS, as an *app*. The aim is to re-create features like Cover Feed with basic UIKit 
