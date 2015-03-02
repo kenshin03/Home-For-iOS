@@ -1,0 +1,2 @@
+language: objective-c
+xcodebuild -workspace Home/Home.xcworkspace -scheme Home -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
