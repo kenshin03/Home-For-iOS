@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kenshin03/Home-For-iOS.svg?branch=master)](https://travis-ci.org/kenshin03/Home-For-iOS)
+
 Home for iOS
 ===============================
 
